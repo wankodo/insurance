@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>医療保険・がん保険 保険料比較シミュレーター</title>
+<meta name="description" content="医療保険・がん保険の月払保険料を、各社が公表している保険料例で比較する無料ツール。年齢・性別を選ぶだけで、保険料と保障の要点が並びます。">
+<style>
+:root{
+  --navy:#12283f; --navy2:#0b1a2c; --amber:#f2a007; --amber-d:#c77f02;
+  --bg:#f4f2ec; --card:#ffffff; --ink:#1d2733; --mut:#68707c;
+  --line:#ddd6c8; --red:#b03a2e; --green:#1e7d46; --soft:#fdf6e0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6}
+header{background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff;padding:22px 16px 18px;border-bottom:4px solid var(--amber)}
+header .wrap{max-width:980px;margin:0 auto}
+header h1{margin:0;font-size:24px;letter-spacing:.04em}
+header h1 .accent{color:var(--amber)}
+header p{margin:6px 0 0;font-size:13px;color:#cfd9e4}
+.wrap{max-width:980px;margin:0 auto;padding:0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(18,40,63,.06)}
+.card h2{margin:0 0 10px;font-size:17px;color:var(--navy);border-left:5px solid var(--amber);padding-left:9px}
+.note{font-size:12.5px;color:var(--mut)}
+.warn{background:var(--soft);border:1px solid #ecd27a;border-radius:8px;padding:10px 12px;font-size:13px;margin:10px 0}
+label.flabel{display:block;font-size:12.5px;color:var(--mut);margin:10px 0 3px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{flex:1;min-width:64px;background:#e9e4d8;border:1px solid var(--line);border-radius:8px;padding:10px 8px;font-size:14.5px;cursor:pointer;color:var(--ink)}
+.seg button.on{background:var(--navy);color:#fff;font-weight:700;border-color:var(--navy)}
+.seg.big button{font-size:16px;padding:12px}
+.prodgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px;margin:14px 0}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:0 1px 3px rgba(18,40,63,.06);display:flex;flex-direction:column}
+.prod .co{font-size:12.5px;color:var(--mut)}
+.prod .pname{font-size:17px;font-weight:800;color:var(--navy);margin:1px 0 2px}
+.prod .plan{font-size:12.5px;color:var(--mut);margin-bottom:10px}
+.prod .pricebox{background:var(--navy);border-radius:8px;padding:10px 14px;margin-bottom:12px}
+.prod .pricebox .lab{font-size:12px;color:#b9c8d8}
+.prod .pricebox .val{font-size:29px;font-weight:800;color:var(--amber);font-variant-numeric:tabular-nums;line-height:1.25}
+.prod .pricebox .val .yen{font-size:16px}
+.prod .pricebox .val .per{font-size:13px;color:#b9c8d8;font-weight:400}
+.prod.nodata{opacity:.75}
+.prod .nodatabox{background:#e9e4d8;border-radius:8px;padding:10px 14px;margin-bottom:12px}
+.prod .nodatabox .val{font-size:20px;font-weight:800;color:var(--mut)}
+.badge{display:inline-block;background:var(--amber);color:#fff;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 8px;margin-left:8px;vertical-align:2px}
+.badge.flat{background:var(--green)}
+.prod h4{margin:10px 0 5px;font-size:13.5px;color:var(--navy)}
+.prod ul{margin:4px 0;padding-left:19px}
+.prod ul li{margin:4px 0;font-size:13.5px}
+.prod .cond{background:#f7f4ec;border:1px solid var(--line);border-radius:7px;padding:8px 11px;font-size:12.5px;margin-top:auto}
+.prod .src{font-size:11.5px;color:var(--mut);margin-top:8px}
+footer{margin:26px 0 40px}
+footer .card{font-size:12.5px;color:var(--mut)}
+.credit{text-align:center;color:var(--mut);font-size:12px;margin:10px 0 30px}
+a{color:var(--navy)}
+.sitebar{background:var(--navy2);border-bottom:2px solid var(--amber)}
+.sitebar .sb-in{max-width:980px;margin:0 auto;padding:7px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sitebar a{color:#fff;text-decoration:none;font-size:13px}
+.sitebar a:hover{color:var(--amber)}
+.sitebar .sb-name{font-weight:700;letter-spacing:.03em}
+.sitebar .sb-tool{color:#b9c8d8;font-size:13px}
+</style>
+</head>
+<body>
+<div class="sitebar"><div class="sb-in"><a class="sb-name" href="index.html">保険ツール集</a><span class="sb-tool">医療保険比較</span></div></div>
+
+<header>
+  <div class="wrap">
+    <h1>医療保険・がん保険 <span class="accent">保険料比較</span></h1>
+    <p>各社が公表している保険料例をもとに、月払保険料と保障の要点を並べて比較します。年齢・性別を選ぶだけでOKです。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <h2>比較する条件</h2>
+    <label class="flabel">保険の種類</label>
+    <div class="seg big" id="catSeg">
+      <button type="button" data-cat="medical" class="on">医療保険</button>
+      <button type="button" data-cat="cancer">がん保険</button>
+    </div>
+    <label class="flabel">年齢</label>
+    <div class="seg" id="ageSeg">
+      <button type="button" data-age="20">20歳</button>
+      <button type="button" data-age="30" class="on">30歳</button>
+      <button type="button" data-age="40">40歳</button>
+      <button type="button" data-age="50">50歳</button>
+      <button type="button" data-age="60">60歳</button>
+    </div>
+    <label class="flabel">性別</label>
+    <div class="seg" id="genderSeg">
+      <button type="button" data-gender="m" class="on">男性</button>
+      <button type="button" data-gender="f">女性</button>
+    </div>
+  </div>
+
+  <div class="warn">
+    <strong>比べる前に：</strong>各社の保険は設計が違います。入院した日に応じて払う「日額型」、治療を受けた月にまとめて払う「治療給付金型」、診断されたら一時金が中心の「一時金型」、年齢で掛金が変わらない「定額掛金型（共済）」など、仕組みがバラバラです。保険料の安さだけで比べず、各カードのプラン条件と保障の要点も必ず見てください。
+  </div>
+
+  <div class="prodgrid" id="results"></div>
+
+  <div class="card">
+    <h2>使い方・見方</h2>
+    <ul style="margin:6px 0;padding-left:20px">
+      <li style="margin:5px 0;font-size:14px">カードは月払保険料の安い順に並びます（金額が確認できない商品は最後に「データなし」で表示します）。</li>
+      <li style="margin:5px 0;font-size:14px">保険料は各社が公表した「保険料例」です。健康状態・特約の付け方・払込期間など、実際の契約条件で変わります。</li>
+      <li style="margin:5px 0;font-size:14px">商品ごとに保険料例の時点が異なります（各カードの注記に明記）。最新の保険料は各社の公式サイトで確認してください。</li>
+    </ul>
+  </div>
+
+  <footer>
+    <div class="card">
+      このツールは非公式の個人ツールです。表示している保険料は各社の公表値（保険料例）で、実際の契約では条件により金額が変わります。申し込み・契約は必ず各社の公式サイトで行い、保障内容は各社のパンフレット・契約概要でご確認ください。本ページは情報提供のみを目的としたもので、特定の保険商品への加入を勧誘するものではありません。<br>
+      出典：
+      <a href="https://edge-prod.aflac.co.jp/news_pdf/20251208.pdf" target="_blank" rel="noopener">アフラック公式ニュースリリース（あんしんパレット）</a>／
+      <a href="https://www.orixlife.co.jp/medical/cure_next/pdf/cu_next_pamphlet2.pdf" target="_blank" rel="noopener">オリックス生命 CURE Next 公式パンフレット</a>／
+      <a href="https://www.kyosai-cc.or.jp/demand2/seido_mypage_pdf/seido_s_net.pdf" target="_blank" rel="noopener">全国生協連「制度のご案内」</a>／
+      <a href="https://www.lifenet-seimei.co.jp/product/cancer/whole-life-cancer/" target="_blank" rel="noopener">ライフネット生命 終身がん保険 公式商品ページ</a>／
+      <a href="https://www.orixlife.co.jp/cancer/believe/pdf/believe_pamphlet.pdf" target="_blank" rel="noopener">オリックス生命 がん保険ビリーブ 公式パンフレット</a>／
+      <a href="https://www.lifenet-seimei.co.jp/product/medical/whole-life-medical/" target="_blank" rel="noopener">ライフネット生命 終身医療保険 公式商品ページ</a>／
+      <a href="https://www.life8739.co.jp/pdf/product/iryo/iryopamphlet_new.pdf" target="_blank" rel="noopener">はなさく生命 はなさく医療 公式パンフレット</a>／
+      <a href="https://neofirst.co.jp/product/iryo/fee.html" target="_blank" rel="noopener">第一ネオ生命 ネオde医療 公式保険料例</a>／
+      <a href="https://www.zurichlife.co.jp/-/media/Files/ZurichLife/sales-tools/bank20251202/medical.pdf" target="_blank" rel="noopener">チューリッヒ生命 終身医療保険プレミアムZ 公式パンフレット</a>／
+      <a href="https://www.sbilife.co.jp/corporate/press/pdf/NR20221019.pdf" target="_blank" rel="noopener">SBI生命 公式ニュースリリース</a>／
+      <a href="https://coopkyosai.coop/thinking/lineup/tasukeai/adult/" target="_blank" rel="noopener">コープ共済《たすけあい》大人向けコース 公式サイト</a>／
+      <a href="https://www.zenrosai.coop/library/72kita/20260405kokumin/260405_kokumin_05.pdf" target="_blank" rel="noopener">こくみん共済 coop 公式パンフレット</a>／
+      <a href="https://www.sonylife.co.jp/company/news/30/files/180502_shinsyohin.pdf" target="_blank" rel="noopener">ソニー生命 公式ニュースリリース</a>／
+      <a href="https://www.life8739.co.jp/pdf/product/gan/ganpamphlet_new.pdf" target="_blank" rel="noopener">はなさく生命 はなさくがん保険 公式パンフレット</a>／
+      <a href="https://assets.contentstack.io/v3/assets/blt52d7347d77fa3188/blta255240b03401596/6ab9bcc7442dc14826ab5afd/fwd-gan-bg.pdf" target="_blank" rel="noopener">FWD生命 FWDがんベスト・ゴールド 公式パンフレット</a>／
+      <a href="https://www.medicarelife.com/products/financial/medifit_gan/pdf/financial_medifitgan_regionalbank_pamph_02.pdf" target="_blank" rel="noopener">メディケア生命 メディフィットがん保険 公式パンフレット</a>／
+      <a href="https://my.ebook5.net/Aflac_01/miraito/" target="_blank" rel="noopener">アフラック ミライト 公式パンフレット</a>／
+      <a href="https://www.mst-is.co.jp/Portals/0/mufg_hokenPotalB/common/link/medical-flyer_anshin_gan.pdf" target="_blank" rel="noopener">東京海上日動あんしん生命 公式チラシ（代理店サイト転載）</a><br>
+      保険料・ルール確認日：2026-11-17
+    </div>
+    <p class="credit">制作：andy（わんこ堂）× 熊八 🐾（Muse Spark）</p>
+  </footer>
+
+</div>
+
+<script>
+var PRODUCTS = {
+  medical: [
+    {
+      company: "アフラック",
+      name: "あんしんパレット",
+      plan: "しっかり充実医療プラン（治療給付金10万円型）",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:2309,f:2924},30:{m:2764,f:3519},40:{m:3634,f:3739},50:{m:4794,f:4399},60:{m:6234,f:5524}},
+      points: [
+        "入院・手術・放射線治療・抗がん剤治療など、所定の治療を受けた月に10万円（治療給付金）が中心の設計",
+        "通院保障は日額5,000円相当",
+        "先進医療は総合先進医療特約で保障"
+      ],
+      cond: "プラン条件：治療給付金特約10万円（2か月型／外来手術10万円）、1回の入院とみなす期間60日、通院特約5,000円、総合先進医療特約を付加。個別取扱・月払・口座振替扱・定額払（終身払）・保険料払込免除特約なし。",
+      note: "総合先進医療特約は10年更新型で、更新後の保険料が変わる場合があります。保険料は2025年12月発売時の公表値です。",
+      src: "出典：アフラック公式ニュースリリース（2025年12月8日公表）の保険料例"
+    },
+    {
+      company: "オリックス生命",
+      name: "CURE Next（キュア・ネクスト）",
+      plan: "基本プラン・入院給付金日額5,000円",
+      priceLabel: "月払保険料",
+      premiums: {30:{m:1470,f:1680},40:{m:2080,f:1995},50:{m:3025,f:2695},60:{m:4370,f:3795}},
+      points: [
+        "入院給付金 日額5,000円（1入院60日・通算1,000日）。七大生活習慣病は1入院120日、三大疾病（がん・心疾患・脳血管疾患）は支払日数無制限",
+        "手術給付金：入院中10万円・外来2.5万円",
+        "先進医療：技術料と同額（通算2,000万円限度）＋一時金"
+      ],
+      cond: "プラン条件：基本プラン・入院給付金日額5,000円コース・先進医療特約（2018）付加・終身払・口座振替扱。保険料は2026年3月1日現在。",
+      note: "60歳は公式パンフレット（2026年3月作成）の値です。30〜50歳は、公式パンフレットの表から判読できなかったため保険代理店サイトが転載した保険料例（2026年8月1日現在）の値で、60歳の値が公式値と一致することを確認しています。20歳の保険料は確認できなかったため「データなし」としています。",
+      src: "出典：オリックス生命公式パンフレット／保険代理店サイト転載の保険料例"
+    },
+    {
+      company: "県民共済（全国生活協同組合連合会）",
+      name: "総合保障2型＋入院保障2型",
+      plan: "年齢・性別で掛金が変わらない定額型（共済）",
+      priceLabel: "月掛金",
+      flat: 4000,
+      points: [
+        "総合保障2型：病気入院 日額5,000円（1日目から、病気124日分まで）。死亡・後遺障害の保障も含む総合型",
+        "入院保障2型：病気入院 日額10,000円、手術 1万円〜10万円、先進医療 1万円〜300万円",
+        "組み合わせると病気入院は合計 日額15,000円"
+      ],
+      cond: "プラン条件：総合保障2型（月掛金2,000円）＋入院保障2型（月掛金2,000円）の組み合わせ。掛金は年齢・性別で変わらない定額です。加入は満18歳〜64歳の健康な方。65歳以降は熟年型へ同掛金で自動継続しますが、保障額は年齢帯ごとに下がります。保障内容は都道府県で若干異なる場合があります。",
+      note: "県民共済は保険会社ではなく共済で、他社の「保険料」とは性質が異なります。掛金は全国生協連の公式資料で確認済みですが、保障額には第三者整理値を含みます。",
+      src: "出典：全国生協連 公式「制度のご案内」"
+    },
+    {
+      company: "ライフネット生命",
+      name: "終身医療保険",
+      plan: "エコノミーコース・入院給付金日額5,000円",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:1199,f:1369},30:{m:1578,f:1701},40:{m:2121,f:2034},50:{m:2892,f:2577},60:{m:3923,f:3363}},
+      points: [
+        "入院給付金 日額5,000円（日帰り入院から保障。5日以内の入院は一律5日分を支払い）",
+        "手術給付金：入院中＝日額×10（5万円）、外来＝日額×5（2.5万円）",
+        "支払限度は1入院60日・通算1,095日"
+      ],
+      cond: "プラン条件：エコノミーコース・入院給付金日額5,000円・保険期間／保険料払込期間：終身（終身払い）。保険料は2026年6月1日現在。",
+      note: "エコノミーコースに通院保障・がん治療給付金・先進医療給付金は含まれません（それらが付くのはおすすめコースです）。",
+      src: "出典：ライフネット生命 公式商品ページの保険料例"
+    },
+    {
+      company: "はなさく生命",
+      name: "はなさく医療",
+      plan: "プラン①（基本プラン）・入院給付金日額5,000円",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:1089,f:1314},30:{m:1439,f:1594},40:{m:2039,f:1619},50:{m:3199,f:2499},60:{m:4759,f:3429}},
+      points: [
+        "入院給付金 日額5,000円（日帰り入院から保障）。3大疾病入院支払日数無制限特則つき",
+        "手術給付金（手術II型）：入院中 1回5万円・10万円・30万円（手術の種類による）、外来 2.5万円",
+        "放射線治療給付金 1回5万円。先進医療は特約で技術料と同額"
+      ],
+      cond: "プラン条件：プラン①・入院給付金日額5,000円・給付限度60日型・3大疾病入院支払日数無制限特則適用・手術II型・先進医療特約付加・終身払い・保険料払込免除特約なし。保険料は2026年2月現在。",
+      note: "パンフレットには入院一時給付特約などが付くプラン②・③もあり、保険料は高くなります。",
+      src: "出典：はなさく生命 公式パンフレット（2026年2月版）の保険料表"
+    },
+    {
+      company: "第一ネオ生命（旧ネオファースト生命）",
+      name: "ネオde医療",
+      plan: "シンプルプラン・健康保険料率",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:721,f:924},30:{m:959,f:1128},40:{m:1349,f:1356},50:{m:2111,f:2004},60:{m:3412,f:3200}},
+      points: [
+        "入院給付金 日額5,000円（日帰り入院から保障、1入院60日・通算1,095日）",
+        "手術保障特則I型（入院1倍）つき",
+        "先進医療・患者申出療養は特約で技術料と同額（通算2,000万円）"
+      ],
+      cond: "プラン条件：シンプルプラン・主契約 入院給付金日額5,000円（60日型）・手術保障特則I型（入院1倍）・先進医療・患者申出療養特約付加・終身払い。先進医療・患者申出療養特約は10年更新型です。",
+      note: "この保険料は「健康保険料率」（過去5年の入院歴なし・過去1年非喫煙・BMI等の基準を満たす場合の割引料率）です。基準を満たさない場合は標準保険料率となり、これより高くなります。",
+      src: "出典：第一ネオ生命 公式サイトの保険料例"
+    },
+    {
+      company: "チューリッヒ生命",
+      name: "終身医療保険プレミアムZ",
+      plan: "シンプルプラン・入院給付日額5,000円",
+      priceLabel: "月払保険料",
+      premiums: {30:{m:999,f:1184},40:{m:1339,f:1269},50:{m:1949,f:1644},60:{m:3184,f:2434}},
+      points: [
+        "入院給付金 日額5,000円（日帰り入院から保障）",
+        "手術給付金等は型（I型・II型・III型）から選ぶ設計",
+        "入院一時金特約・退院後通院特約・先進医療特約などを組み合わせ可能"
+      ],
+      cond: "プラン条件：シンプルプラン・入院給付日額5,000円（60日型）・保険期間／保険料払込期間：終身（終身払い）。保険料は2025年12月2日現在。",
+      note: "公式パンフレットのプラン例表は30歳からの掲載のため、20歳は「データなし」としています。30歳男性は保険料が1,000円未満となり、申込み時に入院給付日額の増額や特約の付加が必要な場合がある旨がパンフレットに注記されています。",
+      src: "出典：チューリッヒ生命 公式パンフレット（2025年12月改訂）のプラン例"
+    },
+    {
+      company: "SBI生命",
+      name: "SBI生命の終身医療保険Neo",
+      plan: "入院給付金日額5,000円・優良体料率（2022年発売時）",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:824,f:1399},30:{m:1064,f:1699},40:{m:1479,f:1839},50:{m:2139,f:2209},60:{m:3199,f:2969}},
+      points: [
+        "入院給付金 日額5,000円（1入院60日型・通算1,095日）",
+        "8大疾病による入院は支払日数無制限になる特則つき",
+        "先進医療特約：技術料と同額＋一時給付金15万円"
+      ],
+      cond: "プラン条件：入院給付金日額5,000円・1入院60日型・先進医療特約(2022)付加・終身払い・口座振替扱。女性は終身女性疾病特約も付加されており、男女で特約の構成が異なります。",
+      note: "この保険料は「優良体料率」（喫煙状況・BMIが同社基準を満たす場合の割引料率）で、2022年11月の発売時に公表された値です。その後の料率改定の有無は確認できていないため、現在の保険料と異なる場合があります。基準を満たさない場合はこれより高くなります。",
+      src: "出典：SBI生命 公式ニュースリリース（2022年10月19日）の保険料例"
+    },
+    {
+      company: "コープ共済（日本コープ共済生活協同組合連合会）",
+      name: "《たすけあい》大人向けコース",
+      plan: "大人向け2000円コース（満65歳満期の定期型・共済）",
+      priceLabel: "月掛金",
+      flat: 2000,
+      points: [
+        "病気入院 日額6,000円（男性）／8,000円（女性・女性入院時諸費用サポート含む）。1日目から184日分",
+        "事故（ケガ）通院 日額1,500円（事故日から180日以内・90日分まで）",
+        "先進医療特約は月掛金プラス100円で付加可（1回あたり最高1,000万円）"
+      ],
+      cond: "プラン条件：大人向け2000円コース。加入できるのは満20歳〜満64歳で、保障は満65歳の満期日までの定期型（終身ではありません）。掛金は年齢・性別で変わらない定額です。",
+      note: "コープ共済は保険会社ではなく共済で、他社の「保険料」とは性質が異なります。満65歳以降は別のコースへの移行が必要です。通院保障は病気ではなく事故（ケガ）が中心です。",
+      src: "出典：コープ共済 公式サイト（大人向けコース）"
+    },
+    {
+      company: "こくみん共済 coop（全国労働者共済生活協同組合連合会）",
+      name: "医療保障タイプ",
+      plan: "2口（定期型・共済）",
+      priceLabel: "月掛金",
+      flat: 2300,
+      points: [
+        "入院 日額10,000円（日帰り入院も保障、1日目から最高180日分）",
+        "手術 6万円、放射線治療 6万円",
+        "先進医療の保障も用意されています"
+      ],
+      cond: "プラン条件：医療保障タイプ 2口・月掛金2,300円。加入できるのは満18歳〜満64歳の健康な方。掛金は年齢・性別によらず定額です。",
+      note: "60歳以降は「医療保障60歳タイプ」に移行し、掛金は同じ2,300円のまま保障が下がります（入院 日額6,000円、手術・放射線治療 各3万円）。こくみん共済は保険会社ではなく共済で、他社の「保険料」とは性質が異なります。",
+      src: "出典：こくみん共済 coop 公式パンフレット"
+    },
+    {
+      company: "こくみん共済 coop（全国労働者共済生活協同組合連合会）",
+      name: "終身医療保障タイプ",
+      plan: "入院日額5,000円（終身型・共済）",
+      priceLabel: "月掛金",
+      premiums: {20:{m:1610,f:1630},30:{m:2020,f:1990},40:{m:2640,f:2460},50:{m:3580,f:3170},60:{m:4920,f:4300}},
+      points: [
+        "入院 日額5,000円（日帰り入院も保障、1日目から最高60日分・通算1,000日）",
+        "手術 5万円、放射線治療 5万円",
+        "先進医療特約：最高1,000万円（技術料実額）"
+      ],
+      cond: "プラン条件：終身医療保障タイプ・入院日額5,000円・保障期間／掛金払込期間：終身。表示の掛金は先進医療特約（月掛金100円）込みの金額です。掛金は加入時の年齢・性別で決まります。",
+      note: "こくみん共済は保険会社ではなく共済で、他社の「保険料」とは性質が異なります。先進医療特約の共済期間は10年で、自動更新により一生涯保障されます。",
+      src: "出典：こくみん共済 coop 公式パンフレットの掛金表"
+    },
+    {
+      company: "ソニー生命",
+      name: "メディカル・ベネフィット",
+      plan: "契約例A・120日型・入院給付金日額5,000円（2018年発売時）",
+      priceLabel: "月払保険料",
+      premiums: {30:{m:2095,f:2140},40:{m:2890,f:2550},50:{m:4260,f:3545}},
+      points: [
+        "入院給付金 日額5,000円（日帰り入院を含め1日目から）",
+        "三疾病（がん・心疾患・脳血管疾患）による入院は支払日数無制限、三疾病の手術は2倍",
+        "死亡給付金（日額×100倍）を含む設計"
+      ],
+      cond: "プラン条件：契約例A・1入院の支払限度120日型・入院給付金日額5,000円・死亡給付金倍率100倍・保険期間：終身・保険料払込期間：終身（終身払い）・個別扱月払。",
+      note: "保険料は2018年7月の発売時に公表された契約例で、現在の料率と同じであるかは確認できていません。公式の契約例は30・40・50歳のみの掲載のため、20歳・60歳は「データなし」としています。",
+      src: "出典：ソニー生命 公式ニュースリリース（2018年5月2日）の契約例"
+    }
+  ],
+  cancer: [
+    {
+      company: "ライフネット生命",
+      name: "終身がん保険",
+      plan: "ライトコース（がん診断一時金100万円）",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:850,f:1140},30:{m:1190,f:1570},40:{m:1740,f:1980},50:{m:2700,f:2360},60:{m:4190,f:2800}},
+      points: [
+        "がん診断一時金 100万円（保険期間を通じて1回）",
+        "上皮内新生物診断一時金 50万円（一時金の50%）",
+        "入院・通院の日額給付金はなし（一時金中心の設計）"
+      ],
+      cond: "プラン条件：ライトコース・がん診断一時金100万円・保険期間／保険料払込期間：終身。保険料は2026年6月1日現在。",
+      note: "がん診断一時金を受け取ると契約は消滅します。保障の開始は申込日から3か月経過後です。",
+      src: "出典：ライフネット生命 公式商品ページの保険料表"
+    },
+    {
+      company: "オリックス生命",
+      name: "がん保険 ビリーブ",
+      plan: "基本給付金額10,000円コース",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:2645,f:2265},30:{m:3515,f:2915},40:{m:4895,f:3745},50:{m:7045,f:4615},60:{m:10165,f:5505}},
+      points: [
+        "がん初回診断一時金 100万円（上皮内新生物も同額）",
+        "がん治療給付金 50万円（がん治療目的の入院開始時、2年に1回を限度）",
+        "がん入院給付金 日額10,000円（支払日数無制限）、がん手術給付金 20万円",
+        "がん通院給付金 日額10,000円（がん通院特約）、先進医療は技術料と同額（通算2,000万円限度）"
+      ],
+      cond: "プラン条件：基本給付金額10,000円コース・がん先進医療特約（2018）・がん通院特約付加・終身払・口座振替扱。",
+      note: "保険料は公式パンフレット（2024年4月作成）掲載の2024年4月1日現在の値で、現行の料率と異なる場合があります。保障の開始は申込から91日目です。",
+      src: "出典：オリックス生命 公式パンフレットの保険料表"
+    },
+    {
+      company: "はなさく生命",
+      name: "はなさくがん保険",
+      plan: "標準プラン（II型）・がん一時給付金100万円",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:1640,f:1860},30:{m:2210,f:2660},40:{m:3210,f:3390},50:{m:4890,f:4030},60:{m:8110,f:5180}},
+      points: [
+        "がん一時給付金 100万円（初回は診断確定時、2回目以後は入院または所定の通院時。1年に1回・回数無制限、上皮内がんも同額）",
+        "がんと診断された後の保険料払込免除あり"
+      ],
+      cond: "プラン条件：標準プラン（II型）・がん一時給付金額100万円・主契約のみ・保険期間／保険料払込期間：終身（終身払い）。保険料は2026年2月現在。",
+      note: "保障の開始は申込みから90日経過後です。がん治療給付金が付くのは保障充実プラン（III型）で、保険料は高くなります。",
+      src: "出典：はなさく生命 公式パンフレット（2026年2月版）の保険料表"
+    },
+    {
+      company: "FWD生命",
+      name: "FWDがんベスト・ゴールド",
+      plan: "ベーシックプラン（がん診断給付金50万円＋治療給付金特約）",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:2317,f:2750},30:{m:3145,f:3634},40:{m:4498,f:4685},50:{m:6952,f:5672},60:{m:11046,f:6384}},
+      points: [
+        "がん診断給付金 50万円（1年に1回・回数無制限、上皮内新生物も同額）",
+        "がん治療給付金特約：抗がん剤・ホルモン剤治療／放射線治療を受けた月に給付",
+        "初めてがんと診断確定されたら、以後の保険料払込は免除"
+      ],
+      cond: "プラン条件：ベーシックプラン・がん診断給付金50万円＋がん治療給付金特約10万円・保険期間／保険料払込期間：終身（全期払）・月払（口座振替扱）。保険料は2026年9月1日現在。",
+      note: "保障の開始は91日目からです。",
+      src: "出典：FWD生命 公式パンフレット（2026年9月改訂）の保険料表"
+    },
+    {
+      company: "メディケア生命",
+      name: "メディフィットがん保険",
+      plan: "スタンダードプラン（基本給付金額10万円）",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:655,f:940},30:{m:925,f:1375},40:{m:1445,f:1920},50:{m:2435,f:2205},60:{m:4155,f:2405}},
+      points: [
+        "抗がん剤治療給付金 月10万円（公的保険対象分は回数無制限）、自由診療抗がん剤治療給付金 月20万円",
+        "がん放射線治療給付金 1回10万円",
+        "上皮内がんも含めたすべてのがんを同額保障",
+        "がん通院治療特約 日額5,000円、がん緩和ケア特約 月5万円つき"
+      ],
+      cond: "プラン条件：スタンダードプラン・主契約I型／基本給付金額10万円＋がん通院治療特約＋がん緩和ケア特約＋がん保険料払込免除特約・保険期間／保険料払込期間：終身（終身払い）。保険料は2026年11月現在。",
+      note: "診断一時金が中心の設計ではありません（がん診断特約は別途付加する設計です）。",
+      src: "出典：メディケア生命 公式パンフレット（2026年11月版）の保険料表"
+    },
+    {
+      company: "アフラック",
+      name: "あなたによりそうがん保険 ミライト",
+      plan: "総合保障プラン（診断給付金100万円・払込免除特約なし）",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:3172,f:3606},30:{m:4463,f:4873},40:{m:6464,f:6397},50:{m:9481,f:7524},60:{m:12114,f:7561}},
+      points: [
+        "診断給付金 100万円＋複数回診断給付金（1年型）100万円",
+        "治療給付金：入院・手術・放射線治療・抗がん剤治療などを受けた月に10万円（60歳以上は6万円）",
+        "入院給付金 日額5,000円（日数無制限）、通院給付金 日額5,000円",
+        "がん要精検後精密検査給付金 2万円（検診ごとに1年に1回）"
+      ],
+      cond: "プラン条件：総合保障プラン・定額タイプ・個別取扱・解約払戻金無型・終身払。治療給付金額10万円（60歳以上は6万円）／診断給付金額100万円／入院・通院給付金 日額5,000円／治療後生活サポート保障特約給付金額10万円（60歳以上は6万円）。がん診断保険料払込免除特約は付けない条件です。保険料は2026年8月現在。",
+      note: "組立型（自由設計）の商品で、特約の組み合わせにより保険料は大きく変わります。表示の保険料は公式パンフレット（2026年8月版）の保険料表で確認した値です。保障が始まるまで待ち期間があります。",
+      src: "出典：アフラック 公式パンフレット（2026年8月版）の保険料表"
+    },
+    {
+      company: "東京海上日動あんしん生命",
+      name: "あんしんがん治療保険",
+      plan: "主契約（給付金月額10万円）＋オプション全部入り",
+      priceLabel: "月払保険料",
+      premiums: {20:{m:3387,f:3340},30:{m:4055,f:3754},40:{m:5103,f:4200},50:{m:7162,f:4820},60:{m:10026,f:5679}},
+      points: [
+        "がんの3大治療（手術・放射線治療・抗がん剤治療など）や疼痛の緩和療養を受けた月に10万円",
+        "がん入院特約 日額10,000円（支払日数無制限）、がん通院特約 日額5,000円",
+        "がん診断特約 50万円、がん特定治療保障特約（自由診療等を通算1億円まで）、がん先進医療特約（技術料を通算2,000万円まで）"
+      ],
+      cond: "プラン条件：主契約（給付金月額10万円）にがん入院特約・がん通院特約・がん診断特約・がん特定治療保障特約・がん先進医療特約をすべて付けた合計保険料。保険期間・保険料払込期間：終身、口座振替扱／団体扱B、悪性新生物保険料払込免除特則なし。",
+      note: "保険料は公式チラシ（2022年2月2日現在）の値を保険代理店サイトが転載したもので、現在の料率と異なる場合があります。特約のうち特定治療保障は原則5年、先進医療は原則10年の保険期間で、最長90歳まで自動更新されます。",
+      src: "出典：東京海上日動あんしん生命 公式チラシ（保険代理店サイト転載）の保険料例"
+    }
+  ]
+};
+
+var state = { cat: "medical", age: 30, gender: "m" };
+
+function fmt(n){ return n.toLocaleString("ja-JP"); }
+
+function priceOf(p){
+  if (typeof p.flat === "number") return p.flat;
+  var row = p.premiums[state.age];
+  if (!row) return null;
+  return row[state.gender];
+}
+
+function render(){
+  var list = PRODUCTS[state.cat].map(function(p){
+    return { p: p, price: priceOf(p) };
+  });
+  list.sort(function(a,b){
+    if (a.price === null && b.price === null) return 0;
+    if (a.price === null) return 1;
+    if (b.price === null) return -1;
+    return a.price - b.price;
+  });
+  var html = "";
+  list.forEach(function(item, idx){
+    var p = item.p;
+    var noData = item.price === null;
+    html += '<div class="prod' + (noData ? ' nodata' : '') + '" data-name="' + p.name + '">';
+    html += '<div class="co">' + p.company + (idx === 0 && !noData ? '<span class="badge">この条件で最安</span>' : '') + (typeof p.flat === "number" ? '<span class="badge flat">年齢不問・定額</span>' : '') + '</div>';
+    html += '<div class="pname">' + p.name + '</div>';
+    html += '<div class="plan">' + p.plan + '</div>';
+    if (noData) {
+      html += '<div class="nodatabox"><div class="lab" style="font-size:12px;color:var(--mut)">' + p.priceLabel + '</div><div class="val">データなし</div></div>';
+    } else {
+      html += '<div class="pricebox"><div class="lab">' + p.priceLabel + '（' + state.age + '歳・' + (state.gender === "m" ? "男性" : "女性") + '）</div><div class="val"><span class="yen">¥</span>' + fmt(item.price) + '<span class="per"> ／月</span></div></div>';
+    }
+    html += '<h4>保障の要点</h4><ul>';
+    p.points.forEach(function(pt){ html += '<li>' + pt + '</li>'; });
+    html += '</ul>';
+    html += '<div class="cond">' + p.cond + '</div>';
+    html += '<p class="note" style="margin:8px 0 0">' + p.note + '</p>';
+    html += '<div class="src">' + p.src + '</div>';
+    html += '</div>';
+  });
+  document.getElementById("results").innerHTML = html;
+}
+
+function bindSeg(id, attr, key, conv){
+  var seg = document.getElementById(id);
+  seg.addEventListener("click", function(e){
+    var btn = e.target.closest("button");
+    if (!btn) return;
+    seg.querySelectorAll("button").forEach(function(b){ b.classList.remove("on"); });
+    btn.classList.add("on");
+    state[key] = conv(btn.dataset[attr]);
+    render();
+  });
+}
+bindSeg("catSeg", "cat", "cat", function(v){ return v; });
+bindSeg("ageSeg", "age", "age", function(v){ return parseInt(v, 10); });
+bindSeg("genderSeg", "gender", "gender", function(v){ return v; });
+
+render();
+</script>
+</body>
+</html>

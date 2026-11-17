@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社会保険料計算シミュレーター</title>
+<meta name="description" content="月給と賞与から、健康保険・厚生年金・雇用保険・労災保険の本人負担と会社負担を計算する無料ツール。協会けんぽ前提、令和8年度の料率対応。">
+<style>
+:root{
+  --navy:#12283f; --navy2:#0b1a2c; --amber:#f2a007; --amber-d:#c77f02;
+  --bg:#f4f2ec; --card:#ffffff; --ink:#1d2733; --mut:#68707c;
+  --line:#ddd6c8; --red:#b03a2e; --green:#1e7d46; --soft:#fdf6e0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6}
+header{background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff;padding:22px 16px 18px;border-bottom:4px solid var(--amber)}
+header .wrap{max-width:980px;margin:0 auto}
+header h1{margin:0;font-size:24px;letter-spacing:.04em}
+header h1 .accent{color:var(--amber)}
+header p{margin:6px 0 0;font-size:13px;color:#cfd9e4}
+.wrap{max-width:980px;margin:0 auto;padding:0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(18,40,63,.06)}
+.card h2{margin:0 0 10px;font-size:17px;color:var(--navy);border-left:5px solid var(--amber);padding-left:9px}
+.note{font-size:12.5px;color:var(--mut)}
+.warn{background:var(--soft);border:1px solid #ecd27a;border-radius:8px;padding:10px 12px;font-size:13px;margin:10px 0}
+label.flabel{display:block;font-size:12.5px;color:var(--mut);margin:10px 0 3px}
+input[type=number],select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font-size:16px;background:#fff;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.biggrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:14px 0}
+.bigbox{background:var(--navy);border-radius:10px;padding:14px 16px}
+.bigbox .lab{font-size:12.5px;color:#b9c8d8}
+.bigbox .val{font-size:30px;font-weight:800;color:var(--amber);font-variant-numeric:tabular-nums;line-height:1.3}
+.bigbox .val .yen{font-size:16px}
+.bigbox .sub{font-size:12.5px;color:#b9c8d8}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:right;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--navy);border-bottom:2px solid var(--amber)}
+tr.total td{font-weight:800;background:#fdf6e0}
+footer{margin:26px 0 40px}
+footer .card{font-size:12.5px;color:var(--mut)}
+.credit{text-align:center;color:var(--mut);font-size:12px;margin:10px 0 30px}
+a{color:var(--navy)}
+.hidden{display:none}
+.sitebar{background:var(--navy2);border-bottom:2px solid var(--amber)}
+.sitebar .sb-in{max-width:980px;margin:0 auto;padding:7px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sitebar a{color:#fff;text-decoration:none;font-size:13px}
+.sitebar a:hover{color:var(--amber)}
+.sitebar .sb-name{font-weight:700;letter-spacing:.03em}
+.sitebar .sb-tool{color:#b9c8d8;font-size:13px}
+</style>
+</head>
+<body>
+<div class="sitebar"><div class="sb-in"><a class="sb-name" href="index.html">保険ツール集</a><span class="sb-tool">社会保険料計算</span></div></div>
+
+<header>
+  <div class="wrap">
+    <h1>社会保険料 <span class="accent">計算シミュレーター</span></h1>
+    <p>月給と賞与を入れるだけで、健康保険・厚生年金・雇用保険・労災保険の「本人負担」と「会社負担」が分かります。協会けんぽ前提・令和8年度の料率で計算します。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <h2>条件を入れる</h2>
+    <div class="grid2">
+      <div>
+        <label class="flabel" for="salary">月給（総支給額・円）</label>
+        <input type="number" id="salary" inputmode="numeric" min="0" placeholder="例：300000">
+      </div>
+      <div>
+        <label class="flabel" for="age">年齢</label>
+        <input type="number" id="age" inputmode="numeric" min="0" max="99" placeholder="例：45">
+      </div>
+      <div>
+        <label class="flabel" for="bonus">賞与（1回あたりの総支給額・円）</label>
+        <input type="number" id="bonus" inputmode="numeric" min="0" placeholder="なければ空欄">
+      </div>
+      <div>
+        <label class="flabel" for="bonusTimes">賞与の回数（年）</label>
+        <select id="bonusTimes">
+          <option value="0">0回（賞与なし）</option>
+          <option value="1">1回</option>
+          <option value="2" selected>2回</option>
+          <option value="3">3回</option>
+          <option value="4">4回</option>
+        </select>
+      </div>
+      <div>
+        <label class="flabel" for="pref">都道府県（事業所の所在地・協会けんぽ）</label>
+        <select id="pref"><option value="北海道">北海道（10.28％）</option><option value="青森県">青森県（9.85％）</option><option value="岩手県">岩手県（9.51％）</option><option value="宮城県">宮城県（10.10％）</option><option value="秋田県">秋田県（10.01％）</option><option value="山形県">山形県（9.75％）</option><option value="福島県">福島県（9.50％）</option><option value="茨城県">茨城県（9.52％）</option><option value="栃木県">栃木県（9.82％）</option><option value="群馬県">群馬県（9.68％）</option><option value="埼玉県">埼玉県（9.67％）</option><option value="千葉県">千葉県（9.73％）</option><option value="東京都" selected>東京都（9.85％）</option><option value="神奈川県">神奈川県（9.92％）</option><option value="新潟県">新潟県（9.21％）</option><option value="富山県">富山県（9.59％）</option><option value="石川県">石川県（9.70％）</option><option value="福井県">福井県（9.71％）</option><option value="山梨県">山梨県（9.55％）</option><option value="長野県">長野県（9.63％）</option><option value="岐阜県">岐阜県（9.80％）</option><option value="静岡県">静岡県（9.61％）</option><option value="愛知県">愛知県（9.93％）</option><option value="三重県">三重県（9.77％）</option><option value="滋賀県">滋賀県（9.88％）</option><option value="京都府">京都府（9.89％）</option><option value="大阪府">大阪府（10.13％）</option><option value="兵庫県">兵庫県（10.12％）</option><option value="奈良県">奈良県（9.91％）</option><option value="和歌山県">和歌山県（10.06％）</option><option value="鳥取県">鳥取県（9.86％）</option><option value="島根県">島根県（9.94％）</option><option value="岡山県">岡山県（10.05％）</option><option value="広島県">広島県（9.78％）</option><option value="山口県">山口県（10.15％）</option><option value="徳島県">徳島県（10.24％）</option><option value="香川県">香川県（10.02％）</option><option value="愛媛県">愛媛県（9.98％）</option><option value="高知県">高知県（10.05％）</option><option value="福岡県">福岡県（10.11％）</option><option value="佐賀県">佐賀県（10.55％）</option><option value="長崎県">長崎県（10.06％）</option><option value="熊本県">熊本県（10.08％）</option><option value="大分県">大分県（10.08％）</option><option value="宮崎県">宮崎県（9.77％）</option><option value="鹿児島県">鹿児島県（10.13％）</option><option value="沖縄県">沖縄県（9.44％）</option></select>
+      </div>
+      <div>
+        <label class="flabel" for="empCat">雇用保険の事業の種類</label>
+        <select id="empCat">
+          <option value="general" selected>一般の事業</option>
+          <option value="agri">農林水産・清酒製造の事業</option>
+          <option value="const">建設の事業</option>
+        </select>
+      </div>
+    </div>
+    <label class="flabel" for="rosai">業種（労災保険料率・令和6年4月改定）</label>
+    <select id="rosai"><optgroup label="林業・漁業・鉱業"><option value="52">林業（52/1,000）</option><option value="18">海面漁業（定置網・魚類養殖を除く）（18/1,000）</option><option value="37">定置網漁業又は海面魚類養殖業（37/1,000）</option><option value="88">金属鉱業・非金属鉱業（石灰石等を除く）又は石炭鉱業（88/1,000）</option><option value="13">石灰石鉱業又はドロマイト鉱業（13/1,000）</option><option value="2.5">原油又は天然ガス鉱業（2.5/1,000）</option><option value="37">採石業（37/1,000）</option><option value="26">その他の鉱業（26/1,000）</option></optgroup><optgroup label="建設事業"><option value="34">水力発電施設、ずい道等新設事業（34/1,000）</option><option value="11">道路新設事業（11/1,000）</option><option value="9">舗装工事業（9/1,000）</option><option value="9">鉄道又は軌道新設事業（9/1,000）</option><option value="9.5">建築事業（既設建築物設備工事業を除く）（9.5/1,000）</option><option value="12">既設建築物設備工事業（12/1,000）</option><option value="6">機械装置の組立て又は据付けの事業（6/1,000）</option><option value="15">その他の建設事業（15/1,000）</option></optgroup><optgroup label="製造業"><option value="5.5">食料品製造業（5.5/1,000）</option><option value="4">繊維工業又は繊維製品製造業（4/1,000）</option><option value="13">木材又は木製品製造業（13/1,000）</option><option value="7">パルプ又は紙製造業（7/1,000）</option><option value="3.5">印刷又は製本業（3.5/1,000）</option><option value="4.5">化学工業（4.5/1,000）</option><option value="6">ガラス又はセメント製造業（6/1,000）</option><option value="13">コンクリート製造業（13/1,000）</option><option value="17">陶磁器製品製造業（17/1,000）</option><option value="23">その他の窯業又は土石製品製造業（23/1,000）</option><option value="6.5">金属精錬業（非鉄金属精錬業を除く）（6.5/1,000）</option><option value="7">非鉄金属精錬業（7/1,000）</option><option value="5">金属材料品製造業（鋳物業を除く）（5/1,000）</option><option value="16">鋳物業（16/1,000）</option><option value="9">金属製品製造業又は金属加工業（一部を除く）（9/1,000）</option><option value="6.5">洋食器、刃物、手工具又は一般金物製造業（めっき業を除く）（6.5/1,000）</option><option value="6.5">めっき業（6.5/1,000）</option><option value="5">機械器具製造業（一部を除く）（5/1,000）</option><option value="3">電気機械器具製造業（3/1,000）</option><option value="4">輸送用機械器具製造業（船舶を除く）（4/1,000）</option><option value="23">船舶製造又は修理業（23/1,000）</option><option value="2.5">計量器、光学機械、時計等製造業（2.5/1,000）</option><option value="3.5">貴金属製品、装身具、皮革製品等製造業（3.5/1,000）</option><option value="6">その他の製造業（6/1,000）</option></optgroup><optgroup label="運輸業・電気ガス水道"><option value="4">交通運輸事業（4/1,000）</option><option value="8.5">貨物取扱事業（港湾関係を除く）（8.5/1,000）</option><option value="9">港湾貨物取扱事業（港湾荷役業を除く）（9/1,000）</option><option value="12">港湾荷役業（12/1,000）</option><option value="3">電気、ガス、水道又は熱供給の事業（3/1,000）</option></optgroup><optgroup label="その他の事業"><option value="13">農業又は海面漁業以外の漁業（13/1,000）</option><option value="13">清掃、火葬又はと畜の事業（13/1,000）</option><option value="6">ビルメンテナンス業（6/1,000）</option><option value="6.5">倉庫業、警備業、消毒又は害虫駆除の事業又はゴルフ場の事業（6.5/1,000）</option><option value="2.5">通信業、放送業、新聞業又は出版業（2.5/1,000）</option><option value="3">卸売業・小売業、飲食店又は宿泊業（3/1,000）</option><option value="2.5">金融業、保険業又は不動産業（2.5/1,000）</option><option value="3" selected>その他の各種事業（3/1,000）</option><option value="42">船舶所有者の事業（42/1,000）</option></optgroup></select>
+    <p class="note">40歳〜64歳の方は、健康保険に介護保険分（1.62％）が自動で上乗せされます。労災保険は会社が全額負担する保険です。</p>
+  </div>
+
+  <div id="emptyMsg" class="warn">月給と年齢を入れると、ここに結果が出ます。</div>
+
+  <div id="result" class="hidden">
+    <div class="biggrid">
+      <div class="bigbox">
+        <div class="lab">本人負担（月額）</div>
+        <div class="val"><span class="yen">¥</span><span id="empMonth">—</span></div>
+        <div class="sub">給与から天引きされる社会保険料</div>
+      </div>
+      <div class="bigbox">
+        <div class="lab">本人負担（年額）</div>
+        <div class="val"><span class="yen">¥</span><span id="empYear">—</span></div>
+        <div class="sub">賞与分を含みます</div>
+      </div>
+      <div class="bigbox">
+        <div class="lab">会社の総コスト（年額）</div>
+        <div class="val"><span class="yen">¥</span><span id="compYear">—</span></div>
+        <div class="sub">給与・賞与＋会社負担の保険料</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>内訳</h2>
+      <p class="note" id="stdInfo"></p>
+      <table>
+        <thead>
+          <tr><th>保険</th><th>本人（月）</th><th>会社（月）</th><th>本人（年）</th><th>会社（年）</th></tr>
+        </thead>
+        <tbody id="breakdown"></tbody>
+      </table>
+      <p class="note">健康保険料には子ども・子育て支援金（0.23％）を含みます。子ども・子育て拠出金（0.36％）は厚生年金の標準報酬に掛かる会社全額負担分です。雇用保険・労災保険は標準報酬ではなく総支給額に料率を掛けて計算します。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>計算の前提</h2>
+    <ul style="margin:6px 0;padding-left:20px">
+      <li style="margin:5px 0;font-size:14px">健康保険は<strong>協会けんぽ</strong>前提です。健康保険組合（組合健保）に加入している会社は、料率も介護保険料率も組合ごとに異なります。</li>
+      <li style="margin:5px 0;font-size:14px">月給は「その月の総支給額」として等級表に当てはめ、標準報酬月額を求めています。実際の標準報酬月額は、入社時の資格取得時決定や4〜6月の定時決定などで決まるため、この結果は目安です。</li>
+      <li style="margin:5px 0;font-size:14px">賞与は1,000円未満を切り捨てた標準賞与額で計算します（健康保険は年度累計573万円、厚生年金は1回150万円が上限）。</li>
+      <li style="margin:5px 0;font-size:14px">雇用保険料率は令和8年度（2026年4月〜2027年3月）、労災保険料率は令和6年4月改定（令和8年度も同率）の値です。</li>
+      <li style="margin:5px 0;font-size:14px">本人負担分の端数は、給与から控除する際の公式ルール（50銭以下は切り捨て、50銭を超えたら切り上げ）で処理しています。</li>
+    </ul>
+  </div>
+
+  <footer>
+    <div class="card">
+      このツールは非公式の個人ツールです。表示される金額は公表料率にもとづく目安で、実際の給与計算は勤務先の規程や社会保険労務士の確認に従ってください。70歳以上の厚生年金、75歳以上の健康保険、厚生年金基金加入者、船員保険などは対象外です。<br>
+      出典：
+      <a href="https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html" target="_blank" rel="noopener">協会けんぽ「令和8年度 都道府県単位保険料率」</a>／
+      <a href="https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/20200825.files/R08ryougaku.pdf" target="_blank" rel="noopener">日本年金機構「厚生年金保険料額表（令和8年度版）」</a>／
+      <a href="https://www.nenkin.go.jp/section/faq/kounen/hokenryo/shoyokeisan.html" target="_blank" rel="noopener">日本年金機構「賞与にかかる保険料」</a>／
+      <a href="https://jsite.mhlw.go.jp/ehime-roudoukyoku/content/contents/002602395.pdf" target="_blank" rel="noopener">厚生労働省「令和8年度 雇用保険料率のご案内」</a>／
+      <a href="https://jsite.mhlw.go.jp/kanagawa-roudoukyoku/hourei_seido_tetsuzuki/roudou_hoken/hourei_seido/2024_00004.html" target="_blank" rel="noopener">神奈川労働局「労災保険率（令和6年4月1日改定）」</a><br>
+      料率・ルール確認日：2026-11-17
+    </div>
+    <p class="credit">制作：andy（わんこ堂）× 熊八 🐾（Muse Spark）</p>
+  </footer>
+
+</div>
+
+<script>
+var PREF = {"北海道": 10.28, "青森県": 9.85, "岩手県": 9.51, "宮城県": 10.1, "秋田県": 10.01, "山形県": 9.75, "福島県": 9.5, "茨城県": 9.52, "栃木県": 9.82, "群馬県": 9.68, "埼玉県": 9.67, "千葉県": 9.73, "東京都": 9.85, "神奈川県": 9.92, "新潟県": 9.21, "富山県": 9.59, "石川県": 9.7, "福井県": 9.71, "山梨県": 9.55, "長野県": 9.63, "岐阜県": 9.8, "静岡県": 9.61, "愛知県": 9.93, "三重県": 9.77, "滋賀県": 9.88, "京都府": 9.89, "大阪府": 10.13, "兵庫県": 10.12, "奈良県": 9.91, "和歌山県": 10.06, "鳥取県": 9.86, "島根県": 9.94, "岡山県": 10.05, "広島県": 9.78, "山口県": 10.15, "徳島県": 10.24, "香川県": 10.02, "愛媛県": 9.98, "高知県": 10.05, "福岡県": 10.11, "佐賀県": 10.55, "長崎県": 10.06, "熊本県": 10.08, "大分県": 10.08, "宮崎県": 9.77, "鹿児島県": 10.13, "沖縄県": 9.44};
+var GRADES = [[0, 58000], [63000, 68000], [73000, 78000], [83000, 88000], [93000, 98000], [101000, 104000], [107000, 110000], [114000, 118000], [122000, 126000], [130000, 134000], [138000, 142000], [146000, 150000], [155000, 160000], [165000, 170000], [175000, 180000], [185000, 190000], [195000, 200000], [210000, 220000], [230000, 240000], [250000, 260000], [270000, 280000], [290000, 300000], [310000, 320000], [330000, 340000], [350000, 360000], [370000, 380000], [395000, 410000], [425000, 440000], [455000, 470000], [485000, 500000], [515000, 530000], [545000, 560000], [575000, 590000], [605000, 620000], [635000, 650000], [665000, 680000], [695000, 710000], [730000, 750000], [770000, 790000], [810000, 830000], [855000, 880000], [905000, 930000], [955000, 980000], [1005000, 1030000], [1055000, 1090000], [1115000, 1150000], [1175000, 1210000], [1235000, 1270000], [1295000, 1330000], [1355000, 1390000]];
+var EMP_RATES = {
+  general: {emp: 5, er: 8.5},
+  agri: {emp: 6, er: 9.5},
+  const: {emp: 6, er: 10.5}
+};
+var CARE_BP = 162, CHILD_BP = 23, PENSION_BP = 1830, CONTRIB_BP = 36;
+
+function gradeOf(salary, minStd, maxStd) {
+  var found = null;
+  for (var i = 0; i < GRADES.length; i++) {
+    var std = GRADES[i][1];
+    if (std < minStd || std > maxStd) continue;
+    if (salary >= GRADES[i][0]) found = {grade: 0, std: std, idx: i};
+    else break;
+  }
+  if (!found) {
+    var first = null, count = 0;
+    for (var j = 0; j < GRADES.length; j++) {
+      if (GRADES[j][1] >= minStd && GRADES[j][1] <= maxStd) { if (!first) first = {std: GRADES[j][1], idx: j}; count++; }
+    }
+    found = {grade: 0, std: first.std, idx: first.idx};
+  }
+  var g = 0;
+  for (var k = 0; k <= found.idx; k++) {
+    if (GRADES[k][1] >= minStd && GRADES[k][1] <= maxStd) g++;
+  }
+  found.grade = g;
+  return found;
+}
+function round50(x) {
+  var f = Math.floor(x), frac = x - f;
+  return frac <= 0.5 ? f : f + 1;
+}
+function splitPremium(base, bp) {
+  var total = Math.round(base * bp / 10000);
+  var emp = round50(base * bp / 20000);
+  return {emp: emp, er: total - emp, total: total};
+}
+function fmt(n) { return n.toLocaleString("ja-JP"); }
+
+function calc() {
+  var salary = parseFloat(document.getElementById("salary").value);
+  var age = parseFloat(document.getElementById("age").value);
+  var bonus = parseFloat(document.getElementById("bonus").value) || 0;
+  var times = parseInt(document.getElementById("bonusTimes").value, 10) || 0;
+  var pref = document.getElementById("pref").value;
+  var empCat = document.getElementById("empCat").value;
+  var rosaiPer = parseFloat(document.getElementById("rosai").value);
+  var result = document.getElementById("result");
+  var empty = document.getElementById("emptyMsg");
+  if (!(salary > 0) || isNaN(age) || !pref) {
+    result.classList.add("hidden");
+    empty.classList.remove("hidden");
+    return;
+  }
+  empty.classList.add("hidden");
+  result.classList.remove("hidden");
+
+  var care = (age >= 40 && age <= 64);
+  var healthBP = Math.round(PREF[pref] * 100) + CHILD_BP + (care ? CARE_BP : 0);
+  var hg = gradeOf(salary, 58000, 1390000);
+  var pg = gradeOf(salary, 88000, 650000);
+
+  var mh = splitPremium(hg.std, healthBP);
+  var mp = splitPremium(pg.std, PENSION_BP);
+  var er = EMP_RATES[empCat];
+  var meEmp = round50(salary * er.emp / 1000);
+  var meEr = round50(salary * er.er / 1000);
+  var mRosai = Math.round(salary * rosaiPer / 1000);
+  var mContrib = Math.round(pg.std * CONTRIB_BP / 10000);
+
+  var stdBonus = Math.floor(bonus / 1000) * 1000;
+  var healthBonusAnnualStd = Math.min(stdBonus * times, 5730000);
+  var pensionBonusStdOnce = Math.min(stdBonus, 1500000);
+  var bhTotal = Math.round(healthBonusAnnualStd * healthBP / 10000);
+  var bhEmp = round50(healthBonusAnnualStd * healthBP / 20000);
+  var bh = {emp: bhEmp, er: bhTotal - bhEmp};
+  var bpTotal = Math.round(pensionBonusStdOnce * times * PENSION_BP / 10000);
+  var bpEmp = round50(pensionBonusStdOnce * times * PENSION_BP / 20000);
+  var bp = {emp: bpEmp, er: bpTotal - bpEmp};
+  var beEmp = round50(bonus * times * er.emp / 1000);
+  var beEr = round50(bonus * times * er.er / 1000);
+  var bRosai = Math.round(bonus * times * rosaiPer / 1000);
+  var bContrib = Math.round(pensionBonusStdOnce * times * CONTRIB_BP / 10000);
+
+  var rows = [
+    ["健康保険（介護" + (care ? "あり" : "なし") + "・支援金込み）", mh.emp, mh.er, mh.emp * 12 + bh.emp, mh.er * 12 + bh.er],
+    ["厚生年金", mp.emp, mp.er, mp.emp * 12 + bp.emp, mp.er * 12 + bp.er],
+    ["雇用保険", meEmp, meEr, meEmp * 12 + beEmp, meEr * 12 + beEr],
+    ["労災保険（会社のみ）", 0, mRosai, 0, mRosai * 12 + bRosai],
+    ["子ども・子育て拠出金（会社のみ）", 0, mContrib, 0, mContrib * 12 + bContrib]
+  ];
+  var tEmpM = 0, tErM = 0, tEmpY = 0, tErY = 0;
+  var htmlRows = "";
+  rows.forEach(function(r) {
+    tEmpM += r[1]; tErM += r[2]; tEmpY += r[3]; tErY += r[4];
+    htmlRows += "<tr><td>" + r[0] + "</td><td>¥" + fmt(r[1]) + "</td><td>¥" + fmt(r[2]) + "</td><td>¥" + fmt(r[3]) + "</td><td>¥" + fmt(r[4]) + "</td></tr>";
+  });
+  htmlRows += "<tr class=\"total\"><td>合計</td><td>¥" + fmt(tEmpM) + "</td><td>¥" + fmt(tErM) + "</td><td>¥" + fmt(tEmpY) + "</td><td>¥" + fmt(tErY) + "</td></tr>";
+  document.getElementById("breakdown").innerHTML = htmlRows;
+
+  document.getElementById("empMonth").textContent = fmt(tEmpM);
+  document.getElementById("empYear").textContent = fmt(tEmpY);
+  document.getElementById("compYear").textContent = fmt(salary * 12 + bonus * times + tErY);
+
+  var stdInfo = "標準報酬月額：健康保険 第" + hg.grade + "級 ¥" + fmt(hg.std) + "／厚生年金 第" + pg.grade + "級 ¥" + fmt(pg.std);
+  stdInfo += "（健康保険料率 " + (healthBP / 100).toFixed(2) + "％＝" + pref + " " + PREF[pref].toFixed(2) + "％＋支援金0.23％" + (care ? "＋介護1.62％" : "") + "）";
+  if (bonus > 0 && times > 0) {
+    stdInfo += "。標準賞与額：1回 ¥" + fmt(stdBonus) + "（健保の年間対象 ¥" + fmt(healthBonusAnnualStd) + "／厚年の1回対象 ¥" + fmt(pensionBonusStdOnce) + "）";
+  }
+  document.getElementById("stdInfo").textContent = stdInfo;
+}
+
+["salary", "age", "bonus", "bonusTimes", "pref", "empCat", "rosai"].forEach(function(id) {
+  document.getElementById(id).addEventListener("input", calc);
+  document.getElementById(id).addEventListener("change", calc);
+});
+calc();
+</script>
+</body>
+</html>

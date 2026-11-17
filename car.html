@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自動車保険 保険料例ケース集｜各社の公式モデルケースで比べる</title>
+<meta name="description" content="自動車保険（任意保険）の保険料は条件で大きく変わります。各社が公式に公表しているモデルケース（保険料例）を、条件タグ付きで集めた無料のケース集です。車両保険あり／なしの差額など、条件がそろった比べ方ができます。">
+<style>
+:root{
+  --navy:#12283f; --navy2:#0b1a2c; --amber:#f2a007; --amber-d:#c77f02;
+  --bg:#f4f2ec; --card:#ffffff; --ink:#1d2733; --mut:#68707c;
+  --line:#ddd6c8; --red:#b03a2e; --green:#1e7d46; --soft:#fdf6e0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6}
+header{background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff;padding:22px 16px 18px;border-bottom:4px solid var(--amber)}
+header .wrap{max-width:980px;margin:0 auto}
+header h1{margin:0;font-size:24px;letter-spacing:.04em}
+header h1 .accent{color:var(--amber)}
+header p{margin:6px 0 0;font-size:13px;color:#cfd9e4}
+.wrap{max-width:980px;margin:0 auto;padding:0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(18,40,63,.06)}
+.card h2{margin:0 0 10px;font-size:17px;color:var(--navy);border-left:5px solid var(--amber);padding-left:9px}
+.card h3{margin:14px 0 6px;font-size:15px;color:var(--navy)}
+.note{font-size:12.5px;color:var(--mut)}
+.warn{background:var(--soft);border:1px solid #ecd27a;border-radius:8px;padding:10px 12px;font-size:13px;margin:10px 0}
+.warn.red{background:#fbeae7;border-color:#e0a49c}
+label.flabel{display:block;font-size:12.5px;color:var(--mut);margin:10px 0 3px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{flex:1;min-width:64px;background:#e9e4d8;border:1px solid var(--line);border-radius:8px;padding:9px 6px;font-size:13.5px;cursor:pointer;color:var(--ink)}
+.seg button.on{background:var(--navy);color:#fff;font-weight:700;border-color:var(--navy)}
+.count{font-size:13px;color:var(--mut);margin:10px 2px 0}
+.prodgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:14px 0}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:0 1px 3px rgba(18,40,63,.06);display:flex;flex-direction:column}
+.prod .co{font-size:12.5px;color:var(--mut)}
+.prod .pname{font-size:16.5px;font-weight:800;color:var(--navy);margin:1px 0 6px;line-height:1.4}
+.prod .pricebox{background:var(--navy);border-radius:8px;padding:10px 14px;margin-bottom:10px}
+.prod .pricebox .lab{font-size:12px;color:#b9c8d8}
+.prod .pricebox .val{font-size:27px;font-weight:800;color:var(--amber);font-variant-numeric:tabular-nums;line-height:1.25}
+.prod .pricebox .val .yen{font-size:15px}
+.prod .pricebox .val .per{font-size:13px;color:#b9c8d8;font-weight:400}
+.prod .pricebox .sub{font-size:13px;color:#e8eef4;font-variant-numeric:tabular-nums}
+.prod .pricebox .prow{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px dashed rgba(255,255,255,.25)}
+.prod .pricebox .prow:last-child{border-bottom:none}
+.prod .pricebox .prow .pl{font-size:12.5px;color:#b9c8d8;white-space:nowrap}
+.prod .pricebox .prow .pv{font-size:19px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+.prod .pricebox .prow .pv .yen{font-size:12px}
+.prod .pricebox .prow.diff .pv{color:var(--amber)}
+.badge{display:inline-block;background:var(--amber);color:#fff;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.badge.official{background:var(--green)}
+.badge.agency{background:#68707c}
+.badge.third{background:var(--red)}
+.chips{margin:2px 0 8px}
+.chip{display:inline-block;background:#eef2f6;border:1px solid var(--line);border-radius:20px;padding:1px 9px;font-size:12px;margin:2px 3px 2px 0;color:var(--navy)}
+.prod h4{margin:10px 0 5px;font-size:13.5px;color:var(--navy)}
+.prod ul{margin:4px 0;padding-left:19px}
+.prod ul li{margin:4px 0;font-size:13px}
+.prod .cond{background:#f7f4ec;border:1px solid var(--line);border-radius:7px;padding:8px 11px;font-size:12.5px;margin-top:auto}
+.prod .src{font-size:11.5px;color:var(--mut);margin-top:8px}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:22px;text-align:center;color:var(--mut);font-size:14px;margin:14px 0}
+footer{margin:26px 0 40px}
+footer .card{font-size:12.5px;color:var(--mut)}
+.credit{text-align:center;color:var(--mut);font-size:12px;margin:10px 0 30px}
+a{color:var(--navy)}
+table.ktable{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+table.ktable th,table.ktable td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+table.ktable th{background:#eef2f6;color:var(--navy);white-space:nowrap}
+.sitebar{background:var(--navy2);border-bottom:2px solid var(--amber)}
+.sitebar .sb-in{max-width:980px;margin:0 auto;padding:7px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sitebar a{color:#fff;text-decoration:none;font-size:13px}
+.sitebar a:hover{color:var(--amber)}
+.sitebar .sb-name{font-weight:700;letter-spacing:.03em}
+.sitebar .sb-tool{color:#b9c8d8;font-size:13px}
+</style>
+</head>
+<body>
+<div class="sitebar"><div class="sb-in"><a class="sb-name" href="index.html">保険ツール集</a><span class="sb-tool">自動車保険比較</span></div></div>
+
+<header>
+  <div class="wrap">
+    <h1>自動車保険 <span class="accent">保険料例ケース集</span></h1>
+    <p>自動車保険の保険料は条件で大きく変わるため、年齢別の料金表はありません。このページは、各社が公式に公表しているモデルケース（保険料例）を、条件とセットで集めたケース集です。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <h2>このページの見方</h2>
+    <p style="margin:6px 0;font-size:14px">自動車保険（任意保険）の保険料は、<strong>ノンフリート等級・年齢条件・車種（型式別料率クラス）・車両保険の有無や金額・年間走行距離・免許の色・割引</strong>の組み合わせで決まります。条件が1つでも違えば金額は変わるため、このページでは「あなたの保険料」を計算するのではなく、<strong>各社が公表したモデルケースを条件つきで眺めて、相場観と条件の影響をつかむ</strong>使い方を想定しています。</p>
+    <h3>保険料が決まる主な要素</h3>
+    <table class="ktable">
+      <tr><th>等級</th><td>無事故で年々上がるノンフリート等級。6等級（新規）から20等級までで割引率が大きく変わり、保険料への影響が最も大きい要素のひとつです。</td></tr>
+      <tr><th>年齢・年齢条件</th><td>運転者の年齢と「○歳以上補償」の設定。若いほど高く、年齢条件を狭めるほど安くなります。</td></tr>
+      <tr><th>車種（型式別料率クラス）</th><td>車の型式ごとに、車両・対人・対物・傷害の料率クラスが設定されています。同じ車名でも型式で変わります。</td></tr>
+      <tr><th>車両保険</th><td>自分の車の損害を補償する保険。付けるかどうか・金額・タイプ（一般／限定）・免責金額で保険料が大きく動きます。同条件の「あり／なし」差額が、このページで最も正確に比べられる切り口です。</td></tr>
+      <tr><th>走行距離・使用目的</th><td>ダイレクト型各社では年間走行距離の区分が保険料に影響します（損保ジャパンやマイカー共済のように距離区分のない会社もあります）。</td></tr>
+      <tr><th>免許の色・割引</th><td>ゴールド免許割引のほか、インターネット割引・新車割引・無事故割引などが積み重なります。</td></tr>
+    </table>
+    <p class="note">各社のモデルケースは「20等級・ゴールド免許・新車割引あり」など、安く見える条件で作られていることが多い点にも注意してください。実際の保険料は、各社の公式見積もりで確認してください。</p>
+  </div>
+
+  <div class="card">
+    <h2>ケースを絞り込む</h2>
+    <label class="flabel">車両保険</label>
+    <div class="seg" id="vehSeg">
+      <button type="button" data-veh="all" class="on">すべて</button>
+      <button type="button" data-veh="yes">あり</button>
+      <button type="button" data-veh="no">なし</button>
+    </div>
+    <label class="flabel">年代（記名被保険者）</label>
+    <div class="seg" id="decSeg">
+      <button type="button" data-dec="all" class="on">すべて</button>
+      <button type="button" data-dec="20s">20代</button>
+      <button type="button" data-dec="30s">30代</button>
+      <button type="button" data-dec="40s">40代</button>
+      <button type="button" data-dec="50s">50代</button>
+      <button type="button" data-dec="60s">60代以上</button>
+    </div>
+    <label class="flabel">等級帯</label>
+    <div class="seg" id="gradeSeg">
+      <button type="button" data-grade="all" class="on">すべて</button>
+      <button type="button" data-grade="g6">6等級前後</button>
+      <button type="button" data-grade="g10">10等級前後</button>
+      <button type="button" data-grade="g20">20等級</button>
+    </div>
+    <label class="flabel">車種カテゴリ</label>
+    <div class="seg" id="carSeg">
+      <button type="button" data-car="all" class="on">すべて</button>
+      <button type="button" data-car="kei">軽自動車</button>
+      <button type="button" data-car="compact">コンパクト</button>
+      <button type="button" data-car="minivan">ミニバン・ワゴン</button>
+      <button type="button" data-car="sedan">セダン・その他</button>
+    </div>
+    <label class="flabel">出典</label>
+    <div class="seg" id="srcSeg">
+      <button type="button" data-src="all" class="on">すべて</button>
+      <button type="button" data-src="official">公式のみ</button>
+    </div>
+  </div>
+
+  <div class="warn red">
+    <strong>注意：</strong>ケースごとに条件が異なるため、金額の単純比較はできません。各ケースの条件を確認してください。一覧は年払い保険料の安い順に並べていますが、順位そのものに「どの会社が安いか」の意味はありません。同条件でそろった「車両保険あり／なし」の差額や、等級だけが違うケースの比較が、条件の影響を正しく見られる切り口です。
+  </div>
+
+  <p class="count" id="countLine"></p>
+  <div class="prodgrid" id="results"></div>
+  <div class="empty" id="emptyBox" style="display:none">条件に合うケースがありません。絞り込みをゆるめてみてください。</div>
+
+  <div class="card">
+    <h2>参考（旧料率・団体扱など）</h2>
+    <p style="margin:6px 0;font-size:13.5px">以下の例は、上のケース一覧とは分けて掲載しています。<strong>団体扱</strong>は勤務先などの団体を通じた専用料率で、一般契約とは料率が根本的に異なるため、<strong>金額比較の対象にはしないでください</strong>。JA共済の例は2024年6月時点、東京海上日動の団体扱例は2015年時点の<strong>旧料率</strong>です。AIG損保の例は単年の保険料ではなく、長期契約と1年契約を3年続けた場合の総額比較です。</p>
+    <p class="note">なお、楽天損保・東京海上日動・三井住友海上・あいおいニッセイ同和損保は、公式サイト上に条件を明示した全体の保険料例を公開していません（楽天損保・三井住友海上・あいおいニッセイ同和損保については、代理店サイト・第三者サイトに掲載された例を出典バッジ付きで上の一覧に収録しています）。</p>
+    <div class="prodgrid" id="refResults"></div>
+  </div>
+
+  <footer>
+    <div class="card">
+      このツールは非公式の個人ツールです。表示している保険料は各社・各団体が公表した保険料例（モデルケース）で、実際の契約では条件により金額が変わります。申し込み・契約は必ず各社の公式サイトで行い、補償内容は各社のパンフレット・契約概要でご確認ください。本ページは情報提供のみを目的としたもので、特定の保険商品への加入を勧誘するものではありません。<br>
+      出典：
+      <a href="https://www.zurich.co.jp/car/consider/example/" target="_blank" rel="noopener">チューリッヒ保険 公式「保険料例」</a>／
+      <a href="https://www.zurich.co.jp/car/useful/guide/cc-cost-average/" target="_blank" rel="noopener">チューリッヒ保険 公式ガイド「自動車保険の相場」</a>／
+      <a href="https://www.mitsui-direct.co.jp/car/" target="_blank" rel="noopener">三井ダイレクト損保 公式サイト</a>／
+      <a href="https://www.mitsui-direct.co.jp/lp/car/d/cas/" target="_blank" rel="noopener">三井ダイレクト損保 公式LP（年代×車種 保険料表）</a>／
+      <a href="https://park.sompo-japan.co.jp/carmag/autoins/switch/column/as002.html" target="_blank" rel="noopener">損保ジャパン 公式コラム（SOMPO CAR MAGAZINE）</a>／
+      <a href="https://www.e-design.net/ande/guide/column/hokenryousouba/" target="_blank" rel="noopener">東京海上ダイレクト 公式コラム「年代別相場」</a>／
+      <a href="https://www.e-design.net/" target="_blank" rel="noopener">東京海上ダイレクト 公式トップページ</a>／
+      <a href="https://www.sompo-direct.co.jp/otona/oshiete/insurance/30s-cost-average.html" target="_blank" rel="noopener">SOMPOダイレクト「おとなの自動車保険」公式コラム</a>／
+      <a href="https://www.sonysonpo.co.jp/auto/" target="_blank" rel="noopener">ソニー損保 公式サイト</a>／
+      <a href="https://from.sonysonpo.co.jp/company/news/docs/2026/20260930_2.pdf" target="_blank" rel="noopener">ソニー損保 長期自動車保険 商品概要（公式PDF）</a>／
+      <a href="https://www.sbisonpo.co.jp/cha/sbiprism/web/" target="_blank" rel="noopener">SBI損保 公式ドメイン 保険料例</a>／
+      <a href="https://www3.axa-direct.co.jp/auto/guide/easy_guide/14.html" target="_blank" rel="noopener">アクサダイレクト 公式ガイド「年代別保険料相場」</a>／
+      <a href="https://www.zenrosai.coop/kyousai/mycar/campaign/car/mycar_kyousai.html" target="_blank" rel="noopener">全労済 マイカー共済 公式ページ</a>／
+      <a href="https://ins.minkabu.jp/car/sbi" target="_blank" rel="noopener">みんかぶ保険（SBI損保・アクサダイレクト・楽天損保・三井住友海上・あいおいニッセイ同和損保の保険料例）</a>／
+      <a href="https://ja-suzuka.or.jp/kouhou/423.pdf" target="_blank" rel="noopener">JA鈴鹿 広報誌2024年7月号</a><br>
+      保険料・ルール確認日：2026-11-17
+    </div>
+    <p class="credit">制作：andy（わんこ堂）× 熊八 🐾（Muse Spark）</p>
+  </footer>
+
+</div>
+
+<script>
+var SRC_LABEL = {official:"公式", agency:"代理店転載", third:"第三者整理"};
+var CAR_LABEL = {kei:"軽自動車", compact:"コンパクト", minivan:"ミニバン・ワゴン", sedan:"セダン・その他"};
+var CASES = [
+  {
+    company:"チューリッヒ保険", title:"20等級・プリウス（ZVW52）",
+    ageLabel:"56歳", dec:"50s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ プリウス（ZVW52）", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（限定カバー型 230万円）",
+    annual:23300, monthly:null, src:"official", period:"保険始期：2026年5月1日",
+    details:["お住まい：東京／使用目的：日常・レジャー／年間予定走行距離：5,000km超10,000km以下","初度登録：2023年12月／年齢条件：30歳以上補償／運転者：本人・配偶者限定","対人・対物賠償：無制限","人身傷害：7,000万円（車内のみ補償）＋人身傷害定額払1,000万円","車両保険：限定カバー型230万円（免責 1回目5万円・2回目以降10万円）","特約：車内身の回り品10万円、ファミリーケア特別見舞金、他車運転危険補償（人傷型）、被害者救済費用補償","割引：インターネット割引、新車割引、早期契約割引、e証券割引、LINE割引"],
+    srcText:"出典：チューリッヒ保険 公式「保険料例」ページ"
+  },
+  {
+    company:"チューリッヒ保険", title:"6G等級（新規）・フィット（GR6）",
+    ageLabel:"32歳", dec:"30s", grade:6, gradeLabel:"6G等級", license:"ブルー",
+    car:"ホンダ フィット（GR6）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（限定カバー型 170万円）",
+    annual:46160, monthly:null, src:"official", period:"保険始期：2026年5月1日",
+    details:["お住まい：大阪／使用目的：日常・レジャー／年間予定走行距離：3,000km超5,000km以下","初度登録：2024年1月／年齢条件：30歳以上補償／運転者：本人・配偶者限定","対人・対物賠償：無制限（対物超過特約：無制限）","人身傷害：5,000万円（車内のみ補償）＋人身傷害定額払1,000万円","車両保険：限定カバー型170万円（免責 1回目7万円・2回目以降10万円）","特約：車内身の回り品10万円、弁護士費用等、ファミリーケア特別見舞金、他車運転危険補償（人傷型）、被害者救済費用補償","割引：インターネット割引、新車割引、早期契約割引、e証券割引、LINE割引"],
+    srcText:"出典：チューリッヒ保険 公式「保険料例」ページ"
+  },
+  {
+    company:"チューリッヒ保険", title:"18等級・アクア（NHP10）",
+    ageLabel:"47歳", dec:"40s", grade:18, gradeLabel:"18等級", license:"ゴールド",
+    car:"トヨタ アクア（NHP10）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（限定カバー型 110万円）",
+    annual:30950, monthly:null, src:"official", period:"保険始期：2026年5月1日",
+    details:["お住まい：福岡／使用目的：日常・レジャー／年間予定走行距離：5,000km超10,000km以下","初度登録：2021年1月／前契約17等級／年齢条件：30歳以上補償／運転者：本人・配偶者限定","対人・対物賠償：無制限","人身傷害：5,000万円（車内のみ補償）＋人身傷害定額払1,000万円","車両保険：限定カバー型110万円（免責 1回目5万円・2回目以降10万円）","特約：車内身の回り品10万円、ファミリーケア特別見舞金、他車運転危険補償（人傷型）、被害者救済費用補償","割引：インターネット割引、早期契約割引、e証券割引、LINE割引（新車割引なし）"],
+    srcText:"出典：チューリッヒ保険 公式「保険料例」ページ"
+  },
+  {
+    company:"チューリッヒ保険", title:"13等級・マツダ2（DJ5AS）",
+    ageLabel:"43歳", dec:"40s", grade:13, gradeLabel:"13等級", license:"ブルー",
+    car:"マツダ マツダ2（DJ5AS）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（ワイドカバー型 180万円）",
+    annual:43140, monthly:null, src:"official", period:"保険始期：2026年5月1日",
+    details:["お住まい：宮城／使用目的：日常・レジャー／年間予定走行距離：3,000km以下","初度登録：2024年1月／前契約12等級／年齢条件：30歳以上補償／運転者：本人・配偶者限定","対人・対物賠償：無制限","人身傷害：7,000万円（車内のみ補償）＋人身傷害定額払1,000万円","車両保険：ワイドカバー型180万円（免責 1回目5万円・2回目以降10万円）","特約：車内身の回り品10万円、ファミリーケア特別見舞金、他車運転危険補償（人傷型）、被害者救済費用補償","割引：インターネット割引、新車割引、早期契約割引、e証券割引、LINE割引"],
+    srcText:"出典：チューリッヒ保険 公式「保険料例」ページ"
+  },
+  {
+    company:"チューリッヒ保険", title:"30代・ノート（E12）",
+    ageLabel:"31歳", dec:"30s", grade:6, gradeLabel:"6G等級", license:"ゴールド",
+    car:"ニッサン ノート（E12）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（ワイドカバー型 55万円）",
+    annual:39670, monthly:3800, src:"official", period:"保険始期：2026年5月1日",
+    details:["お住まい：愛知／使用目的：日常・レジャー／年間予定走行距離：3,000km以下","初度登録：令和2年12月／新規加入（前契約なし）／年齢条件：30歳以上補償／運転者：本人・配偶者限定","対人・対物賠償：無制限","人身傷害：3,000万円（車内のみ補償）＋人身傷害定額払1,000万円","車両保険：ワイドカバー型55万円（免責 1回目7万円・2回目以降10万円）","特約：ファミリーケア特別見舞金、他車運転危険補償（人傷型）、被害者救済費用補償（車内身の回り品・弁護士費用等はなし）","割引：インターネット割引（新規）、e証券割引、LINE割引、早期契約割引"],
+    srcText:"出典：チューリッヒ保険 公式ガイド「自動車保険の相場」（他社からの乗り換え例）"
+  },
+  {
+    company:"チューリッヒ保険", title:"40代・プリウス（ZVW55）車両保険あり／なし比較",
+    ageLabel:"45歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ プリウス（ZVW55）", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（ワイドカバー型 215万円）／なし の同条件比較",
+    pair:{withA:33570, withoutA:15440, withM:3220}, src:"official", period:"保険始期：2026年5月1日",
+    details:["お住まい：東京／使用目的：日常・レジャー／年間予定走行距離：3,000km超5,000km以下","初度登録：令和4年12月／年齢条件：30歳以上補償／運転者：本人・配偶者限定","対人・対物賠償：無制限（対物超過特約：無制限）","人身傷害：3,000万円（車内のみ補償）＋人身傷害定額払1,000万円","車両保険ありの場合：ワイドカバー型215万円（免責 1回目5万円・2回目以降10万円）","特約：車内身の回り品10万円、弁護士費用等、ファミリーケア特別見舞金、他車運転危険補償（人傷型）、被害者救済費用補償","割引：インターネット割引（新規）、新車割引、e証券割引、LINE割引、早期契約割引"],
+    srcText:"出典：チューリッヒ保険 公式ガイド「自動車保険の相場」（差額18,130円はページ明記）"
+  },
+  {
+    company:"チューリッヒ保険", title:"50代・プリウス（ZVW55）",
+    ageLabel:"53歳", dec:"50s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ プリウス（ZVW55）", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（限定カバー型 190万円）",
+    annual:19830, monthly:null, src:"official", period:"保険始期：2026年5月1日",
+    details:["お住まい：東京／使用目的：日常・レジャー／年間予定走行距離：3,000km以下","初度登録：令和4年12月／年齢条件：30歳以上補償／運転者：本人・配偶者限定","対人・対物賠償：無制限（対物超過特約：無制限）","人身傷害：3,000万円（車内のみ補償）＋人身傷害定額払1,000万円","車両保険：限定カバー型190万円（免責 1回目5万円・2回目以降10万円）","特約：車内身の回り品10万円、ファミリーケア特別見舞金、他車運転危険補償（人傷型）、被害者救済費用補償（弁護士費用等はなし）","割引：インターネット割引（新規）、新車割引、e証券割引、LINE割引、早期契約割引"],
+    srcText:"出典：チューリッヒ保険 公式ガイド「自動車保険の相場」（他社からの乗り換え例）"
+  },
+  {
+    company:"チューリッヒ保険", title:"60代・N-BOX（JF3）",
+    ageLabel:"60歳", dec:"60s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"ホンダ N-BOX（JF3）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（ワイドカバー型 100万円）",
+    annual:29340, monthly:null, src:"official", period:"保険始期：2026年5月1日",
+    details:["お住まい：福岡／使用目的：日常・レジャー／年間予定走行距離：3,000km以下","初度登録：令和4年12月／前契約14等級／年齢条件：30歳以上補償／運転者：本人・配偶者限定","対人・対物賠償：無制限（対物超過特約：50万円）","人身傷害：3,000万円（車内のみ補償）＋人身傷害定額払1,000万円","車両保険：ワイドカバー型100万円（免責 1回目5万円・2回目以降10万円）","特約：弁護士費用等、ファミリーケア特別見舞金、他車運転危険補償（人傷型）、被害者救済費用補償（車内身の回り品はなし）","割引：インターネット割引（新規）、新車割引、e証券割引、LINE割引、早期契約割引"],
+    srcText:"出典：チューリッヒ保険 公式ガイド「自動車保険の相場」（他社からの乗り換え例）"
+  },
+  {
+    company:"三井ダイレクト損保", title:"40代・20等級・プリウス（MXWH65）",
+    ageLabel:"46歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ プリウス（MXWH65）", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（限定タイプ 325万円）",
+    annual:21320, monthly:1910, monthlyTotal:22920, src:"official", period:"保険始期：2026年5月1日（2026年4月時点の算出）",
+    details:["初度登録：2024年10月／登録地：品川（関東・甲信越）／年間走行距離：3,001〜5,000km／使用目的：主に日常・レジャー","運転者年齢条件：35歳以上補償／本人限定特約／事故有係数適用期間：0年","対人・対物賠償：無制限、対物超過修理費用特約あり","人身傷害：3,000万円（車内・車外補償タイプ）","車両保険：限定タイプ325万円（免責 1回目5万円・2回目以降10万円）、車両保険無過失事故特約あり","特約：他車運転特約、被害者救済費用特約あり（搭乗者傷害・弁護士費用・日常生活賠償・レンタカー費用特約はなし）","割引：インターネット契約割引、eサービス（証券不発行）割引、長期無事故割引、ゴールド免許割引、車両保険セット割引、新車割引"],
+    srcText:"出典：三井ダイレクト損保 公式トップページの保険料例（月払総額22,920円）"
+  },
+  {
+    company:"三井ダイレクト損保", title:"30代・20等級・セレナ（C25）",
+    ageLabel:"37歳", dec:"30s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"ニッサン セレナ（C25）", carCat:"minivan", vehicle:"yes", vehicleLabel:"車両保険あり（限定タイプ 35万円）",
+    annual:20240, monthly:1820, monthlyTotal:21840, src:"official", period:"保険始期：2026年5月1日（2026年4月時点の算出）",
+    details:["初度登録：2009年1月／登録地：品川（関東・甲信越）／年間走行距離：3,001〜5,000km／使用目的：主に日常・レジャー","運転者年齢条件：35歳以上補償／本人限定特約／事故有係数適用期間：0年","対人・対物賠償：無制限、対物超過修理費用特約あり","人身傷害：3,000万円（車内・車外補償タイプ）","車両保険：限定タイプ35万円（免責 1回目5万円・2回目以降10万円）、車両保険無過失事故特約あり","特約：他車運転特約、被害者救済費用特約あり（搭乗者傷害・弁護士費用・日常生活賠償・レンタカー費用特約はなし）","割引：インターネット契約割引、eサービス割引、長期無事故割引、ゴールド免許割引、車両保険セット割引（新車割引なし）"],
+    srcText:"出典：三井ダイレクト損保 公式トップページの保険料例（月払総額21,840円）"
+  },
+  {
+    company:"三井ダイレクト損保", title:"20代・6等級・N-BOX（JF6）",
+    ageLabel:"26歳", dec:"20s", grade:6, gradeLabel:"6等級（S）", license:"ゴールド",
+    car:"ホンダ N-BOX（JF6）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（限定タイプ 180万円）",
+    annual:38680, monthly:3480, monthlyTotal:41760, src:"official", period:"保険始期：2026年5月1日（2026年4月時点の算出）",
+    details:["初度登録：2024年1月／登録地：品川（関東・甲信越）／年間走行距離：3,001〜5,000km／使用目的：主に日常・レジャー","運転者年齢条件：26歳以上補償／本人限定特約／自動ブレーキあり／事故有係数適用期間：0年","対人・対物賠償：無制限、対物超過修理費用特約あり","人身傷害：3,000万円（車内・車外補償タイプ）","車両保険：限定タイプ180万円（免責 1回目5万円・2回目以降10万円）、車両保険無過失事故特約あり","特約：他車運転特約、被害者救済費用特約あり（搭乗者傷害・弁護士費用・日常生活賠償・レンタカー費用特約はなし）","割引：インターネット契約割引、eサービス割引、ゴールド免許割引、ASV割引、車両保険セット割引、新車割引（長期無事故割引なし）"],
+    srcText:"出典：三井ダイレクト損保 公式トップページの保険料例（月払総額41,760円）"
+  },
+  {
+    company:"三井ダイレクト損保", title:"20代・セレナ（C28）車両保険あり／なし",
+    ageLabel:"26歳", dec:"20s", grade:14, gradeLabel:"14等級", license:"ゴールド",
+    car:"ニッサン セレナ（C28）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ 250万円）／なし の同条件比較",
+    pair:{withA:32960, withoutA:19560, withM:2960, withoutM:1760}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["初度登録：2023年1月／登録地：世田谷（関東・甲信越）／年間走行距離（過去1年間）：3,000km以下／使用目的：主に日常・レジャー","運転者年齢条件：26歳以上補償／本人・配偶者限定特約／自動ブレーキあり","対人・対物賠償：無制限、対物超過修理費用特約あり","人身傷害：5,000万円（車内・車外補償タイプ）","車両保険ありの場合：限定タイプ250万円（免責 1回目5万円・2回目以降10万円）、新車特約315万円、車両保険無過失事故特約あり","特約：身の回り品補償10万円、日常生活賠償、他車運転、被害者救済費用あり（弁護士費用・レンタカー費用・ドラレコ特約はなし）","割引：インターネット契約割引、eサービス割引、ゴールド免許割引、ASV割引、車両保険セット割引、新車割引（月払総額：車両保険あり35,520円）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"30代・セレナ（C28）車両保険あり／なし",
+    ageLabel:"36歳", dec:"30s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"ニッサン セレナ（C28）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ 250万円）／なし の同条件比較",
+    pair:{withA:22030, withoutA:12380, withM:1980, withoutM:1110}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["初度登録：2023年1月／登録地：世田谷（関東・甲信越）／年間走行距離（過去1年間）：3,000km以下／使用目的：主に日常・レジャー","運転者年齢条件：35歳以上補償／本人・配偶者限定特約／自動ブレーキあり","対人・対物賠償：無制限、対物超過修理費用特約あり","人身傷害：5,000万円（車内・車外補償タイプ）","車両保険ありの場合：限定タイプ250万円（免責 1回目5万円・2回目以降10万円）、新車特約315万円、車両保険無過失事故特約あり","特約：身の回り品補償10万円、日常生活賠償、他車運転、被害者救済費用あり（弁護士費用・レンタカー費用・ドラレコ特約はなし）","割引：インターネット契約割引、eサービス割引、ゴールド免許割引、ASV割引、車両保険セット割引、新車割引、長期無事故割引（月払総額：あり23,760円）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"40代・セレナ（C28）車両保険あり／なし",
+    ageLabel:"46歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"ニッサン セレナ（C28）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ 250万円）／なし の同条件比較",
+    pair:{withA:20910, withoutA:11880, withM:1880, withoutM:1060}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["初度登録：2023年1月／登録地：世田谷（関東・甲信越）／年間走行距離（過去1年間）：3,000km以下／使用目的：主に日常・レジャー","運転者年齢条件：35歳以上補償／本人・配偶者限定特約／自動ブレーキあり","対人・対物賠償：無制限、対物超過修理費用特約あり","人身傷害：5,000万円（車内・車外補償タイプ）","車両保険ありの場合：限定タイプ250万円（免責 1回目5万円・2回目以降10万円）、新車特約315万円、車両保険無過失事故特約あり","特約：身の回り品補償10万円、日常生活賠償、他車運転、被害者救済費用あり（弁護士費用・レンタカー費用・ドラレコ特約はなし）","割引：インターネット契約割引、eサービス割引、ゴールド免許割引、ASV割引、車両保険セット割引、新車割引、長期無事故割引（月払総額：あり22,560円）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"50代・セレナ（C28）車両保険あり／なし",
+    ageLabel:"56歳", dec:"50s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"ニッサン セレナ（C28）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ 250万円）／なし の同条件比較",
+    pair:{withA:21940, withoutA:11680, withM:1970, withoutM:1050}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["初度登録：2023年1月／登録地：世田谷（関東・甲信越）／年間走行距離（過去1年間）：3,000km以下／使用目的：主に日常・レジャー","運転者年齢条件：35歳以上補償／本人・配偶者限定特約／自動ブレーキあり","対人・対物賠償：無制限、対物超過修理費用特約あり","人身傷害：5,000万円（車内・車外補償タイプ）","車両保険ありの場合：限定タイプ250万円（免責 1回目5万円・2回目以降10万円）、新車特約315万円、車両保険無過失事故特約あり","特約：身の回り品補償10万円、日常生活賠償、他車運転、被害者救済費用あり（弁護士費用・レンタカー費用・ドラレコ特約はなし）","割引：インターネット契約割引、eサービス割引、ゴールド免許割引、ASV割引、車両保険セット割引、新車割引、長期無事故割引（月払総額：あり23,640円）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"20代・プリウス 車両保険あり／なし",
+    ageLabel:"20代", dec:"20s", grade:null, gradeLabel:"等級はLPで要確認", license:null,
+    car:"トヨタ プリウス", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ）／なし の同条件比較",
+    pair:{withA:32330, withoutA:19060, withM:2900, withoutM:1710}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["公式LPの年代×車種 保険料表の金額を転記","車両保険ありは限定タイプ","ケースごとの詳細条件（等級・型式・補償内訳など）は同LPに掲載されています（本ページでは金額・年代・車種のみ収録）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"30代・プリウス 車両保険あり／なし",
+    ageLabel:"30代", dec:"30s", grade:null, gradeLabel:"等級はLPで要確認", license:null,
+    car:"トヨタ プリウス", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ）／なし の同条件比較",
+    pair:{withA:21620, withoutA:12080, withM:1940, withoutM:1080}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["公式LPの年代×車種 保険料表の金額を転記","車両保険ありは限定タイプ","ケースごとの詳細条件（等級・型式・補償内訳など）は同LPに掲載されています（本ページでは金額・年代・車種のみ収録）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"40代・プリウス 車両保険あり／なし",
+    ageLabel:"40代", dec:"40s", grade:null, gradeLabel:"等級はLPで要確認", license:null,
+    car:"トヨタ プリウス", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ）／なし の同条件比較",
+    pair:{withA:20560, withoutA:11620, withM:1850, withoutM:1040}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["公式LPの年代×車種 保険料表の金額を転記","車両保険ありは限定タイプ","ケースごとの詳細条件（等級・型式・補償内訳など）は同LPに掲載されています（本ページでは金額・年代・車種のみ収録）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"50代・プリウス 車両保険あり／なし",
+    ageLabel:"50代", dec:"50s", grade:null, gradeLabel:"等級はLPで要確認", license:null,
+    car:"トヨタ プリウス", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ）／なし の同条件比較",
+    pair:{withA:21570, withoutA:11430, withM:1940, withoutM:1020}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["公式LPの年代×車種 保険料表の金額を転記","車両保険ありは限定タイプ","ケースごとの詳細条件（等級・型式・補償内訳など）は同LPに掲載されています（本ページでは金額・年代・車種のみ収録）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"20代・N-BOX 車両保険あり／なし",
+    ageLabel:"20代", dec:"20s", grade:null, gradeLabel:"等級はLPで要確認", license:null,
+    car:"ホンダ N-BOX", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ）／なし の同条件比較",
+    pair:{withA:29550, withoutA:18280, withM:2650, withoutM:1640}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["公式LPの年代×車種 保険料表の金額を転記","車両保険ありは限定タイプ","ケースごとの詳細条件（等級・型式・補償内訳など）は同LPに掲載されています（本ページでは金額・年代・車種のみ収録）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"30代・N-BOX 車両保険あり／なし",
+    ageLabel:"30代", dec:"30s", grade:null, gradeLabel:"等級はLPで要確認", license:null,
+    car:"ホンダ N-BOX", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ）／なし の同条件比較",
+    pair:{withA:20020, withoutA:11710, withM:1800, withoutM:1050}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["公式LPの年代×車種 保険料表の金額を転記","車両保険ありは限定タイプ","ケースごとの詳細条件（等級・型式・補償内訳など）は同LPに掲載されています（本ページでは金額・年代・車種のみ収録）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"40代・N-BOX 車両保険あり／なし",
+    ageLabel:"40代", dec:"40s", grade:null, gradeLabel:"等級はLPで要確認", license:null,
+    car:"ホンダ N-BOX", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ）／なし の同条件比較",
+    pair:{withA:19080, withoutA:11280, withM:1710, withoutM:1010}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["公式LPの年代×車種 保険料表の金額を転記","車両保険ありは限定タイプ","ケースごとの詳細条件（等級・型式・補償内訳など）は同LPに掲載されています（本ページでは金額・年代・車種のみ収録）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"50代・N-BOX 車両保険あり／なし",
+    ageLabel:"50代", dec:"50s", grade:null, gradeLabel:"等級はLPで要確認", license:null,
+    car:"ホンダ N-BOX", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ）／なし の同条件比較",
+    pair:{withA:20010, withoutA:11120, withM:1800, withoutM:1000}, src:"official", period:"保険始期：2025年5月1日（2025年4月時点の算出）",
+    details:["公式LPの年代×車種 保険料表の金額を転記","車両保険ありは限定タイプ","ケースごとの詳細条件（等級・型式・補償内訳など）は同LPに掲載されています（本ページでは金額・年代・車種のみ収録）"],
+    srcText:"出典：三井ダイレクト損保 公式LP「年代×車種 保険料表」"
+  },
+  {
+    company:"三井ダイレクト損保", title:"子育てファミリー例・シエンタ（MXPL10G）車両保険あり／なし",
+    ageLabel:"37歳", dec:"30s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ シエンタ（MXPL10G）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり（限定タイプ 220万円）／なし の同条件比較",
+    pair:{withA:29520, withoutA:19210, withM:2650, withoutM:1720, withMT:31800, withoutMT:20640}, src:"official", period:"保険始期：2026年4月1日（2026年1月時点の算出）",
+    details:["初度登録：2023年4月／登録地：横浜（関東・甲信越）／年間走行距離：3,001〜5,000km／使用目的：主に日常・レジャー","運転者年齢条件：35歳以上補償／本人・配偶者限定特約／事故有係数適用期間：0年","対人・対物賠償：無制限、対物超過修理費用特約あり","人身傷害：9,000万円（車内・車外補償タイプ）","車両保険ありの場合：限定タイプ220万円（免責 1回目5万円・2回目以降10万円）、新車特約285万円、車両保険無過失事故特約あり","特約：弁護士費用補償、日常生活賠償、自転車・車いす・ベビーカー等傷害定額、他車運転、被害者救済費用あり（搭乗者傷害はなし）","割引：インターネット契約割引、eサービス割引、長期無事故割引、ゴールド免許割引、新車割引（車両保険ありは車両保険セット割引も追加）"],
+    srcText:"出典：三井ダイレクト損保 公式ガイド「子育てファミリー向け保険料例」"
+  },
+  {
+    company:"損保ジャパン", title:"30歳・13等級・小型車 車両保険あり／なし",
+    ageLabel:"30歳", dec:"30s", grade:13, gradeLabel:"13等級", license:"ゴールド",
+    car:"自家用小型乗用車（料率クラス 車両6・対人5・対物5・傷害11）", carCat:"compact", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 265万円）／なし の同条件比較",
+    pair:{withA:81204, withoutA:39432, withM:6767, withoutM:3286}, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：26歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）","対人賠償：無制限／対物賠償：無制限（自己負担額なし）、対物全損時修理差額費用特約","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件265万円（自己負担額 5万円・10万円）","特約：ロードアシスタンス等諸費用特約","割引：車齢別割引、ゴールド免許割引、Web証券割引","年間走行距離：区分なし（損保ジャパンでは走行距離は保険料に影響しない旨が公式に明記）"],
+    srcText:"出典：損保ジャパン 公式コラム「30代の自動車保険の相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"損保ジャパン", title:"30歳・13等級・軽自動車 車両保険あり／なし",
+    ageLabel:"30歳", dec:"30s", grade:13, gradeLabel:"13等級", license:"ゴールド",
+    car:"自家用軽四輪乗用車（料率クラス 車両4・対人4・対物4・傷害4）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 165万円）／なし の同条件比較",
+    pair:{withA:72684, withoutA:38964, withM:6057, withoutM:3247}, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：26歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）","対人賠償：無制限／対物賠償：無制限（自己負担額なし）","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件165万円（自己負担額 5万円・10万円）","割引：車齢別割引、ゴールド免許割引、Web証券割引","年間走行距離：区分なし（保険料に影響しない）"],
+    note:"軽自動車コラムの30歳ケース（車両保険金額265万円・料率クラスが異なる）とは別の試算です。",
+    srcText:"出典：損保ジャパン 公式コラム「30代の自動車保険の相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"損保ジャパン", title:"45歳・13等級・小型車 車両保険あり／なし",
+    ageLabel:"45歳", dec:"40s", grade:13, gradeLabel:"13等級", license:"ゴールド",
+    car:"自家用小型乗用車（料率クラス 車両6・対人5・対物5・傷害11）", carCat:"compact", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 265万円）／なし の同条件比較",
+    pair:{withA:75096, withoutA:35688, withM:6258, withoutM:2974}, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：35歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）","対人賠償：無制限／対物賠償：無制限（自己負担額なし）","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件265万円（自己負担額 5万円・10万円）","割引：車齢別割引、ゴールド免許割引、Web証券割引","年間走行距離：区分なし（保険料に影響しない）"],
+    srcText:"出典：損保ジャパン 公式コラム「40代の自動車保険の月額相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"損保ジャパン", title:"22歳・6S等級・小型車 車両保険あり／なし（月額のみ公表）",
+    ageLabel:"22歳", dec:"20s", grade:6, gradeLabel:"6S等級", license:"ブルー",
+    car:"自家用小型乗用車（料率クラス 車両6・対人5・対物5・傷害11）", carCat:"compact", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 265万円）／なし の同条件比較",
+    pair:{withM:18258, withoutM:8936}, monthlyOnly:true, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：21歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）。年額は公表されておらず、月額のみの公表です","対人賠償：無制限／対物賠償：無制限（自己負担額なし）","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件265万円（自己負担額 5万円・10万円）","割引：車齢別割引、Web証券割引（ブルー免許のためゴールド免許割引なし）","年間走行距離：区分なし（保険料に影響しない）"],
+    srcText:"出典：損保ジャパン 公式コラム「自動車保険料の平均相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"損保ジャパン", title:"55歳・20等級・小型車 車両保険あり／なし（月額のみ公表）",
+    ageLabel:"55歳", dec:"50s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"自家用小型乗用車（料率クラス 車両6・対人5・対物5・傷害11）", carCat:"compact", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 265万円）／なし の同条件比較",
+    pair:{withM:4796, withoutM:2247}, monthlyOnly:true, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：35歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）。年額は公表されておらず、月額のみの公表です","対人賠償：無制限／対物賠償：無制限（自己負担額なし）","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件265万円（自己負担額 5万円・10万円）","割引：車齢別割引、ゴールド免許割引、Web証券割引","年間走行距離：区分なし（保険料に影響しない）"],
+    srcText:"出典：損保ジャパン 公式コラム「自動車保険料の平均相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"損保ジャパン", title:"64歳・20等級・小型車 車両保険あり／なし（月額のみ公表）",
+    ageLabel:"64歳", dec:"60s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"自家用小型乗用車（料率クラス 車両6・対人5・対物5・傷害11）", carCat:"compact", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 265万円）／なし の同条件比較",
+    pair:{withM:5041, withoutM:2329}, monthlyOnly:true, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：35歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）。年額は公表されておらず、月額のみの公表です","対人賠償：無制限／対物賠償：無制限（自己負担額なし）","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件265万円（自己負担額 5万円・10万円）","割引：車齢別割引、ゴールド免許割引、Web証券割引","年間走行距離：区分なし（保険料に影響しない）"],
+    srcText:"出典：損保ジャパン 公式コラム「自動車保険料の平均相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"損保ジャパン", title:"25歳・6等級・軽自動車 車両保険あり／なし",
+    ageLabel:"25歳", dec:"20s", grade:6, gradeLabel:"6（S）等級", license:"グリーン",
+    car:"自家用軽四輪乗用車（料率クラス 車両4・対人2・対物2・傷害4）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 265万円）／なし の同条件比較",
+    pair:{withA:197568, withoutA:89220, withM:16464, withoutM:7435}, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：21歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）","対人賠償：無制限／対物賠償：無制限（自己負担額なし）","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件265万円（自己負担額 5万円・10万円）","割引：車齢別割引、Web証券割引（グリーン免許のためゴールド免許割引なし）","年間走行距離：区分なし（保険料に影響しない）"],
+    srcText:"出典：損保ジャパン 公式コラム「軽自動車の保険料相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"損保ジャパン", title:"30歳・13等級・軽自動車（車両265万円）車両保険あり／なし",
+    ageLabel:"30歳", dec:"30s", grade:13, gradeLabel:"13等級", license:"ゴールド",
+    car:"自家用軽四輪乗用車（料率クラス 車両4・対人2・対物2・傷害4）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 265万円）／なし の同条件比較",
+    pair:{withA:76188, withoutA:34632, withM:6349, withoutM:2886}, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：26歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）","対人賠償：無制限／対物賠償：無制限（自己負担額なし）","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件265万円（自己負担額 5万円・10万円）","割引：車齢別割引、ゴールド免許割引、Web証券割引","年間走行距離：区分なし（保険料に影響しない）"],
+    note:"30代コラムの軽自動車ケース（車両保険金額165万円・料率クラスが異なる）とは別の試算です。",
+    srcText:"出典：損保ジャパン 公式コラム「軽自動車の保険料相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"損保ジャパン", title:"45歳・13等級・軽自動車 車両保険あり／なし",
+    ageLabel:"45歳", dec:"40s", grade:13, gradeLabel:"13等級", license:"ゴールド",
+    car:"自家用軽四輪乗用車（料率クラス 車両4・対人2・対物2・傷害4）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 265万円）／なし の同条件比較",
+    pair:{withA:71136, withoutA:31836, withM:5928, withoutM:2653}, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：35歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）","対人賠償：無制限／対物賠償：無制限（自己負担額なし）","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件265万円（自己負担額 5万円・10万円）","割引：車齢別割引、ゴールド免許割引、Web証券割引","年間走行距離：区分なし（保険料に影響しない）"],
+    srcText:"出典：損保ジャパン 公式コラム「軽自動車の保険料相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"損保ジャパン", title:"70歳・20等級・軽自動車 車両保険あり／なし",
+    ageLabel:"70歳", dec:"60s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"自家用軽四輪乗用車（料率クラス 車両4・対人2・対物2・傷害4）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（一般条件 265万円）／なし の同条件比較",
+    pair:{withA:70296, withoutA:30528, withM:5858, withoutM:2544}, src:"official", period:"契約期間：2027年1月1日から1年間",
+    details:["使用目的：日常・レジャー使用／運転者限定：本人のみ／年齢条件：35歳以上補償／初度登録：2027年1月","払込方法：クレジットカード払（分割払）","対人賠償：無制限／対物賠償：無制限（自己負担額なし）","人身傷害：7,000万円（自動車・交通乗用具事故補償特約セット）＋入通院定額給付金10万円","車両保険ありの場合：一般条件265万円（自己負担額 5万円・10万円）","割引：車齢別割引、ゴールド免許割引、Web証券割引、65歳以上優良割引","年間走行距離：区分なし（保険料に影響しない）"],
+    srcText:"出典：損保ジャパン 公式コラム「軽自動車の保険料相場」（SOMPO CAR MAGAZINE）"
+  },
+  {
+    company:"東京海上ダイレクト（旧イーデザイン損保）", title:"18歳・6A等級・プリウス（初めて加入）車両保険あり／なし",
+    ageLabel:"18歳", dec:"20s", grade:6, gradeLabel:"6A等級", license:"グリーン",
+    car:"トヨタ プリウス（ZVW60）", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（一般タイプ 305万円）／なし の同条件比較",
+    pair:{withA:317809, withoutA:133090}, src:"official", period:"保険開始日：2026年7月1日",
+    details:["初度登録：2026年6月／料率クラス：車両7・対人7・対物5・傷害9／主な使用地：東京都","使用目的：主に日常・レジャー／前年走行距離区分：新規契約区分","運転者年齢条件：年齢問わず補償／運転者限定：本人限定","対人賠償：無制限／対物賠償：無制限、対物超過特約あり","人身傷害：3,000万円（車内のみ補償）","車両保険ありの場合：一般タイプ305万円（免責 5万円・10万円）、車両全損時諸費用特約あり","特約：弁護士特約（自動車事故のみ）、他車運転特約、被害者救済特約、無過失特約","割引：インターネット割引、新車割引"],
+    srcText:"出典：東京海上ダイレクト 公式コラム「年代別相場」（年代ごとに契約条件が異なる表です）"
+  },
+  {
+    company:"東京海上ダイレクト（旧イーデザイン損保）", title:"21歳・6B等級・プリウス（初めて加入）車両保険あり／なし",
+    ageLabel:"21歳", dec:"20s", grade:6, gradeLabel:"6B等級", license:"ブルー",
+    car:"トヨタ プリウス（ZVW60）", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（一般タイプ 305万円）／なし の同条件比較",
+    pair:{withA:157487, withoutA:67106}, src:"official", period:"保険開始日：2026年7月1日",
+    details:["初度登録：2026年6月／料率クラス：車両7・対人7・対物5・傷害9／主な使用地：東京都","使用目的：主に日常・レジャー／前年走行距離区分：新規契約区分","運転者年齢条件：21歳以上補償／運転者限定：本人限定","対人賠償：無制限／対物賠償：無制限、対物超過特約あり","人身傷害：3,000万円（車内のみ補償）","車両保険ありの場合：一般タイプ305万円（免責 5万円・10万円）、車両全損時諸費用特約あり","特約：弁護士特約（自動車事故のみ）、他車運転特約、被害者救済特約、無過失特約","割引：インターネット割引、新車割引"],
+    srcText:"出典：東京海上ダイレクト 公式コラム「年代別相場」（年代ごとに契約条件が異なる表です）"
+  },
+  {
+    company:"東京海上ダイレクト（旧イーデザイン損保）", title:"26歳・6C等級・プリウス（初めて加入）車両保険あり／なし",
+    ageLabel:"26歳", dec:"20s", grade:6, gradeLabel:"6C等級", license:"ブルー",
+    car:"トヨタ プリウス（ZVW60）", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（一般タイプ 305万円）／なし の同条件比較",
+    pair:{withA:126794, withoutA:57503}, src:"official", period:"保険開始日：2026年7月1日",
+    details:["初度登録：2026年6月／料率クラス：車両7・対人7・対物5・傷害9／主な使用地：東京都","使用目的：主に日常・レジャー／前年走行距離区分：新規契約区分","運転者年齢条件：26歳以上補償／運転者限定：本人限定","対人賠償：無制限／対物賠償：無制限、対物超過特約あり","人身傷害：3,000万円（車内のみ補償）","車両保険ありの場合：一般タイプ305万円（免責 5万円・10万円）、車両全損時諸費用特約あり","特約：弁護士特約（自動車事故のみ）、他車運転特約、被害者救済特約、無過失特約","割引：インターネット割引、新車割引"],
+    srcText:"出典：東京海上ダイレクト 公式コラム「年代別相場」（年代ごとに契約条件が異なる表です）"
+  },
+  {
+    company:"東京海上ダイレクト（旧イーデザイン損保）", title:"32歳・6E等級・プリウス（初めて加入）車両保険あり／なし",
+    ageLabel:"32歳", dec:"30s", grade:6, gradeLabel:"6E等級", license:"ブルー",
+    car:"トヨタ プリウス（ZVW60）", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（一般タイプ 305万円）／なし の同条件比較",
+    pair:{withA:96375, withoutA:45582}, src:"official", period:"保険開始日：2026年7月1日",
+    details:["初度登録：2026年6月／料率クラス：車両7・対人7・対物5・傷害9／主な使用地：東京都","使用目的：主に日常・レジャー／前年走行距離区分：新規契約区分","運転者年齢条件：30歳以上補償／運転者限定：本人限定","対人賠償：無制限／対物賠償：無制限、対物超過特約あり","人身傷害：3,000万円（車内のみ補償）","車両保険ありの場合：一般タイプ305万円（免責 5万円・10万円）、車両全損時諸費用特約あり","特約：弁護士特約（自動車事故のみ）、他車運転特約、被害者救済特約、無過失特約","割引：インターネット割引、新車割引"],
+    srcText:"出典：東京海上ダイレクト 公式コラム「年代別相場」（年代ごとに契約条件が異なる表です）"
+  },
+  {
+    company:"東京海上ダイレクト（旧イーデザイン損保）", title:"42歳・6E等級・プリウス（初めて加入）車両保険あり／なし",
+    ageLabel:"42歳", dec:"40s", grade:6, gradeLabel:"6E等級", license:"ブルー",
+    car:"トヨタ プリウス（ZVW60）", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（一般タイプ 305万円）／なし の同条件比較",
+    pair:{withA:94962, withoutA:44783}, src:"official", period:"保険開始日：2026年7月1日",
+    details:["初度登録：2026年6月／料率クラス：車両7・対人7・対物5・傷害9／主な使用地：東京都","使用目的：主に日常・レジャー／前年走行距離区分：新規契約区分","運転者年齢条件：30歳以上補償／運転者限定：本人限定","対人賠償：無制限／対物賠償：無制限、対物超過特約あり","人身傷害：3,000万円（車内のみ補償）","車両保険ありの場合：一般タイプ305万円（免責 5万円・10万円）、車両全損時諸費用特約あり","特約：弁護士特約（自動車事故のみ）、他車運転特約、被害者救済特約、無過失特約","割引：インターネット割引、新車割引"],
+    srcText:"出典：東京海上ダイレクト 公式コラム「年代別相場」（年代ごとに契約条件が異なる表です）"
+  },
+  {
+    company:"東京海上ダイレクト（旧イーデザイン損保）", title:"32歳・20等級・プリウス（等級比較例）",
+    ageLabel:"32歳", dec:"30s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ プリウス（ZVW60）", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（一般タイプ 305万円）",
+    annual:45847, monthly:null, src:"official", period:"保険開始日：2026年7月1日",
+    details:["初度登録：2026年6月／料率クラス：車両7・対人7・対物5・傷害9／主な使用地：東京都","使用目的：主に日常・レジャー／前年走行距離区分：7,000km超10,000km以下","運転者年齢条件：30歳以上補償／運転者限定：夫婦限定","対人賠償：無制限／対物賠償：無制限、対物超過特約あり","人身傷害：3,000万円（車内のみ補償）","車両保険：一般タイプ305万円（免責 5万円・10万円）、車両全損時諸費用特約あり","特約：弁護士特約（自動車事故のみ）、他車運転特約、被害者救済特約、無過失特約","割引：インターネット割引、新車割引"],
+    note:"同ページの等級比較例です。ほぼ同条件の6E等級（初めて加入・運転者限定は本人限定、前年走行距離区分は新規契約区分）では88,598円で、差額は42,751円とページに記載されています。",
+    srcText:"出典：東京海上ダイレクト 公式コラム「年代別相場」（等級比較例）"
+  },
+  {
+    company:"東京海上ダイレクト（旧イーデザイン損保）", title:"40歳・20等級・ヤリス（KSP210）トップページ代表例",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:null,
+    car:"トヨタ ヤリス（KSP210）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（限定タイプ）",
+    annual:22834, monthly:2047, src:"official", period:"公式トップページ掲載例（始期の詳細は未確認）",
+    details:["公式トップページに「20等級・車両保険あり（限定タイプ）」の代表例として掲載された金額・年齢・車種・型式・等級を転記","月払保険料は12回払・1回分"],
+    note:"詳細な算出条件（免許の色・使用目的・走行距離・補償内訳・特約・割引）は別ページに分離されており、本調査では未確認です。",
+    srcText:"出典：東京海上ダイレクト 公式トップページ"
+  },
+  {
+    company:"東京海上ダイレクト（旧イーデザイン損保）", title:"30歳・20等級・N-BOX（JF5）トップページ代表例",
+    ageLabel:"30歳", dec:"30s", grade:20, gradeLabel:"20等級", license:null,
+    car:"ホンダ N-BOX（JF5）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（限定タイプ）",
+    annual:23412, monthly:2100, src:"official", period:"公式トップページ掲載例（始期の詳細は未確認）",
+    details:["公式トップページに「20等級・車両保険あり（限定タイプ）」の代表例として掲載された金額・年齢・車種・型式・等級を転記","月払保険料は12回払・1回分"],
+    note:"詳細な算出条件（免許の色・使用目的・走行距離・補償内訳・特約・割引）は別ページに分離されており、本調査では未確認です。",
+    srcText:"出典：東京海上ダイレクト 公式トップページ"
+  },
+  {
+    company:"東京海上ダイレクト（旧イーデザイン損保）", title:"50歳・20等級・プリウス（ZVW60）トップページ代表例",
+    ageLabel:"50歳", dec:"50s", grade:20, gradeLabel:"20等級", license:null,
+    car:"トヨタ プリウス（ZVW60）", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（限定タイプ）",
+    annual:26037, monthly:2329, src:"official", period:"公式トップページ掲載例（始期の詳細は未確認）",
+    details:["公式トップページに「20等級・車両保険あり（限定タイプ）」の代表例として掲載された金額・年齢・車種・型式・等級を転記","月払保険料は12回払・1回分"],
+    note:"詳細な算出条件（免許の色・使用目的・走行距離・補償内訳・特約・割引）は別ページに分離されており、本調査では未確認です。",
+    srcText:"出典：東京海上ダイレクト 公式トップページ"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・6S等級・N-BOX（JF6）車両保険あり／なし",
+    ageLabel:"35歳", dec:"30s", grade:6, gradeLabel:"6S等級", license:"ブルー・グリーン",
+    car:"ホンダ N-BOX（JF6）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:92930, withoutA:33080}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：10,000km以下（6S等級の試算では6等級・新規走行距離区分として試算）","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、ネット割（新規）、新車割引（6S等級は無事故割引なし）","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「30代の自動車保険の相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・6S等級・セレナ（FC28）車両保険あり／なし",
+    ageLabel:"35歳", dec:"30s", grade:6, gradeLabel:"6S等級", license:"ブルー・グリーン",
+    car:"ニッサン セレナ（FC28）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:136760, withoutA:38240}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：10,000km以下（6S等級の試算では6等級・新規走行距離区分として試算）","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、ネット割（新規）、新車割引（6S等級は無事故割引なし）","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「30代の自動車保険の相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・12等級・N-BOX（JF6）車両保険あり／なし",
+    ageLabel:"35歳", dec:"30s", grade:12, gradeLabel:"12等級", license:"ブルー・グリーン",
+    car:"ホンダ N-BOX（JF6）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:60790, withoutA:21550}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：10,000km以下","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「30代の自動車保険の相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・12等級・セレナ（FC28）車両保険あり／なし",
+    ageLabel:"35歳", dec:"30s", grade:12, gradeLabel:"12等級", license:"ブルー・グリーン",
+    car:"ニッサン セレナ（FC28）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:93180, withoutA:23650}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：10,000km以下","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「30代の自動車保険の相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・15等級・N-BOX（JF6）車両保険あり／なし",
+    ageLabel:"35歳", dec:"30s", grade:15, gradeLabel:"15等級", license:"ブルー・グリーン",
+    car:"ホンダ N-BOX（JF6）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:56900, withoutA:20320}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：10,000km以下","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「30代の自動車保険の相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・15等級・セレナ（FC28）車両保険あり／なし",
+    ageLabel:"35歳", dec:"30s", grade:15, gradeLabel:"15等級", license:"ブルー・グリーン",
+    car:"ニッサン セレナ（FC28）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:87970, withoutA:22300}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：10,000km以下","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「30代の自動車保険の相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・20等級・N-BOX（JF6）車両保険あり／なし",
+    ageLabel:"35歳", dec:"30s", grade:20, gradeLabel:"20等級", license:"ブルー・グリーン",
+    car:"ホンダ N-BOX（JF6）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:44520, withoutA:16790}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：10,000km以下","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「30代の自動車保険の相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・20等級・セレナ（FC28）車両保険あり／なし",
+    ageLabel:"35歳", dec:"30s", grade:20, gradeLabel:"20等級", license:"ブルー・グリーン",
+    car:"ニッサン セレナ（FC28）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:68910, withoutA:18660}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：10,000km以下","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「30代の自動車保険の相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"47歳・20等級・プリウス（ZVW65）車両保険あり／なし",
+    ageLabel:"47歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ プリウス（ZVW65）", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:31550, withoutA:11290}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引、電気・ハイブリッド車割引","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「20等級の保険料例」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"47歳・20等級・フィット（GR8）車両保険あり／なし",
+    ageLabel:"47歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"ホンダ フィット（GR8）", carCat:"compact", vehicle:"pair", vehicleLabel:"車両保険あり／なし の同条件比較（金額・タイプは記事に未掲載）",
+    pair:{withA:32170, withoutA:10000}, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","人身傷害：車両保険あり＝5,000万円／なし＝3,000万円（いずれも車内のみ補償）","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引、電気・ハイブリッド車割引","年払（一括払）の金額です"],
+    note:"使用目的・運転者の範囲・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「20等級の保険料例」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・15等級・タント（LA660S）車両保険あり",
+    ageLabel:"35歳", dec:"30s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"ダイハツ タント（LA660S）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（金額・タイプは記事に未掲載）",
+    annual:27550, monthly:2560, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引","月額は分割払の金額です"],
+    note:"使用目的・運転者の範囲・人身傷害の金額・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「軽自動車の保険料相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・15等級・ムーヴ（LA850S）車両保険あり",
+    ageLabel:"35歳", dec:"30s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"ダイハツ ムーヴ（LA850S）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（金額・タイプは記事に未掲載）",
+    annual:30560, monthly:2840, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引","月額は分割払の金額です"],
+    note:"使用目的・運転者の範囲・人身傷害の金額・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「軽自動車の保険料相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・15等級・N-BOX（JF6）車両保険あり",
+    ageLabel:"35歳", dec:"30s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"ホンダ N-BOX（JF6）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（金額・タイプは記事に未掲載）",
+    annual:31120, monthly:2890, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引","月額は分割払の金額です"],
+    note:"使用目的・運転者の範囲・人身傷害の金額・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「軽自動車の保険料相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・15等級・アルト（HA97S）車両保険あり",
+    ageLabel:"35歳", dec:"30s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"スズキ アルト（HA97S）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（金額・タイプは記事に未掲載）",
+    annual:29940, monthly:2800, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引、電気・ハイブリッド車割引","月額は分割払の金額です"],
+    note:"使用目的・運転者の範囲・人身傷害の金額・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「軽自動車の保険料相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"25歳・15等級・タント（LA660S）車両保険あり",
+    ageLabel:"25歳", dec:"20s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"ダイハツ タント（LA660S）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（金額・タイプは記事に未掲載）",
+    annual:42040, monthly:3870, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引","月額は分割払の金額です","年齢別表（タントのみ）の1ケースです"],
+    note:"使用目的・運転者の範囲・人身傷害の金額・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「軽自動車の保険料相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"29歳・15等級・タント（LA660S）車両保険あり",
+    ageLabel:"29歳", dec:"20s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"ダイハツ タント（LA660S）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（金額・タイプは記事に未掲載）",
+    annual:34710, monthly:3220, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引","月額は分割払の金額です","年齢別表（タントのみ）の1ケースです"],
+    note:"使用目的・運転者の範囲・人身傷害の金額・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「軽自動車の保険料相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"47歳・15等級・タント（LA660S）車両保険あり",
+    ageLabel:"47歳", dec:"40s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"ダイハツ タント（LA660S）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（金額・タイプは記事に未掲載）",
+    annual:27500, monthly:2560, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引","月額は分割払の金額です","年齢別表（タントのみ）の1ケースです"],
+    note:"使用目的・運転者の範囲・人身傷害の金額・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「軽自動車の保険料相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"53歳・15等級・タント（LA660S）車両保険あり",
+    ageLabel:"53歳", dec:"50s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"ダイハツ タント（LA660S）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（金額・タイプは記事に未掲載）",
+    annual:27690, monthly:2570, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引","月額は分割払の金額です","年齢別表（タントのみ）の1ケースです"],
+    note:"使用目的・運転者の範囲・人身傷害の金額・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「軽自動車の保険料相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"60歳・15等級・タント（LA660S）車両保険あり",
+    ageLabel:"60歳", dec:"60s", grade:15, gradeLabel:"15等級", license:"ゴールド",
+    car:"ダイハツ タント（LA660S）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両保険あり（金額・タイプは記事に未掲載）",
+    annual:32160, monthly:2990, src:"official", period:"保険始期：2026年11月",
+    details:["年間走行距離：3,000km以下","対人・対物は無制限が基本補償（商品の基本設計）","割引：早割50、無事故割引、ネット割（新規）、新車割引、ゴールド免許割引","月額は分割払の金額です","年齢別表（タントのみ）の1ケースです"],
+    note:"使用目的・運転者の範囲・人身傷害の金額・車両保険の金額や免責・特約の内訳は記事に未掲載で、公式の相場シミュレーションサイト側での確認となります。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「軽自動車の保険料相場」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"SOMPOダイレクト「おとなの自動車保険」", title:"35歳・6等級・プリウス（ZVW65）車両保険なし",
+    ageLabel:"35歳", dec:"30s", grade:6, gradeLabel:"6等級", license:"ブルー・グリーン",
+    car:"トヨタ プリウス（ZVW65）", carCat:"sedan", vehicle:"no", vehicleLabel:"車両保険なし",
+    annual:45710, monthly:null, src:"official", period:"保険始期：2026年11月",
+    details:["公式コラム「6等級の年代別例」に掲載された35歳の例（年払）","対人・対物は無制限が基本補償（商品の基本設計）"],
+    note:"この例の詳細条件（走行距離・人身傷害の金額・割引の内訳など）は記事本文では要点のみのため、公式コラムでご確認ください。",
+    srcText:"出典：SOMPOダイレクト 公式コラム「6等級の保険料例」（公式シミュレーションの試算結果）"
+  },
+  {
+    company:"ソニー損保", title:"20等級・プリウス（公式トップページのモデルケース）",
+    ageLabel:"年齢は未確認", dec:null, grade:20, gradeLabel:"20等級", license:null,
+    car:"トヨタ プリウス", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（金額240万円）",
+    annual:37620, monthly:null, src:"official", period:"保険始期日：2026年1月1日",
+    details:["公式トップページの「保険料のモデルケース」に掲載された金額（一括払）","車両保険金額：240万円","金額は「無事故割引（2,500円）適用前」の保険料（ページ表記）"],
+    note:"このケースの年齢・免許の色・型式・使用目的・走行距離・補償の内訳は、ページ上の詳細表示（モーダル）での確認が必要で、本調査では未確認です。",
+    srcText:"出典：ソニー損保 公式サイト トップページ「保険料のモデルケース」"
+  },
+  {
+    company:"ソニー損保", title:"12等級・セレナ（公式トップページのモデルケース）",
+    ageLabel:"年齢は未確認", dec:null, grade:12, gradeLabel:"12等級", license:null,
+    car:"ニッサン セレナ", carCat:"minivan", vehicle:"yes", vehicleLabel:"車両保険あり（金額195万円）",
+    annual:45780, monthly:null, src:"official", period:"保険始期日：2026年1月1日",
+    details:["公式トップページの「保険料のモデルケース」に掲載された金額（一括払）","車両保険金額：195万円","金額は「無事故割引（2,500円）適用前」の保険料（ページ表記）"],
+    note:"このケースの年齢・免許の色・型式・使用目的・走行距離・補償の内訳は、ページ上の詳細表示（モーダル）での確認が必要で、本調査では未確認です。",
+    srcText:"出典：ソニー損保 公式サイト トップページ「保険料のモデルケース」"
+  },
+  {
+    company:"ソニー損保", title:"6等級・ステップワゴン（公式トップページのモデルケース）",
+    ageLabel:"年齢は未確認", dec:null, grade:6, gradeLabel:"6等級", license:null,
+    car:"ホンダ ステップワゴン", carCat:"minivan", vehicle:"yes", vehicleLabel:"車両保険あり（金額235万円）",
+    annual:54930, monthly:null, src:"official", period:"保険始期日：2026年1月1日",
+    details:["公式トップページの「保険料のモデルケース」に掲載された金額（一括払）","車両保険金額：235万円","金額は「無事故割引（2,500円）適用前」の保険料（ページ表記）"],
+    note:"このケースの年齢・免許の色・型式・使用目的・走行距離・補償の内訳は、ページ上の詳細表示（モーダル）での確認が必要で、本調査では未確認です。",
+    srcText:"出典：ソニー損保 公式サイト トップページ「保険料のモデルケース」"
+  },
+  {
+    company:"ソニー損保", title:"42歳・20等級・ヤリス（MXPH10）長期自動車保険資料の比較例",
+    ageLabel:"42歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ ヤリス（MXPH10）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（150万円・初年度）",
+    annual:35150, monthly:null, src:"official", period:"保険期間：2026年10月1日から（3年契約の資料）",
+    details:["表示額は同条件の「1年契約・第1保険年度」の保険料です（2年目38,340円・3年目37,770円はいずれも目安）","3年契約（長期自動車保険）の場合は3年間合計136,430円で、無事故お祝い金20,460円を差し引くと115,970円","初度登録：2020年2月／使用目的：主に家庭用／契約距離区分：9,000km以下（3年合計）","運転者限定：本人限定／年齢条件：30歳以上補償／ゴールド免許割引適用","対人・対物賠償：無制限","人身傷害：3,000万円（車内のみ補償型）","車両保険：150万円（1年目。2年目135万円・3年目120万円）、免責 1回目5万円・2回目以降10万円","割引：インターネット割引、無事故割引、証券ペーパーレス割引（契約形態により金額が異なる）"],
+    note:"1年契約の金額は、等級ダウン事故がなく満期を迎えた場合に2026年10月の保険料率で継続したときの試算で、実際の保険料は料率改定などにより変動する可能性があります（資料の注記）。",
+    srcText:"出典：ソニー損保 公式ニュースリリース参考資料「長期自動車保険（3年契約）の商品概要と保険料例」（公式PDF）"
+  },
+  {
+    company:"SBI損保", title:"50歳・20等級・プリウス（MXWH60）車両保険あり／なし",
+    ageLabel:"50歳", dec:"50s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ プリウス（MXWH60）", carCat:"sedan", vehicle:"pair", vehicleLabel:"車両保険あり（一般車両 430万円）／なし の同条件比較",
+    pair:{withA:37080, withoutA:11820}, src:"official", period:"保険始期：令和8年（2026年）6月",
+    details:["東京都在住／初度登録：令和8年6月（新車）／年間走行距離：3,000km以下","使用目的：日常・レジャー／運転者限定：本人限定／年齢条件：26歳以上補償／一括払","対人・対物賠償：無制限","人身傷害：5,000万円（自動車事故補償）／搭乗者傷害：なし","車両保険ありの場合：一般車両430万円（車両自己負担額 10万円・10万円）、全損時諸費用保険金特約","特約：対物差額修理費用補償、車内外身の回り品補償30万円（自己負担額3,000円）、車両損害に関するレンタカー費用補償（日額10,000円）、自宅・車庫等修理費用補償","割引：新車割引、インターネット割引、証券不発行割引"],
+    srcText:"出典：SBI損保 公式ドメイン掲載の保険料例（取扱代理店のLP形式ページ。引受保険会社はSBI損害保険株式会社）"
+  },
+  {
+    company:"SBI損保", title:"35歳・12等級・ヴォクシー（ZWR90W）車両保険あり／なし",
+    ageLabel:"35歳", dec:"30s", grade:12, gradeLabel:"12等級", license:"ゴールド",
+    car:"トヨタ ヴォクシー（ZWR90W）", carCat:"minivan", vehicle:"pair", vehicleLabel:"車両保険あり（車対車＋限定A 400万円）／なし の同条件比較",
+    pair:{withA:25190, withoutA:14990}, src:"official", period:"保険始期：令和8年（2026年）6月",
+    details:["東京都在住／初度登録：令和8年6月（新車）／年間走行距離：3,000km以下","使用目的：日常・レジャー／運転者限定：本人限定／年齢条件：26歳以上補償／一括払","対人・対物賠償：無制限","人身傷害：5,000万円（自動車事故補償）／搭乗者傷害：1,000万円","車両保険ありの場合：車対車＋限定A 400万円（車両自己負担額 5万円・10万円）","特約：対物差額修理費用補償、自転車事故補償","割引：新車割引、インターネット割引、証券不発行割引"],
+    srcText:"出典：SBI損保 公式ドメイン掲載の保険料例（取扱代理店のLP形式ページ。引受保険会社はSBI損害保険株式会社）"
+  },
+  {
+    company:"SBI損保", title:"26歳・6S等級・N-BOX（JF6）車両保険あり／なし",
+    ageLabel:"26歳", dec:"20s", grade:6, gradeLabel:"6S等級", license:"ゴールド",
+    car:"ホンダ N-BOX（JF6）", carCat:"kei", vehicle:"pair", vehicleLabel:"車両保険あり（一般車両 255万円）／なし の同条件比較",
+    pair:{withA:80540, withoutA:31740}, src:"official", period:"保険始期：令和8年（2026年）6月",
+    details:["東京都在住／初度登録：令和8年6月（新車）／初めての加入","使用目的：日常・レジャー／運転者限定：本人限定／年齢条件：26歳以上補償／一括払","対人・対物賠償：無制限","人身傷害：3,000万円（自動車事故補償）／搭乗者傷害：なし","車両保険ありの場合：一般車両255万円（車両自己負担額 5万円・10万円）","割引：新車割引、インターネット割引、証券不発行割引"],
+    note:"このケースの年間走行距離は、公式ページの条件文から確認できませんでした（未確認）。",
+    srcText:"出典：SBI損保 公式ドメイン掲載の保険料例（取扱代理店のLP形式ページ。引受保険会社はSBI損害保険株式会社）"
+  },
+  {
+    company:"SBI損保", title:"40歳・20等級・ヤリス（MXPA10）",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ ヤリス（MXPA10）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（一般タイプ 200万円）",
+    annual:27060, monthly:null, src:"agency", period:"保険始期：2026年1月1日",
+    details:["居住地：東京／記名被保険者40歳男性・配偶者40歳／初度登録：令和8年1月","使用目的：日常・レジャー／年齢条件：26歳以上補償／運転者限定：本人・配偶者限定","過去1年間の走行距離：2,500km／一括払／継続契約以外","対人・対物賠償：無制限","人身傷害：5,000万円（搭乗中のみ補償）／搭乗者傷害：なし","車両保険：一般タイプ200万円（自己負担額 1回目0円・2回目以降10万円）","特約：弁護士特約（自動車事故限定型）あり","割引：新車割引、インターネット割引、証券不発行割引"],
+    srcText:"出典：みんかぶ保険に転載されたSBI損保の商品概要資料の保険料例（代理店転載）"
+  },
+  {
+    company:"SBI損保", title:"40歳・20等級・BMW（5X20）",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"BMW（5X20）", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（一般タイプ 730万円）",
+    annual:81830, monthly:null, src:"agency", period:"保険始期：2026年1月1日",
+    details:["居住地：東京／記名被保険者40歳男性・配偶者40歳／初度登録：令和8年1月","使用目的：日常・レジャー／年齢条件：26歳以上補償／運転者限定：本人・配偶者限定","過去1年間の走行距離：2,500km／一括払／継続契約以外","対人・対物賠償：無制限","人身傷害：5,000万円（搭乗中のみ補償）／搭乗者傷害：なし","車両保険：一般タイプ730万円（自己負担額 1回目0円・2回目以降10万円）","特約：弁護士特約（自動車事故限定型）あり","割引：新車割引、インターネット割引、証券不発行割引"],
+    srcText:"出典：みんかぶ保険に転載されたSBI損保の商品概要資料の保険料例（代理店転載）"
+  },
+  {
+    company:"アクサダイレクト", title:"40歳・6S等級（初めて加入）型式NRE161",
+    ageLabel:"40歳", dec:"40s", grade:6, gradeLabel:"6S等級", license:"ゴールド",
+    car:"型式NRE161（自家用小型乗用車・車名は未確認）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（一般車両保険 195万円）",
+    annual:73590, monthly:null, src:"official", period:"保険始期日：2026年6月1日",
+    details:["東京都在住／初度登録：2026年1月／年間予想最大走行距離：3,000km以上5,000km未満","使用目的：日常レジャー用／運転者年齢条件：30歳以上補償／運転者限定：本人・配偶者型","対人・対物賠償：無制限、対物全損時修理差額費用補償特約50万円","人身傷害補償特約：5,000万円（搭乗中のみ補償）／無保険車傷害保険：2億円／搭乗者傷害保険：500万円","車両保険：一般車両保険195万円（免責 1回目5万円・2回目以降10万円、車対車免ゼロ特約）、車両新価特約195万円","特約：身の回り品保険10万円、地震・噴火・津波危険「車両全損時一時金」特約50万円、弁護士費用等補償特約、レンタカー費用補償特約（5,000円／日）","割引：インターネット割引、証券不発行割引（無事故割引・20等級継続割引はなし）"],
+    note:"20等級のケースと同条件で、等級だけが異なる比較例です。型式NRE161の車名は公式ページ本文から確認できませんでした（未確認）。",
+    srcText:"出典：アクサダイレクト 公式ガイド「年代別保険料相場」"
+  },
+  {
+    company:"アクサダイレクト", title:"40歳・20等級 型式NRE161",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"型式NRE161（自家用小型乗用車・車名は未確認）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（一般車両保険 195万円）",
+    annual:42940, monthly:null, src:"official", period:"保険始期日：2026年6月1日",
+    details:["東京都在住／初度登録：2026年1月／年間予想最大走行距離：3,000km以上5,000km未満","使用目的：日常レジャー用／運転者年齢条件：30歳以上補償／運転者限定：本人・配偶者型","対人・対物賠償：無制限、対物全損時修理差額費用補償特約50万円","人身傷害補償特約：5,000万円（搭乗中のみ補償）／無保険車傷害保険：2億円／搭乗者傷害保険：500万円","車両保険：一般車両保険195万円（免責 1回目5万円・2回目以降10万円、車対車免ゼロ特約）、車両新価特約195万円","特約：身の回り品保険10万円、地震・噴火・津波危険「車両全損時一時金」特約50万円、弁護士費用等補償特約、レンタカー費用補償特約（5,000円／日）","割引：インターネット割引、証券不発行割引、無事故割引、20等級継続割引"],
+    note:"6S等級のケースと同条件で、等級だけが異なる比較例です（等級による差は30,650円）。型式NRE161の車名は未確認です。",
+    srcText:"出典：アクサダイレクト 公式ガイド「年代別保険料相場」"
+  },
+  {
+    company:"アクサダイレクト", title:"34歳・11等級・アクア（MXPK16）価格重視型プラン",
+    ageLabel:"34歳", dec:"30s", grade:11, gradeLabel:"11等級", license:"ゴールド",
+    car:"トヨタ アクア（MXPK16）", carCat:"compact", vehicle:"no", vehicleLabel:"車両保険なし（価格重視型プラン）",
+    annual:19050, monthly:null, src:"official", period:"保険始期日：2026年6月1日",
+    details:["東京在住／初度登録：2026年1月／年間予想最大走行距離：1,000km以上3,000km未満","使用目的：日常レジャー用／運転者年齢条件：30歳以上補償／運転者限定：本人・配偶者型","対人・対物賠償：無制限、対物全損時修理差額費用補償特約50万円","人身傷害補償特約：5,000万円（搭乗中のみ補償）／無保険車傷害保険：2億円／搭乗者傷害保険：なし","車両保険：なし（エコノミータイプ）。車両新価特約・レンタカー費用補償特約・弁護士費用等補償特約などもなし","金額は割引前22,050円から、インターネット割引（1,000円）と無事故割引（2,000円）を適用した後の金額です（証券不発行割引はあらかじめ適用済み）"],
+    srcText:"出典：アクサダイレクト 公式「価格重視型プラン」のモデルケース"
+  },
+  {
+    company:"アクサダイレクト", title:"27歳・7S等級・シエンタ（MXPC10G）複数所有新規割引",
+    ageLabel:"27歳", dec:"20s", grade:7, gradeLabel:"7S等級", license:"ブルー",
+    car:"トヨタ シエンタ（MXPC10G）", carCat:"minivan", vehicle:"yes", vehicleLabel:"車両保険あり（一般車両保険 285万円）",
+    annual:73480, monthly:null, src:"official", period:"保険始期日：2026年10月1日",
+    details:["東京在住／初度登録：2026年1月／年間予想最大走行距離：3,000km以上5,000km未満","使用目的：日常レジャー用／運転者年齢条件：26歳以上補償／運転者限定：本人・配偶者型","対人・対物賠償：無制限、対物全損時修理差額費用補償特約50万円","人身傷害補償特約：3,000万円（搭乗中のみ補償）／無保険車傷害保険：2億円／搭乗者傷害保険：なし","車両保険：一般車両保険285万円（免責 1回目5万円・2回目以降10万円）","特約：身の回り品保険10万円、弁護士費用等補償特約あり","割引：複数所有新規割引（セカンドカー割引）、インターネット割引、証券不発行割引"],
+    note:"2台目以降の契約で7S等級から始められる場合の例です。通常の6S等級では81,180円（同条件）で、その差は7,700円です。",
+    srcText:"出典：アクサダイレクト 公式「複数所有新規割引」の保険料例"
+  },
+  {
+    company:"アクサダイレクト", title:"27歳・6S等級・シエンタ（MXPC10G）通常の新規",
+    ageLabel:"27歳", dec:"20s", grade:6, gradeLabel:"6S等級", license:"ブルー",
+    car:"トヨタ シエンタ（MXPC10G）", carCat:"minivan", vehicle:"yes", vehicleLabel:"車両保険あり（一般車両保険 285万円）",
+    annual:81180, monthly:null, src:"official", period:"保険始期日：2026年10月1日",
+    details:["東京在住／初度登録：2026年1月／年間予想最大走行距離：3,000km以上5,000km未満","使用目的：日常レジャー用／運転者年齢条件：26歳以上補償／運転者限定：本人・配偶者型","対人・対物賠償：無制限、対物全損時修理差額費用補償特約50万円","人身傷害補償特約：3,000万円（搭乗中のみ補償）／無保険車傷害保険：2億円／搭乗者傷害保険：なし","車両保険：一般車両保険285万円（免責 1回目5万円・2回目以降10万円）","特約：身の回り品保険10万円、弁護士費用等補償特約あり","割引：インターネット割引、証券不発行割引（複数所有新規割引なし）"],
+    note:"複数所有新規割引が使える場合は7S等級で73,480円（同条件）になります。",
+    srcText:"出典：アクサダイレクト 公式「複数所有新規割引」の保険料例"
+  },
+  {
+    company:"アクサダイレクト", title:"40歳・20等級・ヤリス（MXPA10）",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ ヤリス（MXPA10）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（一般車両保険 200万円）",
+    annual:30030, monthly:null, src:"agency", period:"保険始期日：2025年12月1日",
+    details:["東京都／予想最大走行距離：1,000km以上3,000km未満","使用目的：日常レジャー用／運転者年齢条件：30歳以上／運転者限定：本人・配偶者","対人・対物賠償：無制限","人身傷害：3,000万円（搭乗中のみ補償特約あり）／無保険車傷害保険：2億円","車両保険：一般車両保険200万円（免責 1回目0万円・2回目以降10万円）","特約：身の回り品保険10万円、弁護士特約（自動車事故限定型。日常生活のトラブルも可）あり","割引：インターネット割引、無事故割引、20等級継続割引"],
+    srcText:"出典：みんかぶ保険に転載されたアクサ損害保険の商品概要資料の保険料例（代理店転載）"
+  },
+  {
+    company:"アクサダイレクト", title:"40歳・20等級・BMW（5X20）車両保険なし",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"BMW（5X20）", carCat:"sedan", vehicle:"no", vehicleLabel:"車両保険なし",
+    annual:16310, monthly:null, src:"agency", period:"保険始期日：2025年12月1日",
+    details:["東京都／予想最大走行距離：1,000km以上3,000km未満","使用目的：日常レジャー用／運転者年齢条件：30歳以上／運転者限定：本人・配偶者","対人・対物賠償：無制限","人身傷害：3,000万円（搭乗中のみ補償特約あり）／無保険車傷害保険：2億円","車両保険：なし","特約：弁護士特約（自動車事故限定型。日常生活のトラブルも可）あり","割引：インターネット割引、無事故割引、20等級継続割引"],
+    srcText:"出典：みんかぶ保険に転載されたアクサ損害保険の商品概要資料の保険料例（代理店転載）"
+  },
+  {
+    company:"全労済（こくみん共済 coop）マイカー共済", title:"20等級・軽自動車 N-BOX（JF6）",
+    ageLabel:"40歳以上50歳未満", dec:"40s", grade:20, gradeLabel:"20等級", license:null,
+    car:"ホンダ N-BOX（JF6）", carCat:"kei", vehicle:"yes", vehicleLabel:"車両損害補償あり（一般補償 230万円）",
+    annual:31440, monthly:2750, src:"official", period:"共済期間開始日：2026年1月1日（2025年12月時点の試算）",
+    details:["型式発売：令和5年10月／初度登録：令和7年12月／型式別掛金クラス：対人3・対物2・人傷5・車両4","運転者年齢条件：35歳以上補償／運転者本人限定特約","対人・対物賠償：無制限","人身傷害補償：5,000万円","車両損害補償：一般補償230万円（自己負担額10万円）・付随諸費用補償","特約・割引：弁護士費用等補償特約、新車割引、AEB割引","走行距離にかかわらず一律の掛金です（公式明記）。免許の色・使用目的は算出条件として提示されていません"],
+    srcText:"出典：全労済 公式サイト「マイカー共済」キャンペーンページの掛金例"
+  },
+  {
+    company:"全労済（こくみん共済 coop）マイカー共済", title:"20等級・コンパクトカー ヤリス（MXPH17）",
+    ageLabel:"40歳以上50歳未満", dec:"40s", grade:20, gradeLabel:"20等級", license:null,
+    car:"トヨタ ヤリス（MXPH17）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両損害補償あり（一般補償 290万円）",
+    annual:41110, monthly:3600, src:"official", period:"共済期間開始日：2026年1月1日（2025年12月時点の試算）",
+    details:["型式発売：令和6年1月／初度登録：令和7年12月／型式別掛金クラス：対人6・対物7・人傷9・車両10","運転者年齢条件：35歳以上補償／運転者本人限定特約","対人・対物賠償：無制限","人身傷害補償：5,000万円","車両損害補償：一般補償290万円（自己負担額10万円）・付随諸費用補償","特約・割引：弁護士費用等補償特約、新車割引、ハイブリッド車割引、AEB割引","走行距離にかかわらず一律の掛金です（公式明記）。免許の色・使用目的は算出条件として提示されていません"],
+    srcText:"出典：全労済 公式サイト「マイカー共済」キャンペーンページの掛金例"
+  },
+  {
+    company:"全労済（こくみん共済 coop）マイカー共済", title:"20等級・ミニバン ノア（ZWR90W）",
+    ageLabel:"40歳以上50歳未満", dec:"40s", grade:20, gradeLabel:"20等級", license:null,
+    car:"トヨタ ノア（ZWR90W）", carCat:"minivan", vehicle:"yes", vehicleLabel:"車両損害補償あり（一般補償 380万円）",
+    annual:36110, monthly:3150, src:"official", period:"共済期間開始日：2026年1月1日（2025年12月時点の試算）",
+    details:["型式発売：令和4年1月／初度登録：令和7年12月／型式別掛金クラス：対人5・対物2・人傷7・車両7","運転者年齢条件：35歳以上補償／運転者本人限定特約","対人・対物賠償：無制限","人身傷害補償：5,000万円","車両損害補償：一般補償380万円（自己負担額10万円）・付随諸費用補償","特約・割引：弁護士費用等補償特約、新車割引、ハイブリッド車割引","走行距離にかかわらず一律の掛金です（公式明記）。免許の色・使用目的は算出条件として提示されていません"],
+    srcText:"出典：全労済 公式サイト「マイカー共済」キャンペーンページの掛金例"
+  },
+  {
+    company:"楽天損保", title:"40歳・20等級・ヤリス（MXPA10）",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ ヤリス（MXPA10）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（一般タイプ 200万円）",
+    annual:23690, monthly:null, src:"agency", period:"契約期間：2026年1月1日から1年間",
+    details:["居住地：東京／初度登録：令和8年1月／前年度走行距離：1,000km","使用目的：日常・レジャー／運転年齢条件：35歳以上／運転者限定：本人・配偶者限定","対人・対物賠償：無制限","人身傷害：3,000万円（搭乗中のみ補償）","車両保険：一般タイプ200万円（自己負担額 1回目0円・2回目以降10万円）","特約：弁護士特約（自動車事故限定型）あり","割引：ゴールド免許割引、本人配偶者限定割引、新車割引、インターネット割引（25%）、無事故割引"],
+    note:"楽天損保の公式サイトには金額の保険料例は公表されておらず（割引率のみ公開）、これは代理店サイトに掲載された例です。",
+    srcText:"出典：みんかぶ保険に掲載された楽天損保の保険料例（代理店転載）"
+  },
+  {
+    company:"楽天損保", title:"40歳・20等級・BMW（5X20）",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"BMW（5X20）", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（一般タイプ 800万円）",
+    annual:75850, monthly:null, src:"agency", period:"契約期間：2026年1月1日から1年間",
+    details:["居住地：東京／初度登録：令和8年1月／前年度走行距離：1,000km","使用目的：日常・レジャー／運転年齢条件：35歳以上／運転者限定：本人・配偶者限定","対人・対物賠償：無制限","人身傷害：3,000万円（搭乗中のみ補償）","車両保険：一般タイプ800万円（自己負担額 1回目0円・2回目以降10万円）","特約：弁護士特約（自動車事故限定型）あり","割引：ゴールド免許割引、本人配偶者限定割引、新車割引、インターネット割引（25%）、無事故割引"],
+    note:"楽天損保の公式サイトには金額の保険料例は公表されておらず（割引率のみ公開）、これは代理店サイトに掲載された例です。",
+    srcText:"出典：みんかぶ保険に掲載された楽天損保の保険料例（代理店転載）"
+  },
+  {
+    company:"三井住友海上", title:"40歳・20等級・ヤリス（MXPA10）",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ ヤリス（MXPA10）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（一般タイプ 200万円）",
+    annual:55540, monthly:null, src:"third", period:"契約期間：2026年1月1日から1年間",
+    details:["居住地：東京／初度登録：2026年1月（新車割引あり）／前年度走行距離：1,000km／一括払い","使用目的：日常・レジャー／運転年齢条件：35歳以上／運転者限定：本人・配偶者限定","用途車種：自家用小型乗用車（料率クラス 車両5・対人4・対物3・傷害5）","対人・対物賠償：無制限","人身傷害：3,000万円（搭乗中のみ補償）","車両保険：一般タイプ200万円（自己負担額 1回目0円・2回目以降0円）","特約：弁護士費用特約（自動車事故限定型）あり","割引：ゴールド免許割引、新車割引、無事故割引"],
+    note:"三井住友海上の公式サイトには保険料例の公表がなく、これは第三者サイトが独自に試算・整理した値です（公式公表値ではありません）。",
+    srcText:"出典：みんかぶ保険の保険料例（第三者整理）"
+  },
+  {
+    company:"三井住友海上", title:"40歳・20等級・BMW（5X20）",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"BMW（5X20）", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（一般タイプ 780万円）",
+    annual:122470, monthly:null, src:"third", period:"契約期間：2026年1月1日から1年間",
+    details:["居住地：東京／初度登録：2026年1月（新車割引あり）／前年度走行距離：1,000km／一括払い","使用目的：日常・レジャー／運転年齢条件：35歳以上／運転者限定：本人・配偶者限定","用途車種：自家用普通乗用車（料率クラス 車両14・対人7・対物5・傷害7）","対人・対物賠償：無制限","人身傷害：3,000万円（搭乗中のみ補償）","車両保険：一般タイプ780万円（自己負担額 1回目0円・2回目以降0円）","特約：弁護士費用特約（自動車事故限定型）あり","割引：ゴールド免許割引、新車割引、無事故割引"],
+    note:"三井住友海上の公式サイトには保険料例の公表がなく、これは第三者サイトが独自に試算・整理した値です（公式公表値ではありません）。",
+    srcText:"出典：みんかぶ保険の保険料例（第三者整理）"
+  },
+  {
+    company:"あいおいニッセイ同和損保", title:"40歳・20等級・ヤリス（MXPA10）",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"トヨタ ヤリス（MXPA10）", carCat:"compact", vehicle:"yes", vehicleLabel:"車両保険あり（一般タイプ 200万円）",
+    annual:53360, monthly:null, src:"third", period:"契約期間：2026年1月1日から1年間",
+    details:["居住地：東京／初度登録：2026年1月（新車割引あり）","使用目的：日常・レジャー／被保険者40歳男性・配偶者40歳／運転者限定：本人・配偶者限定","対人・対物賠償：無制限","人身傷害：3,000万円（搭乗中のみ補償）","車両保険：一般タイプ200万円（自己負担額 1回目0円・2回目以降0円）","特約：弁護士費用特約（自動車事故限定型）あり","割引：新車割引"],
+    note:"あいおいニッセイ同和損保の公式サイトには一般向け保険料例の公表がなく、これは第三者サイトが独自に試算・整理した値です（公式公表値ではありません）。運転者年齢条件・料率クラス・走行距離・払込方法は同ページに提示がなく未確認です。",
+    srcText:"出典：みんかぶ保険の保険料例（第三者整理）"
+  },
+  {
+    company:"あいおいニッセイ同和損保", title:"40歳・20等級・BMW（5X20）",
+    ageLabel:"40歳", dec:"40s", grade:20, gradeLabel:"20等級", license:"ゴールド",
+    car:"BMW（5X20）", carCat:"sedan", vehicle:"yes", vehicleLabel:"車両保険あり（一般タイプ 780万円）",
+    annual:124810, monthly:null, src:"third", period:"契約期間：2026年1月1日から1年間",
+    details:["居住地：東京／初度登録：2026年1月（新車割引あり）","使用目的：日常・レジャー／被保険者40歳男性・配偶者40歳／運転者限定：本人・配偶者限定","対人・対物賠償：無制限","人身傷害：3,000万円（搭乗中のみ補償）","車両保険：一般タイプ780万円（自己負担額 1回目0円・2回目以降0円）","特約：弁護士費用特約（自動車事故限定型）あり","割引：新車割引"],
+    note:"あいおいニッセイ同和損保の公式サイトには一般向け保険料例の公表がなく、これは第三者サイトが独自に試算・整理した値です（公式公表値ではありません）。運転者年齢条件・料率クラス・走行距離・払込方法は同ページに提示がなく未確認です。",
+    srcText:"出典：みんかぶ保険の保険料例（第三者整理）"
+  }
+];
+var REF = [
+  {
+    company:"JA共済（クルマスター）", title:"35歳・20等級・ヤリス（MXPH15）",
+    lines:["掛金：一時払 59,530円／月払 5,310円","記名被共済者：35歳／車両価格225万円の場合／令和6年購入","等級：20等級（事故有係数適用期間0年）／免許：ゴールド／運転者年齢条件：35歳以上限定保障","保障：人身傷害5,000万円、傷害定額給付（死亡1,000万円・標準型）、対人・対物賠償 無制限（対物超過修理費用保障付）、車両保障 全損害担保（免責0万円）、レッカー・ロード費用保障、車両諸費用保障特約（代車費用日額5,000円）","特約：運転者家族限定特約、弁護士費用保障特約","割引：自賠責共済セット割引、新車割引、自動継続割引、長期優良契約割引、複数契約割引","使用目的・年間走行距離は記載なし"],
+    srcText:"出典：JA鈴鹿（鈴鹿農業協同組合）公式広報誌2024年7月号（令和6年6月現在の掛金。現行料率とは異なる可能性があります）"
+  },
+  {
+    company:"JA共済（クルマスター）", title:"45歳・20等級・セレナ（HFC27）",
+    lines:["掛金：一時払 62,480円／月払 5,580円","記名被共済者：45歳／車両価格350万円の場合／令和6年購入","等級：20等級（事故有係数適用期間0年）／免許：ゴールド／運転者年齢条件：35歳以上限定保障","保障：人身傷害5,000万円、傷害定額給付（死亡1,000万円・標準型）、対人・対物賠償 無制限（対物超過修理費用保障付）、車両保障 全損害担保（免責0万円）、レッカー・ロード費用保障、車両諸費用保障特約（代車費用日額5,000円）","特約：運転者家族限定特約、弁護士費用保障特約","割引：自賠責共済セット割引、新車割引、自動継続割引、長期優良契約割引、複数契約割引","使用目的・年間走行距離は記載なし"],
+    srcText:"出典：JA鈴鹿（鈴鹿農業協同組合）公式広報誌2024年7月号（令和6年6月現在の掛金。現行料率とは異なる可能性があります）"
+  },
+  {
+    company:"JA共済（クルマスター）", title:"54歳・20等級・ハイゼット（S201C・軽貨物）",
+    lines:["掛金：一時払 32,030円／月払 2,870円","記名被共済者：54歳／車両価格45万円の場合／平成26年購入・自家用軽貨物自動車","等級：20等級（事故有係数適用期間0年）／免許：ゴールド／運転者年齢条件：35歳以上限定保障","保障：人身傷害5,000万円、傷害定額給付（死亡1,000万円・標準型）、対人・対物賠償 無制限（対物超過修理費用保障付）、車両保障 全損害担保（免責0万円）、レッカー・ロード費用保障、車両諸費用保障特約（代車費用日額5,000円）","特約：運転者家族限定特約、弁護士費用保障特約","割引：自賠責共済セット割引、自動継続割引、長期優良契約割引、複数契約割引、農業用貨物車割引","使用目的・年間走行距離は記載なし"],
+    srcText:"出典：JA鈴鹿（鈴鹿農業協同組合）公式広報誌2024年7月号（令和6年6月現在の掛金。現行料率とは異なる可能性があります）"
+  },
+  {
+    company:"東京海上日動", title:"団体扱の契約例（2015年の旧料率）ヴィッツ（NCP131）",
+    lines:["保険料：一般契約 一時払 年間83,110円（分割払 月々7,270円・年間87,240円）／団体扱契約 一時払 年間78,960円（分割払 月々6,940円・年間83,280円）／差額 年間4,150円","等級：12等級（事故有係数適用期間0年）／用途・車種：自家用小型乗用車／料率クラス 車両4・対人4・対物5・傷害4","初度登録：平成26年7月／使用目的：日常・レジャー使用／年齢条件：35歳以上補償（記名被保険者年齢区分 30歳以上40歳未満）／免許：ゴールド","補償：対人・対物賠償 無制限（免責0円）、人身傷害3,000万円、傷害一時金10万円、車両保険165万円（一般条件、免責 1回目5万円・2回目以降10万円）、車両新価保険特約、弁護士費用特約 ほか","割引：新車割引、イモビライザー割引"],
+    srcText:"出典：団体扱チラシ（2015年・いわき地区の教職員団体向け資料）。平成27年（2015年）4月1日現在の旧料率で、現在の保険料水準とは異なります（代理店転載）"
+  },
+  {
+    company:"三井住友海上", title:"団体扱の契約例（富士フイルムグループ団体扱）",
+    lines:["年間保険料：一般契約 114,180円 → 大口団体扱割引30％適用で 75,940円（差額38,240円）","始期日：2026年3月1日／1年契約／初度登録：2022年1月","等級：20等級（事故有係数適用期間0年）／記名被保険者：61歳／免許：ブルー／使用目的：日常・レジャー","型式：ZWR95W／自家用普通乗用車／料率クラス 車両7・対人自損5・対物3・傷害7／35歳以上補償／運転者限定なし","補償：対人・対物賠償 無制限（免責なし・対物超過修理費用特約あり）、人身傷害5,000万円、車両保険 一般補償250万円（免責0万円）、車両保険無過失事故特約、全損時諸費用特約、レンタカー費用特約（日額7,000円）、弁護士費用特約、日常生活賠償特約 ほか"],
+    srcText:"出典：富士フイルムグループ団体扱自動車保険チラシ（取扱代理店作成・代理店転載）。団体扱専用の料率であり、一般契約の目安にはなりません"
+  },
+  {
+    company:"あいおいニッセイ同和損保", title:"団体扱の契約例（長野県教職員向け団体扱）",
+    lines:["保険料（一時払）：一般のご契約 81,700円 → 大口団体割引15％＋団体扱一括払係数適用で 65,960円（年間15,740円お得）","保険期間：2026年6月1日〜2027年6月1日／自家用小型乗用車／初度登録：2014年1月","等級：20等級（事故有係数適用期間0年）／ゴールド免許割引／使用目的：日常・レジャー／運転者年齢条件：35歳以上補償（記名被保険者年齢別料率区分 40〜49歳）","料率クラス：車両4・対人自損5・対物7・傷害7","補償：対人・対物賠償 無制限（対物超過修理費用特約あり）、人身傷害5,000万円、車両保険145万円（一般補償、免責なし、車両保険無過失事故特約あり）、全損時諸費用特約、ロードサービス費用特約（代車日額7,000円）、弁護士費用（自動車事故型）特約 ほか","保険料は2026年6月現在の保険料に基づく（チラシ明記）"],
+    srcText:"出典：長野県教職員向け団体扱案内チラシ（生活協同組合コープながの学校職域センターが団体窓口・代理店転載）。団体扱専用の料率であり、一般契約の目安にはなりません"
+  },
+  {
+    company:"AIG損保", title:"長期契約比較 CASE.1（2年目に事故で保険を使用した場合）",
+    lines:["3年間の総額：1年契約を3年継続した場合 310,520円／3年長期分割払契約 257,870円／差額 52,650円","商品：AAP（家庭用総合自動車保険）／使用目的：日常・レジャー使用","記名被保険者：開始日時点40歳（1年契約は継続時に1歳加算）／初年度等級：11等級／運転者年齢条件：35歳以上限定","用途車種：自家用普通乗用車／料率クラス 車両7・対人7・対物7・人傷搭傷7／初度登録：2025年10月（新車割引あり）","保険期間の開始日：2026年1月1日から3年間／払込方法：長期契約＝年払、1年契約＝一時払","補償：対人・対物賠償 無制限（免責なし）、人身傷害1億円、搭乗者傷害1,000万円（一時金払）、車両保険 一般（免責0万円・10万円、金額は初年度150万円／2年度目120万円／3年度目115万円）","注記：1年契約を3年間継続した場合の2年目以降の保険料は、保険料改定等の要素がなかったものとして算出。年ごとの内訳は未確認"],
+    srcText:"出典：AIG損保 公式チラシ「教えて！AIG損保の自動車保険」（2025年10月版）を取扱代理店サイトが転載（代理店転載）"
+  },
+  {
+    company:"AIG損保", title:"長期契約比較 CASE.2（早期契約割引・免許の色が変わる場合）",
+    lines:["3年間の総額：1年契約を3年継続した場合 290,280円／3年長期分割払契約 254,430円／差額 35,850円","早期契約割引を適用し、1年目に免許更新でゴールドからブルーになる場合の比較","その他の条件はCASE.1と共通（AAP、40歳、11等級、35歳以上限定、自家用普通乗用車、人身傷害1億円、車両保険 一般 ほか）","注記：1年契約を3年間継続した場合の2年目以降の保険料は、保険料改定等の要素がなかったものとして算出。年ごとの内訳は未確認"],
+    srcText:"出典：AIG損保 公式チラシ「教えて！AIG損保の自動車保険」（2025年10月版）を取扱代理店サイトが転載（代理店転載）"
+  },
+  {
+    company:"三井住友海上", title:"公式チラシの例（新車割引の適用イメージ・4年間）",
+    lines:["年間保険料（一時払）：1年目 58,320円（車両保険金額150万円・新車割引あり）／2年目 57,200円（115万円・新車割引あり）／3年目 57,030円（110万円・新車割引あり）／4年目 62,760円（105万円・新車割引なし）","商品：GK クルマの保険／保険期間1年／一時払／始期日：2025年1月1日〜（各年1月始期）","記名被保険者：45歳／ゴールド免許割引適用／使用目的：日常・レジャー／自家用普通乗用車／初度登録：2023年1月","等級：20等級（事故有係数適用期間0年）／35歳以上補償／型式別料率クラス 車両7・対人自損7・対物7・傷害7","補償：対人・対物賠償 無制限（免責なし）、人身傷害5,000万円、傷害一時金特約あり、車両保険あり（一般補償、免責0万円・10万円）","この例は「新車割引が外れると保険料が上がる」ことの説明用イメージで、将来の保険料改定・割引率改定は考慮されていません（チラシ明記）"],
+    srcText:"出典：三井住友海上作成チラシ「自動車保険の保険料の決まり方」（2024年10月・2025年1月〜12月始期契約用）を代理店サイトが転載（代理店転載）"
+  }
+];
+
+var state = {veh:"all", dec:"all", grade:"all", car:"all", src:"all"};
+
+function fmt(n){ return n.toLocaleString("ja-JP"); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+function gradeBand(g){
+  if(g === null || g === undefined) return null;
+  if(g <= 7) return "g6";
+  if(g <= 17) return "g10";
+  return "g20";
+}
+function sortKey(c){
+  if(c.vehicle === "pair" && c.pair){
+    if(c.pair.withA) return c.pair.withA;
+    if(c.pair.withM) return c.pair.withM * 12;
+  }
+  if(c.annual) return c.annual;
+  if(c.monthly) return c.monthly * 12;
+  return 999999999;
+}
+function matches(c){
+  if(state.veh === "yes" && !(c.vehicle === "yes" || c.vehicle === "pair")) return false;
+  if(state.veh === "no" && !(c.vehicle === "no" || c.vehicle === "pair")) return false;
+  if(state.dec !== "all" && c.dec !== state.dec) return false;
+  if(state.grade !== "all"){
+    var b = gradeBand(c.grade);
+    if(b !== state.grade) return false;
+  }
+  if(state.car !== "all" && c.carCat !== state.car) return false;
+  if(state.src === "official" && c.src !== "official") return false;
+  return true;
+}
+
+function priceHTML(c){
+  var h = "";
+  if(c.vehicle === "pair" && c.pair){
+    var p = c.pair;
+    h += '<div class="pricebox">';
+    if(c.monthlyOnly){
+      h += '<div class="lab">月払保険料（年額は公表なし）</div>';
+      h += '<div class="prow"><span class="pl">車両保険あり</span><span class="pv">' + fmt(p.withM) + '<span class="yen">円／月</span></span></div>';
+      h += '<div class="prow"><span class="pl">車両保険なし</span><span class="pv">' + fmt(p.withoutM) + '<span class="yen">円／月</span></span></div>';
+      h += '<div class="prow diff"><span class="pl">差額（月額）</span><span class="pv">' + fmt(p.withM - p.withoutM) + '<span class="yen">円</span></span></div>';
+    } else {
+      h += '<div class="lab">年払い保険料（一括払）</div>';
+      h += '<div class="prow"><span class="pl">車両保険あり</span><span class="pv">' + fmt(p.withA) + '<span class="yen">円</span></span></div>';
+      h += '<div class="prow"><span class="pl">車両保険なし</span><span class="pv">' + fmt(p.withoutA) + '<span class="yen">円</span></span></div>';
+      h += '<div class="prow diff"><span class="pl">差額</span><span class="pv">' + fmt(p.withA - p.withoutA) + '<span class="yen">円</span></span></div>';
+      var subs = [];
+      if(p.withM) subs.push("月払：あり " + fmt(p.withM) + "円");
+      if(p.withoutM) subs.push("なし " + fmt(p.withoutM) + "円");
+      if(p.withMT) subs.push("月払総額：あり " + fmt(p.withMT) + "円");
+      if(p.withoutMT) subs.push("なし " + fmt(p.withoutMT) + "円");
+      if(subs.length) h += '<div class="sub">' + esc(subs.join("／")) + '</div>';
+    }
+    h += '</div>';
+    return h;
+  }
+  h += '<div class="pricebox"><div class="lab">年払い保険料' + (c.company.indexOf("共済") >= 0 ? "（掛金）" : "") + '</div>';
+  h += '<div class="val">' + fmt(c.annual) + '<span class="yen">円</span><span class="per">／年</span></div>';
+  if(c.monthly) h += '<div class="sub">月払 ' + fmt(c.monthly) + '円' + (c.monthlyTotal ? "（月払総額 " + fmt(c.monthlyTotal) + "円）" : "") + '</div>';
+  h += '</div>';
+  return h;
+}
+
+function cardHTML(c){
+  var h = '<div class="prod">';
+  h += '<div class="co">' + esc(c.company) + '<span class="badge ' + c.src + '">' + SRC_LABEL[c.src] + '</span></div>';
+  h += '<div class="pname">' + esc(c.title) + '</div>';
+  h += priceHTML(c);
+  h += '<div class="chips">';
+  h += '<span class="chip">' + esc(c.ageLabel) + '</span>';
+  h += '<span class="chip">' + esc(c.gradeLabel) + '</span>';
+  if(c.license) h += '<span class="chip">' + esc(c.license) + '免許</span>';
+  h += '<span class="chip">' + esc(CAR_LABEL[c.carCat]) + '</span>';
+  h += '<span class="chip">' + esc(c.vehicleLabel) + '</span>';
+  h += '</div>';
+  h += '<h4>条件・補償内容</h4><ul>';
+  for(var i = 0; i < c.details.length; i++) h += '<li>' + esc(c.details[i]) + '</li>';
+  h += '</ul>';
+  if(c.note) h += '<div class="cond">' + esc(c.note) + '</div>';
+  h += '<div class="src">' + esc(c.period) + '<br>' + esc(c.srcText) + '</div>';
+  h += '</div>';
+  return h;
+}
+
+function refCardHTML(r){
+  var h = '<div class="prod">';
+  h += '<div class="co">' + esc(r.company) + '<span class="badge agency">参考</span></div>';
+  h += '<div class="pname">' + esc(r.title) + '</div>';
+  h += '<ul>';
+  for(var i = 0; i < r.lines.length; i++) h += '<li>' + esc(r.lines[i]) + '</li>';
+  h += '</ul>';
+  h += '<div class="src">' + esc(r.srcText) + '</div>';
+  h += '</div>';
+  return h;
+}
+
+function render(){
+  var list = CASES.filter(matches);
+  list.sort(function(a, b){ return sortKey(a) - sortKey(b); });
+  var h = "";
+  for(var i = 0; i < list.length; i++) h += cardHTML(list[i]);
+  document.getElementById("results").innerHTML = h;
+  document.getElementById("emptyBox").style.display = list.length ? "none" : "block";
+  document.getElementById("countLine").textContent = "全" + CASES.length + "ケース中 " + list.length + "件を表示（年払い保険料の安い順）";
+}
+
+function bindSeg(id, key, attr){
+  var seg = document.getElementById(id);
+  seg.addEventListener("click", function(e){
+    var btn = e.target.closest("button");
+    if(!btn) return;
+    var btns = seg.querySelectorAll("button");
+    for(var i = 0; i < btns.length; i++) btns[i].classList.remove("on");
+    btn.classList.add("on");
+    state[key] = btn.getAttribute(attr);
+    render();
+  });
+}
+bindSeg("vehSeg", "veh", "data-veh");
+bindSeg("decSeg", "dec", "data-dec");
+bindSeg("gradeSeg", "grade", "data-grade");
+bindSeg("carSeg", "car", "data-car");
+bindSeg("srcSeg", "src", "data-src");
+
+var refHTML = "";
+for(var j = 0; j < REF.length; j++) refHTML += refCardHTML(REF[j]);
+document.getElementById("refResults").innerHTML = refHTML;
+
+render();
+</script>
+</body>
+</html>
