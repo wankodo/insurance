@@ -64,6 +64,17 @@ footer{max-width:880px;margin:0 auto;padding:0 12px 36px;font-size:12px;color:va
 footer a{color:var(--navy2)}
 details.rates{margin-top:10px}
 details.rates summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--navy)}
+.grid .wide{grid-column:1/-1}
+.subhead{font-size:14.5px;font-weight:800;color:var(--navy);border-top:1px dashed var(--line);padding-top:12px}
+.subhead p{font-size:12.5px;font-weight:400;color:var(--mut);margin:4px 0 0}
+.diag{margin:2px 0 8px}
+.diag:empty{display:none}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700;margin:0 6px 6px 0}
+.badge.hit{background:#e3f4ec;color:var(--good);border:1px solid var(--good)}
+.badge.miss{background:#eef1f5;color:var(--mut);border:1px solid var(--line)}
+.badge.info{background:#fdf6e0;color:#7a5b00;border:1px solid #ecd27a}
+.diag .pre{font-size:14px;font-weight:700;margin:2px 0 4px}
+.diag .basis{font-size:12px;color:var(--mut)}
 .sitebar{background:var(--navy2);border-bottom:2px solid var(--amber)}
 .sitebar .sb-in{max-width:880px;margin:0 auto;padding:7px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .sitebar a{color:#fff;text-decoration:none;font-size:13px}
@@ -111,6 +122,7 @@ html[data-theme="andy"] .badge.t2{background:#0d2a42;color:#d8f1f6;border-color:
 html[data-theme="andy"] .badge.t3{background:rgba(61,220,151,.14);color:#3ddc97;border-color:rgba(61,220,151,.4)}
 html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222e}
 html[data-theme="andy"] .note{background:rgba(70,217,236,.10);border-color:rgba(110,205,230,.32)}
+html[data-theme="andy"] .subhead{color:#d8f1f6}
 </style>
 </head>
 <body>
@@ -206,6 +218,29 @@ html[data-theme="andy"] .note{background:rgba(70,217,236,.10);border-color:rgba(
       <label class="check"><input type="checkbox" id="zennou"> 前納（年払い）を利用する</label>
       <div class="hint">前納すると年約4%の割引があります（複利現価法による割引のため、実際の割引額は加入月により変わります）。</div>
     </div>
+    <div class="wide subhead">世帯の情報と減免の診断（任意）
+      <p>国保には、世帯の所得が一定以下だと均等割・平等割が7割・5割・2割軽減される「法定軽減」があります。ここを入力すると、令和8年度の判定基準で対象かどうかを診断し、軽減後の金額で比較します（未入力の場合は診断を出さず、通常の計算をします）。被保険者数には上の「国保に加入する人数」を使います。世帯の合計所得は、本人の所得と世帯主の所得で組み立てます（本人・世帯主以外の家族の所得、後期高齢者医療へ移行した方（特定同一世帯所属者）の所得・人数は含めていません）。診断は目安であり、最終的な判定はお住まいの市区町村が行います。</p>
+    </div>
+    <div class="field">
+      <label for="headIncome">世帯主の前年の所得（円）</label>
+      <input type="number" id="headIncome" inputmode="numeric" placeholder="本人が世帯主なら空欄">
+      <div class="hint">本人が世帯主の場合は空欄で構いません（本人の所得で判定し、二重には数えません）。世帯主が国保に入っていない場合（擬制世帯主）でも、判定には世帯主の所得を含めます。所得は給与所得・年金所得などの合計で、各種所得控除を引く前の額です。</div>
+    </div>
+    <div class="field">
+      <label for="salaryCount">給与所得者等の数（世帯）</label>
+      <input type="number" id="salaryCount" inputmode="numeric" placeholder="空欄なら1人として判定">
+      <div class="hint">給与収入55万円超の方と、公的年金等収入が65歳未満で60万円超・65歳以上で125万円超の方の人数（世帯主・加入者の中での数）。判定基準額への加算は2人以上の場合だけにあります。空欄の場合は1人として判定します。</div>
+    </div>
+    <div class="field">
+      <label for="salaryIncomeSelf">前年の給与所得（本人分・円）</label>
+      <input type="number" id="salaryIncomeSelf" inputmode="numeric" placeholder="空欄なら年収から換算">
+      <div class="hint">源泉徴収票の「給与所得控除後の金額」など、正確な給与所得が分かる場合は入力してください（上の「前年の給与年収」からの換算より優先します）。非自発的失業の軽減は、この給与所得を30%として計算します。</div>
+    </div>
+    <div class="field">
+      <label>国保の非自発的失業の軽減</label>
+      <label class="check"><input type="checkbox" id="involCheck"> 非自発的失業（会社の倒産・解雇など。雇用保険の特定受給資格者または特定理由離職者）</label>
+      <div class="hint">チェックすると、国保の計算で本人の前年の給与所得を30%として計算し、診断に表示します（市区町村への届出が必要です）。上の「退職理由」で会社都合・倒産・雇い止め等を選んだ場合も、同じ軽減が適用されます。</div>
+    </div>
   </div>
 
   <div id="manualPanel">
@@ -244,6 +279,7 @@ html[data-theme="andy"] .note{background:rgba(70,217,236,.10);border-color:rgba(
       <div class="sub" id="y1KokuSub">内訳は下の表</div>
     </div>
   </div>
+  <div class="diag" id="y1Diag"></div>
   <div class="diff" id="y1Diff">未入力の項目があります</div>
   <table>
     <thead><tr><th>国保 1年目の内訳</th><th>所得割</th><th>均等割</th><th>平等割</th><th>資産割</th><th>合計</th></tr></thead>
@@ -266,6 +302,7 @@ html[data-theme="andy"] .note{background:rgba(70,217,236,.10);border-color:rgba(
       <div class="sub" id="y2KokuSub">内訳は下の表</div>
     </div>
   </div>
+  <div class="diag" id="y2Diag"></div>
   <div class="diff" id="y2Diff">未入力の項目があります</div>
   <table>
     <thead><tr><th>国保 2年目の内訳</th><th>所得割</th><th>均等割</th><th>平等割</th><th>資産割</th><th>合計</th></tr></thead>
@@ -297,7 +334,8 @@ html[data-theme="andy"] .note{background:rgba(70,217,236,.10);border-color:rgba(
     <li>任意継続の保険料は原則2年間変わりませんが、料率改定・40歳／65歳到達・標準報酬月額の上限変更・転居で変わる場合があります。このツールでは2年目も同額で表示しています。</li>
     <li>国保の保険料は前年の所得で決まるため、<strong>退職直後の1年目は高く、所得が下がる2年目に下がる</strong>のが典型パターンです。</li>
     <li>国保には、このツールの自動計算に含まれない<strong>自治体ごとの条例減免</strong>（失業・所得減少・災害等）がある場合があります。窓口で確認してください。また産前産後免除・旧被扶養者減免も別途対象になる場合があります。</li>
-    <li>非自発的離職者軽減は<strong>届出が必要</strong>です（雇用保険受給資格者証を持参して市区町村の窓口へ）。自動では適用されません。</li>
+    <li>非自発的離職者軽減は<strong>届出が必要</strong>です（雇用保険受給資格者証を持参して市区町村の窓口へ）。自動では適用されません。対象期間は、離職日の翌日が属する月から、その月が属する年度の翌年度末まで（最大約2年間）です。このツールでは1年目・2年目の両方に適用して計算していますが、退職の時期によっては2年目の一部が対象期間外となる場合があります。</li>
+    <li>このツールの<strong>減免の診断</strong>（法定軽減の対象の可能性）は、令和8年度の判定基準による目安です。実際の判定は世帯主（国保未加入の擬制世帯主を含む）と加入者全員・特定同一世帯所属者の前年の所得で行われ、<strong>所得の申告がないと判定されません</strong>（収入がなかった年も申告が必要です）。このツールでは本人・世帯主以外の家族の所得と特定同一世帯所属者の所得・人数を含めていないため、実際の判定と異なる場合があります。最終確認は市区町村の窓口で行ってください。</li>
     <li>任意継続では原則として傷病手当金・出産手当金は支給されません（退職時に受給資格を満たし継続受給している場合を除く）。受給中・受給予定の方は金額比較の前に確認してください。</li>
     <li>このツールは<strong>協会けんぽ</strong>前提です。健康保険組合（組合健保）の任意継続は料率・標準報酬月額の上限が組合ごとに異なるため、加入していた組合に確認してください。</li>
     <li>国保の料率は自治体ごとに毎年改定されます。収録データの年度は結果欄に表示します。賦課限度額が未確認の自治体では、限度額なしで計算しているため、高所得の場合は実際の保険料より高く出ることがあります（政令の上限は医療分67万円・支援金分26万円・介護分17万円・子ども分3万円＝令和8年度、参考表示）。</li>
@@ -308,7 +346,8 @@ html[data-theme="andy"] .note{background:rgba(70,217,236,.10);border-color:rgba(
 <footer>
   <p>このツールは目安の試算です。実際の保険料は、任意継続は協会けんぽ支部からの通知、国保は市区町村からの納付通知書で確認してください。本ツールは保険の勧誘を目的としたものではありません。</p>
   <p>出典：協会けんぽ「任意継続」「令和8年度 都道府県単位保険料率」（kyoukaikenpo.or.jp）／厚生労働省「国民健康保険の保険料・保険税について」（mhlw.go.jp）／各都道府県・市区町村の公式公表資料（自治体ごとの出典は結果欄に表示）</p>
-  <p>保険料・ルール確認日：2026-11-17</p>
+  <p>減免の診断の判定基準（令和8年度の法定軽減の判定式・非自発的離職者軽減の内容と対象期間）出典：札幌市「国民健康保険（保険料の減額）」（city.sapporo.jp）／藤沢市「国民健康保険料の軽減制度・減免制度」（city.fujisawa.kanagawa.jp）</p>
+  <p>保険料・ルール確認日：2026-11-17／減免の判定基準の確認日：2026-11-18</p>
   <p>制作：andy（わんこ堂）× 熊八 🐾（Muse Spark）</p>
 </footer>
 
@@ -358,12 +397,25 @@ function hyojunFromSalary(sal){
 /* rates: {m:[r,k,h,cap], s:..., c:..., k:[r,ka,kbase,h,cap], a:{m,s,c}|null} */
 function calcKokuho(rates, salaryIncome, o){
   var deemed = o.invol ? salaryIncome*0.3 : salaryIncome;
-  var judge = deemed;
   var N=o.members, P=o.preschool, C=o.careCount, K18=o.under18;
-  var red = 0;
-  if(judge<=430000) red=0.7;
-  else if(judge<=430000+310000*N) red=0.5;
-  else if(judge<=430000+570000*N) red=0.2;
+  var red = 0, judgeInfo = null;
+  if(o.redForce!==undefined&&o.redForce!==null){
+    red = o.redForce;
+  } else if(o.household){
+    // 世帯ベースの法定軽減診断（令和8年度基準）：判定所得は世帯合計（非自発的の場合は本人の給与所得を30%にした後の額を含む）
+    var J=o.household.judgeTotal, M=o.household.judgeMembers, E=Math.max(o.household.earners||1,1);
+    var add = E>=2 ? 100000*(E-1) : 0;
+    var t7=430000+add, t5=430000+310000*M+add, t2=430000+570000*M+add;
+    if(J<=t7) red=0.7;
+    else if(J<=t5) red=0.5;
+    else if(J<=t2) red=0.2;
+    judgeInfo={total:J,t7:t7,t5:t5,t2:t2,members:M,earners:E};
+  } else {
+    var judge = deemed;
+    if(judge<=430000) red=0.7;
+    else if(judge<=430000+310000*N) red=0.5;
+    else if(judge<=430000+570000*N) red=0.2;
+  }
   var base = Math.max(deemed - kisoKojo(deemed), 0);
   var F = o.fixedTax||0;
   function catMedLike(cat, countBasis){
@@ -374,7 +426,7 @@ function calcKokuho(rates, salaryIncome, o){
     var asset = (rates.a&&rates.a.m!==undefined&&countBasis!==null)?0:0;
     return {shotoku:shotoku,kinto:kinto,heito:heito,asset:0,cap:cat[3]};
   }
-  var res={red:red, base:base, deemed:deemed, cats:{}, total:0, missing:[]};
+  var res={red:red, base:base, deemed:deemed, judgeInfo:judgeInfo, cats:{}, total:0, missing:[]};
   // medical
   (function(){
     var cat=rates.m; if(!cat){res.missing.push("医療分");return}
@@ -504,6 +556,7 @@ function calc(){
     $("y1NiniSub").textContent="月額 —"; $("y2NiniSub").textContent="月額 —";
     $("y1Diff").textContent="未入力の項目があります"; $("y2Diff").textContent="未入力の項目があります";
     $("y1Break").innerHTML=""; $("y2Break").innerHTML="";
+    $("y1Diag").innerHTML=""; $("y2Diag").innerHTML="";
     $("calcNotes").textContent=""; $("srcBody").textContent=""; $("ratesBody").innerHTML="";
     ["y1NiniSide","y1KokuSide","y2NiniSide","y2KokuSide","planNN","planKK","planNK"].forEach(function(id){$(id).classList.remove("win")});
     return;
@@ -519,11 +572,26 @@ function calc(){
   if(under18===null){under18=preschool; under18Auto=true}
   if(under18>members)under18=members;
   if(preschool>members)preschool=members;
-  var invol = reason==="invol";
+  var involCheckOn = $("involCheck").checked;
+  var invol = reason==="invol" || involCheckOn;
   var fixedTax = num("fixedAssetTax")||0;
+  // 世帯情報（減免の診断用）
+  var headIncome = num("headIncome");
+  var salaryCount = num("salaryCount");
+  var salaryIncomeSelfIn = num("salaryIncomeSelf");
+  var householdMode = headIncome!==null || salaryCount!==null;
+  var earners = 1;
+  if(salaryCount!==null){earners=Math.floor(salaryCount); if(earners<1)earners=1}
+  var sal1 = salaryIncomeSelfIn!==null ? salaryIncomeSelfIn : kyuyoShotoku(income1);
+  function judgeTotalFor(sal){
+    var self = invol ? sal*0.3 : sal;
+    // 世帯主が本人の場合は本人の所得と同一（二重に数えない）。世帯主所得の入力がある場合だけ加算する
+    return self + (headIncome!==null ? headIncome : 0);
+  }
   var income2raw = num("income2");
   var income2Blank = income2raw===null;
   var income2 = income2Blank?0:income2raw;
+  var sal2 = kyuyoShotoku(income2);
 
   // 任意継続
   var baseHyojun=Math.min(hyojun, HYOJUN_CAP);
@@ -533,9 +601,17 @@ function calc(){
   var zennou = $("zennou").checked;
   var niniYearEff = zennou ? yen(niniYear*0.96) : niniYear;
 
-  var opts={invol:invol, members:members, preschool:preschool, careCount:careCount, under18:under18, selfCare:selfCare, fixedTax:fixedTax};
-  var k1=calcKokuho(cityInfo.rates, kyuyoShotoku(income1), opts);
-  var k2=calcKokuho(cityInfo.rates, kyuyoShotoku(income2), opts);
+  function mkOpts(sal){
+    var o={invol:invol, members:members, preschool:preschool, careCount:careCount, under18:under18, selfCare:selfCare, fixedTax:fixedTax};
+    if(householdMode) o.household={judgeTotal:judgeTotalFor(sal), judgeMembers:members, earners:earners};
+    return o;
+  }
+  var opts1=mkOpts(sal1), opts2=mkOpts(sal2);
+  var k1=calcKokuho(cityInfo.rates, sal1, opts1);
+  var k2=calcKokuho(cityInfo.rates, sal2, opts2);
+  var k1pre=null, k2pre=null;
+  if(householdMode&&k1.red>0){var o1p=Object.assign({},opts1); o1p.redForce=0; k1pre=calcKokuho(cityInfo.rates, sal1, o1p)}
+  if(householdMode&&k2.red>0){var o2p=Object.assign({},opts2); o2p.redForce=0; k2pre=calcKokuho(cityInfo.rates, sal2, o2p)}
 
   function fillYear(nini, koku, niniId, kokuId, subId, diffId, breakId, niniSide, kokuSide, yearLabel){
     $(niniId).innerHTML=fmt(nini)+" <small>/ 年</small>";
@@ -551,6 +627,24 @@ function calc(){
   }
   fillYear(niniYearEff, k1, "y1Nini","y1Koku","y1NiniSub","y1Diff","y1Break","y1NiniSide","y1KokuSide","1年目");
   fillYear(niniYearEff, k2, "y2Nini","y2Koku","y2NiniSub","y2Diff","y2Break","y2NiniSide","y2KokuSide","2年目");
+
+  function diagHtml(k, pre){
+    if(!householdMode && !involCheckOn) return "";
+    var h="";
+    if(householdMode&&k.judgeInfo){
+      var ji=k.judgeInfo;
+      if(k.red>0) h+="<span class='badge hit'>法定軽減 "+(k.red===0.7?"7割":k.red===0.5?"5割":"2割")+"の対象の可能性</span>";
+      else h+="<span class='badge miss'>法定軽減の対象外の見込み</span>";
+      if(invol) h+="<span class='badge info'>非自発的失業の軽減を適用</span>";
+      if(k.red>0&&pre) h+="<div class='pre'>国保の年額：法定軽減前 "+fmt(pre.total)+" → 軽減後 "+fmt(k.total)+"</div>";
+      h+="<div class='basis'>判定所得（世帯合計）"+fmt(ji.total)+"／令和8年度の判定基準：7割 "+fmt(ji.t7)+"以下・5割 "+fmt(ji.t5)+"以下・2割 "+fmt(ji.t2)+"以下（被保険者"+ji.members+"人・給与所得者等"+ji.earners+"人として計算）</div>";
+    } else if(invol){
+      h+="<span class='badge info'>非自発的失業の軽減を適用（給与所得を30%で計算）</span>";
+    }
+    return h;
+  }
+  $("y1Diag").innerHTML=diagHtml(k1,k1pre);
+  $("y2Diag").innerHTML=diagHtml(k2,k2pre);
 
   var totNN=niniYearEff*2, totKK=k1.total+k2.total, totNK=niniYearEff+k2.total;
   $("totNN").innerHTML=fmt(totNN);
@@ -569,9 +663,16 @@ function calc(){
   if(under18Auto)notes.push("18歳以下の人数が未入力のため、未就学児の人数（"+under18+"人）と同じとして計算しています。");
   if(income2Blank)notes.push("2年目の見込み年収が未入力のため、0円（所得なし）として計算しています。");
   if(invol)notes.push("非自発的離職者軽減を適用し、前年の給与所得を30%で計算しています（市区町村への届出が必要です）。");
+  if(invol)notes.push("非自発的離職者軽減の対象期間は、離職日の翌日が属する月から、その月が属する年度の翌年度末まで（最大約2年間）です。このツールでは1年目・2年目の両方に適用して計算していますが、退職の時期によっては2年目の一部が対象期間外となる場合があります。");
+  if(salaryIncomeSelfIn!==null)notes.push("本人の前年の給与所得は、入力された金額（"+fmt(salaryIncomeSelfIn)+"）を使っています（年収からの換算より優先）。");
+  if(householdMode){
+    notes.push("減免の診断は、令和8年度の法定軽減の判定基準による目安です（判定は世帯の合計所得で行います）。最終的な判定はお住まいの市区町村が行います。");
+    notes.push("診断の世帯合計所得は、本人の所得（非自発的失業の軽減が適用される場合は給与所得を30%にした後の額）と世帯主の所得で組み立てています。本人・世帯主以外の家族の所得と、特定同一世帯所属者（後期高齢者医療へ移行した方）の所得・人数は含めていません。");
+    if(salaryCount===null)notes.push("給与所得者等の数が未入力のため、1人として判定しています。");
+  }
   [k1,k2].forEach(function(k,idx){
     var yl=idx===0?"1年目":"2年目";
-    if(k.red>0)notes.push(yl+"の国保は低所得軽減（"+(k.red===0.7?"7割":k.red===0.5?"5割":"2割")+"軽減）が適用されています。");
+    if(k.red>0&&!householdMode)notes.push(yl+"の国保は低所得軽減（"+(k.red===0.7?"7割":k.red===0.5?"5割":"2割")+"軽減）が適用されています。");
     if(k.missing.length)notes.push(yl+"の国保："+k.missing.join("・")+"の料率データがないため、その分は計算に含まれていません。");
     var capMiss=[];
     [["m","医療分"],["s","支援金分"],["c","介護分"],["k","子ども分"]].forEach(function(pr){
@@ -619,7 +720,7 @@ document.addEventListener("DOMContentLoaded",function(){
     var s=num("salaryHelper");
     if(s!==null&&s>0){$("hyojun").value=hyojunFromSalary(s); calc()}
   });
-  ["hyojun","salaryHelper","age","income1","income2","members","careCount","preschool","under18","dependents","fixedAssetTax","reason","zennou",
+  ["hyojun","salaryHelper","age","income1","income2","members","careCount","preschool","under18","dependents","fixedAssetTax","reason","zennou","headIncome","salaryCount","salaryIncomeSelf","involCheck",
    "manMR","manMK","manMH","manMCap","manSR","manSK","manSH","manSCap","manCR","manCK","manCH","manCCap","manKR","manKK","manKH","manKCap","manAM","manAS","manAC"]
    .forEach(function(id){$(id).addEventListener("input",calc); $(id).addEventListener("change",calc)});
   calc();

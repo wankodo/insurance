@@ -113,7 +113,7 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
 <header>
   <div class="wrap">
     <h1>フリーランスの社会保険料 <span class="accent">計算シミュレーター</span></h1>
-    <p>個人事業主・フリーランスが自分で払う「国民年金」と「国民健康保険」の保険料を、あわせて計算します。国民年金は年度ごとの定額、国保はお住まいの自治体の料率（全国1,446自治体収録）で計算します。</p>
+    <p>個人事業主・フリーランスが自分で払う「国民年金」と「国民健康保険」の保険料を、あわせて計算します。国民年金は年度ごとの定額、国保はお住まいの自治体の料率（全国1,446自治体収録）で計算します。世帯の所得を入力すると、国民年金の保険料免除と国保の法定軽減の対象かどうかも、目安として診断します。</p>
   </div>
 </header>
 
@@ -137,9 +137,42 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
     <label class="check"><input type="checkbox" id="penFuka"> 付加年金を付ける（月額400円／1人）</label>
     <p class="penline">国民年金：月額 <span class="amt" id="penMonth">—</span> ／ 年額 <span class="amt" id="penYearAmt">—</span></p>
     <p class="note" id="penNote"></p>
+    <div class="warn" id="penDiag" style="display:none"></div>
     <div class="warn" id="zennoBox">
       <strong>前納割引（令和8年度・日本年金機構公表）</strong><br>
       まとめて前払いすると割引があります。1年前納：現金・クレジットカード 211,220円（3,820円割引）／口座振替 210,530円（4,510円割引）。2年前納：現金・クレジットカード 418,510円（16,010円割引）／口座振替 417,150円（17,370円割引）。6か月前納や口座振替の早割（月60円割引）もあります。上の計算は毎月納付の額で表示しています。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>世帯の情報（減免の診断用・任意）</h2>
+    <p class="note">入力すると、国民年金の保険料免除と国保の法定軽減（7割・5割・2割）について、対象かどうかを目安として診断します。すべて任意入力です。未入力の項目がある場合は、その前提を診断結果に表示します。すべて未入力の場合は診断を行わず、通常の計算のみを行います。</p>
+    <div class="grid">
+      <div class="field">
+        <label for="spouseInc">配偶者の前年の所得（円）</label>
+        <input type="number" id="spouseInc" inputmode="numeric" placeholder="例：500000">
+        <div class="hint">年金の免除判定と、国保の軽減判定（世帯合計所得）に使います。配偶者がいない場合は空欄のままにしてください。</div>
+      </div>
+      <div class="field">
+        <label for="headInc">世帯主の前年の所得（円）</label>
+        <input type="number" id="headInc" inputmode="numeric" placeholder="例：1200000">
+        <div class="hint">本人が世帯主の場合は空欄のままにしてください（本人の所得で判定します）。配偶者が世帯主の場合は、配偶者の欄に入力してこちらは空欄にしてください（二重に数えないため）。</div>
+      </div>
+      <div class="field">
+        <label for="fuyouCount">扶養親族等の数（人）</label>
+        <input type="number" id="fuyouCount" inputmode="numeric" placeholder="例：1">
+        <div class="hint">年金の免除判定に使います。税法上の扶養に入れている配偶者・子どもなどの人数です。空欄なら0人として判定します。</div>
+      </div>
+      <div class="field">
+        <label for="hhMembers">国保の被保険者数（世帯・本人を含む）</label>
+        <input type="number" id="hhMembers" inputmode="numeric" placeholder="例：2">
+        <div class="hint">国保の軽減判定に使う人数です。空欄なら、下の国保欄の「国保に加入する人数」で判定します。</div>
+      </div>
+      <div class="field">
+        <label for="salCount">給与所得者等の数（世帯）</label>
+        <input type="number" id="salCount" inputmode="numeric" placeholder="例：1">
+        <div class="hint">給与収入が55万円を超える方や、一定額を超える公的年金を受けている方の人数です。2人以上いると国保の軽減の判定基準が上がります。空欄なら加算なし（判定は厳しめ）で判定します。</div>
+      </div>
     </div>
   </div>
 
@@ -247,12 +280,14 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
 
   <footer>
     <div class="card">
-      このツールは非公式の個人ツールです。表示される金額は公表資料にもとづく目安で、実際の保険料はお住まいの自治体の条例・年度・世帯の状況（所得の内訳、軽減の適用可否など）により異なります。正確な金額は自治体から届く納付通知書でご確認ください。国民年金の免除・猶予、学生納付特例、国保の非自発的離職者軽減などは対象外です。<br>
+      このツールは非公式の個人ツールです。表示される金額は公表資料にもとづく目安で、実際の保険料はお住まいの自治体の条例・年度・世帯の状況（所得の内訳、軽減の適用可否など）により異なります。正確な金額は自治体から届く納付通知書でご確認ください。国民年金の保険料免除と国保の法定軽減（7割・5割・2割）については、入力した所得をもとに目安の診断を行います（実際の審査では、他の世帯員の所得や各種控除の額なども見るため、診断と結果が異なる場合があります）。納付猶予・学生納付特例・失業等による特例免除と、国保の非自発的離職者軽減は診断の対象外です。<br>
       出典：
       <a href="https://www.nenkin.go.jp/service/kokunen/hokenryo/hokenryo.html" target="_blank" rel="noopener">日本年金機構「国民年金保険料」</a>／
       <a href="https://www.nenkin.go.jp/service/kokunen/hokenryo/zenno.html" target="_blank" rel="noopener">日本年金機構「国民年金保険料の前納」</a>／
+      <a href="https://www.nenkin.go.jp/service/kokunen/menjo/20150428.html" target="_blank" rel="noopener">日本年金機構「国民年金保険料の免除制度・納付猶予制度」</a>／
+      国保の法定軽減の判定基準は、厚生労働省の基準にもとづき自治体の公式案内（さいたま市・函館市など）で確認／
       国保の料率・出典は自治体ごとに結果欄に表示します。<br>
-      国民年金の額・前納割引の確認日：2026-11-18
+      国民年金の額・前納割引の確認日：2026-11-18／免除・軽減の判定基準の確認日：2026-11-18
     </div>
     <p class="credit">制作：andy（わんこ堂）× 熊八 🐾（Muse Spark）</p>
   </footer>
@@ -291,12 +326,23 @@ function hyojunFromSalary(sal){
 /* rates: {m:[r,k,h,cap], s:..., c:..., k:[r,ka,kbase,h,cap], a:{m,s,c}|null} */
 function calcKokuho(rates, salaryIncome, o){
   var deemed = o.invol ? salaryIncome*0.3 : salaryIncome;
-  var judge = deemed;
+  var judge = (o.judgeIncome!==null&&o.judgeIncome!==undefined) ? o.judgeIncome : deemed;
   var N=o.members, P=o.preschool, C=o.careCount, K18=o.under18;
+  var NJ = (o.judgeMembers!==null&&o.judgeMembers!==undefined) ? o.judgeMembers : N;
   var red = 0;
-  if(judge<=430000) red=0.7;
-  else if(judge<=430000+310000*N) red=0.5;
-  else if(judge<=430000+570000*N) red=0.2;
+  if(o.judgeIncome!==null&&o.judgeIncome!==undefined){
+    // 世帯情報がある場合：世帯合計所得＋給与所得者等加算、自治体データの年度の基準額で判定
+    var adj = o.salAdj||0;
+    var per5 = (o.redYear===7) ? 305000 : 310000;
+    var per2 = (o.redYear===7) ? 560000 : 570000;
+    if(judge<=430000+adj) red=0.7;
+    else if(judge<=430000+per5*NJ+adj) red=0.5;
+    else if(judge<=430000+per2*NJ+adj) red=0.2;
+  } else {
+    if(judge<=430000) red=0.7;
+    else if(judge<=430000+310000*N) red=0.5;
+    else if(judge<=430000+570000*N) red=0.2;
+  }
   var base = Math.max(deemed - kisoKojo(deemed), 0);
   var F = o.fixedTax||0;
   function catMedLike(cat, countBasis){
@@ -307,7 +353,7 @@ function calcKokuho(rates, salaryIncome, o){
     var asset = (rates.a&&rates.a.m!==undefined&&countBasis!==null)?0:0;
     return {shotoku:shotoku,kinto:kinto,heito:heito,asset:0,cap:cat[3]};
   }
-  var res={red:red, base:base, deemed:deemed, cats:{}, total:0, missing:[]};
+  var res={red:red, base:base, deemed:deemed, judge:judge, judgeMembers:NJ, salAdj:(o.salAdj||0), cats:{}, total:0, missing:[]};
   // medical
   (function(){
     var cat=rates.m; if(!cat){res.missing.push("医療分");return}
@@ -413,16 +459,67 @@ function breakRows(res){
 }
 
 function calc(){
+  // household info (減免の診断用)
+  var spouseInc=num("spouseInc"), headInc=num("headInc");
+  var fuyou=num("fuyouCount"); if(fuyou===null||fuyou<0)fuyou=0;
+  var hhAny = spouseInc!==null||headInc!==null||num("fuyouCount")!==null||num("hhMembers")!==null||num("salCount")!==null;
+  var ownInc=num("income");
+
   // pension (always computable)
   var yearKey=$("penYear").value;
   var baseM=PENSION[yearKey];
   var persons=num("penPersons"); if(persons===null||persons<1)persons=1;
   var fuka=$("penFuka").checked;
-  var penMonth=(baseM+(fuka?FUKA:0))*persons;
+
+  // --- 国民年金の免除診断（日本年金機構の所得基準による目安） ---
+  var penExempt=null; // {label, pay}
+  var penDiagHtml="";
+  if(ownInc!==null){
+    var kojoApprox=fuyou*380000; // 扶養親族等控除額の近似（扶養1人あたり38万円）。社会保険料控除額等は0とする
+    var tiers=[
+      {label:"全額免除", pay:0, thr:(fuyou+1)*350000+320000},
+      {label:"4分の3免除", pay:0.25, thr:880000+kojoApprox},
+      {label:"半額免除", pay:0.5, thr:1280000+kojoApprox},
+      {label:"4分の1免除", pay:0.75, thr:1680000+kojoApprox}
+    ];
+    var judged=[["本人",ownInc]];
+    if(spouseInc!==null)judged.push(["配偶者",spouseInc]);
+    if(headInc!==null)judged.push(["世帯主",headInc]);
+    for(var ti=0;ti<tiers.length;ti++){
+      var okAll=true;
+      for(var ji=0;ji<judged.length;ji++){ if(judged[ji][1]>tiers[ti].thr){okAll=false;break} }
+      if(okAll){penExempt=tiers[ti];break}
+    }
+    var partialNotes=[];
+    if(spouseInc===null)partialNotes.push("配偶者の所得が未入力のため、配偶者がいる場合は実際の判定と異なる場合があります");
+    if(headInc===null)partialNotes.push("世帯主の所得が未入力のため、世帯主は本人として判定しています");
+    if(penExempt){
+      penDiagHtml="<strong>国民年金の免除診断："+penExempt.label+"の対象の目安です。</strong><br>"
+        +"前年の所得が日本年金機構の所得基準の範囲内でした。本人の保険料は、免除後の納付額で計算しています。"
+        +(fuka?"免除の承認を受けている間は付加保険料を納めることができないため、本人の付加分（月額400円）は計算から外しています。":"");
+    } else {
+      penDiagHtml="<strong>国民年金の免除診断：免除の対象外の見込みです。</strong><br>"
+        +"入力された所得では、日本年金機構の所得基準（最も緩い4分の1免除の基準）を超えています。";
+    }
+    penDiagHtml+="<br>※この診断は目安です。一部免除の基準に使う扶養親族等控除額は扶養1人あたり38万円で近似し、社会保険料控除額等は0として計算しているため、実際の基準はもう少し高くなる場合が多く、この診断は厳しめ（対象になりにくく）に出ます。失業等による特例免除、納付猶予（50歳未満の方）、学生納付特例はこの診断では判定していません。最終的な判定は年金事務所・市区町村の窓口でご確認ください。";
+    if(partialNotes.length)penDiagHtml+="<br>※"+partialNotes.join("。")+"。";
+  }
+  var selfPay = penExempt ? Math.round(baseM*penExempt.pay/10)*10 : baseM;
+  var fukaCount = fuka ? Math.max(persons-(penExempt?1:0),0) : 0;
+  var penMonth=selfPay+baseM*(persons-1)+FUKA*fukaCount;
   var penYearAmt=penMonth*12;
   $("penMonth").textContent=fmt(penMonth);
   $("penYearAmt").textContent=fmt(penYearAmt);
-  $("penNote").textContent="定額 月額"+fmt(baseM)+"（令和"+yearKey+"年度）"+(fuka?"＋付加 月額"+fmt(FUKA):"")+" × "+persons+"人分。令和9年度は月額18,290円の予定です。";
+  if(!penExempt){
+    $("penNote").textContent="定額 月額"+fmt(baseM)+"（令和"+yearKey+"年度）"+(fuka?"＋付加 月額"+fmt(FUKA):"")+" × "+persons+"人分。令和9年度は月額18,290円の予定です。";
+  } else {
+    $("penNote").textContent="定額 月額"+fmt(baseM)+"（令和"+yearKey+"年度）。本人分は"+penExempt.label+"の診断により月額"+fmt(selfPay)
+      +(persons>1?"、他の"+(persons-1)+"人分は定額":"")
+      +(fuka&&fukaCount>0?"、付加 月額"+fmt(FUKA)+"×"+fukaCount+"人分":"")
+      +"で計算しています。令和9年度は月額18,290円の予定です。";
+  }
+  var pdEl=$("penDiag");
+  if(penDiagHtml){pdEl.innerHTML=penDiagHtml; pdEl.style.display="block"} else {pdEl.innerHTML=""; pdEl.style.display="none"}
   $("zennoBox").style.display = yearKey==="8" ? "block" : "none";
 
   // kokuho
@@ -460,7 +557,17 @@ function calc(){
   if(preschool>members)preschool=members;
   var fixedTax=num("fixedAssetTax")||0;
 
-  var opts={invol:false, members:members, preschool:preschool, careCount:careCount, under18:under18, selfCare:selfCare, fixedTax:fixedTax};
+  var judgeIncome=null, salAdj=0, redYear=8, judgeMembers=null;
+  if(hhAny){
+    judgeIncome=income+(spouseInc||0)+(headInc||0);
+    var scN=num("salCount");
+    salAdj=(scN!==null&&scN>=2)?(scN-1)*100000:0;
+    redYear=cityInfo.rec?cityInfo.rec[2]:8;
+    var hmN=num("hhMembers");
+    judgeMembers=(hmN!==null&&hmN>=1)?hmN:null;
+  }
+  var opts={invol:false, members:members, preschool:preschool, careCount:careCount, under18:under18, selfCare:selfCare, fixedTax:fixedTax,
+            judgeIncome:judgeIncome, salAdj:salAdj, redYear:redYear, judgeMembers:judgeMembers};
   var res=calcKokuho(cityInfo.rates, income, opts);
 
   var totYear=res.total+penYearAmt;
@@ -473,7 +580,16 @@ function calc(){
   $("kokuBreak").innerHTML=breakRows(res);
 
   var notes=[];
-  if(res.red>0)notes.push("国保は低所得軽減（"+(res.red===0.7?"7割":res.red===0.5?"5割":"2割")+"軽減）が適用されています。");
+  var redLabel=(res.red===0.7?"7割":res.red===0.5?"5割":"2割");
+  if(hhAny){
+    var diagTxt="国保の軽減診断：世帯合計所得 "+fmt(res.judge)+"（入力された本人・配偶者・世帯主の所得の合計）・被保険者数 "+res.judgeMembers+"人で判定し、";
+    if(res.red>0)diagTxt+="法定軽減（"+redLabel+"軽減）の対象の目安です。均等割・平等割に軽減を適用して計算しています。";
+    else diagTxt+="法定軽減の対象外の見込みです。";
+    diagTxt+="判定には"+(redYear===7?"令和7年度":"令和8年度")+"の基準額を使っています。世帯合計には入力した人の所得だけが含まれ、同居する親・子など他の世帯員の所得は含まれていません。実際の判定では世帯全員の所得や、65歳以上の年金所得の特例なども見るため、結果が異なる場合があります。最終的な判定はお住まいの自治体でご確認ください。";
+    notes.push(diagTxt);
+  } else if(res.red>0){
+    notes.push("国保は低所得軽減（"+redLabel+"軽減）が適用されています。");
+  }
   if(res.missing.length)notes.push("国保："+res.missing.join("・")+"の料率データがないため、その分は計算に含まれていません。");
   var capMiss=[];
   [["m","医療分"],["s","支援金分"],["c","介護分"],["k","子ども分"]].forEach(function(pr){
@@ -503,7 +619,7 @@ function calc(){
   prefs.forEach(function(p){ var o=document.createElement("option"); o.value=p; o.textContent=p; sel.appendChild(o); });
 })();
 
-["penYear","penPersons","penFuka","pref","city","income","age","members","careCount","preschool","under18","fixedAssetTax",
+["penYear","penPersons","penFuka","pref","city","income","age","members","careCount","preschool","under18","fixedAssetTax","spouseInc","headInc","fuyouCount","hhMembers","salCount",
  "manMR","manMK","manMH","manMCap","manSR","manSK","manSH","manSCap","manCR","manCK","manCH","manCCap","manKR","manKK","manKH","manKCap","manAM","manAS","manAC"
 ].forEach(function(id){
   var el=$(id); if(!el)return;
