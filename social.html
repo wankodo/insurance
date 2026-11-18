@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>社会保険料計算シミュレーター</title>
-<meta name="description" content="月給と賞与から、健康保険・厚生年金・雇用保険・労災保険の本人負担と会社負担を計算する無料ツール。協会けんぽ・組合健保（主要35組合＋料率の手入力）対応、令和8年度の料率。">
+<meta name="description" content="月給と賞与から、健康保険・厚生年金・雇用保険・労災保険の本人負担と会社負担を計算する無料ツール。協会けんぽ・組合健保（主要40組合＋料率の手入力）対応、令和8年度の料率。">
 <style>
 :root{
   --navy:#12283f; --navy2:#0b1a2c; --amber:#f2a007; --amber-d:#c77f02;
@@ -45,6 +45,7 @@ footer .card{font-size:12.5px;color:var(--mut)}
 .credit{text-align:center;color:var(--mut);font-size:12px;margin:10px 0 30px}
 a{color:var(--navy)}
 .hidden{display:none}
+.guidebtn{margin-top:10px;padding:10px 16px;border:1px solid var(--amber-d);border-radius:8px;background:var(--amber);color:#14273c;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
 #srcInfo{overflow-wrap:anywhere}
 .sitebar{background:var(--navy2);border-bottom:2px solid var(--amber)}
 .sitebar .sb-in{max-width:980px;margin:0 auto;padding:7px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -69,6 +70,7 @@ html[data-theme="andy"] :is(.card h2,.card h3,.tool-card h2,.today .word,.today.
 /* 白・淡色の面は背景と文字色をセットでダークパネル化 */
 html[data-theme="andy"] :is(.suggest,.chip,.plan,.rank li,.dir-cell,.hexbox.sub,.result .action,.checks label,.badges span,.rank-num,.prod .cond,.prod .nodatabox,.chips button,.tabs button,.cal-nav button,.btn-ghost,.btn.ghost,.presets button,.lp-line .lp,button.dbtn,.plan.dim){background:#0a1e30;color:#d8f1f6;border-color:rgba(110,205,230,.32)}
 html[data-theme="andy"] .btn-del{background:#0a1e30;border-color:rgba(110,205,230,.32)}
+html[data-theme="andy"] .guidebtn{background:#0a1e30;color:#d8f1f6;border-color:rgba(110,205,230,.42)}
 html[data-theme="andy"] .sumcard.white{background:#0a1e30;color:#d8f1f6}
 html[data-theme="andy"] .seg button{background:#0a1e30;color:#d8f1f6;border-color:rgba(110,205,230,.32)}
 html[data-theme="andy"] .seg button.active{background:#1d4568;color:#fff}
@@ -100,7 +102,7 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
 <header>
   <div class="wrap">
     <h1>社会保険料 <span class="accent">計算シミュレーター</span></h1>
-    <p>月給と賞与を入れるだけで、健康保険・厚生年金・雇用保険・労災保険の「本人負担」と「会社負担」が分かります。協会けんぽ／組合健保（主要35組合＋料率の手入力）・令和8年度の料率で計算します。</p>
+    <p>月給と賞与を入れるだけで、健康保険・厚生年金・雇用保険・労災保険の「本人負担」と「会社負担」が分かります。協会けんぽ／組合健保（主要40組合＋料率の手入力）・令和8年度の料率で計算します。</p>
   </div>
 </header>
 
@@ -144,8 +146,9 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
         <select id="pref"><option value="北海道">北海道（10.28％）</option><option value="青森県">青森県（9.85％）</option><option value="岩手県">岩手県（9.51％）</option><option value="宮城県">宮城県（10.10％）</option><option value="秋田県">秋田県（10.01％）</option><option value="山形県">山形県（9.75％）</option><option value="福島県">福島県（9.50％）</option><option value="茨城県">茨城県（9.52％）</option><option value="栃木県">栃木県（9.82％）</option><option value="群馬県">群馬県（9.68％）</option><option value="埼玉県">埼玉県（9.67％）</option><option value="千葉県">千葉県（9.73％）</option><option value="東京都" selected>東京都（9.85％）</option><option value="神奈川県">神奈川県（9.92％）</option><option value="新潟県">新潟県（9.21％）</option><option value="富山県">富山県（9.59％）</option><option value="石川県">石川県（9.70％）</option><option value="福井県">福井県（9.71％）</option><option value="山梨県">山梨県（9.55％）</option><option value="長野県">長野県（9.63％）</option><option value="岐阜県">岐阜県（9.80％）</option><option value="静岡県">静岡県（9.61％）</option><option value="愛知県">愛知県（9.93％）</option><option value="三重県">三重県（9.77％）</option><option value="滋賀県">滋賀県（9.88％）</option><option value="京都府">京都府（9.89％）</option><option value="大阪府">大阪府（10.13％）</option><option value="兵庫県">兵庫県（10.12％）</option><option value="奈良県">奈良県（9.91％）</option><option value="和歌山県">和歌山県（10.06％）</option><option value="鳥取県">鳥取県（9.86％）</option><option value="島根県">島根県（9.94％）</option><option value="岡山県">岡山県（10.05％）</option><option value="広島県">広島県（9.78％）</option><option value="山口県">山口県（10.15％）</option><option value="徳島県">徳島県（10.24％）</option><option value="香川県">香川県（10.02％）</option><option value="愛媛県">愛媛県（9.98％）</option><option value="高知県">高知県（10.05％）</option><option value="福岡県">福岡県（10.11％）</option><option value="佐賀県">佐賀県（10.55％）</option><option value="長崎県">長崎県（10.06％）</option><option value="熊本県">熊本県（10.08％）</option><option value="大分県">大分県（10.08％）</option><option value="宮崎県">宮崎県（9.77％）</option><option value="鹿児島県">鹿児島県（10.13％）</option><option value="沖縄県">沖縄県（9.44％）</option></select>
       </div>
       <div id="unionWrap" class="hidden">
-        <label class="flabel" for="union">健康保険組合（主要35組合・令和8年度の公式料率）</label>
+        <label class="flabel" for="union">健康保険組合（主要40組合・令和8年度の公式料率）</label>
         <select id="union"></select>
+        <p class="note">リストにない組合の方は「組合健保（料率を手入力）」モードで計算できます。「（未収録・案内）」と付いた組合は、選ぶと案内が表示されます。</p>
       </div>
       <div>
         <label class="flabel" for="empCat">雇用保険の事業の種類</label>
@@ -184,6 +187,14 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
 
   <div id="emptyMsg" class="warn">月給と年齢を入れると、ここに結果が出ます。</div>
 
+  <div id="unionGuide" class="card hidden">
+    <h2 id="guideName">未収録の組合</h2>
+    <p>この組合の料率は、公式サイトで数値を確認できなかったため、このツールには未収録です。</p>
+    <p>保険証に記載の組合の公式サイトや給与明細で料率（健康保険料率・介護保険料率と、それぞれの本人負担割合）を確認のうえ、「健康保険の加入先」で「組合健保（料率を手入力）」を選ぶと計算できます。</p>
+    <p id="guideLink" class="note hidden"></p>
+    <button type="button" class="guidebtn" id="guideToManual">手入力モードに切り替える</button>
+  </div>
+
   <div id="result" class="hidden">
     <div class="biggrid">
       <div class="bigbox">
@@ -220,7 +231,7 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
   <div class="card">
     <h2>計算の前提</h2>
     <ul style="margin:6px 0;padding-left:20px">
-      <li style="margin:5px 0;font-size:14px">健康保険は<strong>協会けんぽ</strong>（都道府県別）／<strong>組合健保</strong>（主要35組合の公式料率）／<strong>組合健保（料率の手入力）</strong>から選べます。組合健保は料率・介護保険料率・労使の負担割合が組合ごとに異なるため、リストにない組合は手入力モードを使ってください。</li>
+      <li style="margin:5px 0;font-size:14px">健康保険は<strong>協会けんぽ</strong>（都道府県別）／<strong>組合健保</strong>（主要40組合の公式料率）／<strong>組合健保（料率の手入力）</strong>から選べます。組合健保は料率・介護保険料率・労使の負担割合が組合ごとに異なるため、リストにない組合は手入力モードを使ってください。</li>
       <li style="margin:5px 0;font-size:14px">月給は「その月の総支給額」として等級表に当てはめ、標準報酬月額を求めています。実際の標準報酬月額は、入社時の資格取得時決定や4〜6月の定時決定などで決まるため、この結果は目安です。</li>
       <li style="margin:5px 0;font-size:14px">賞与は1,000円未満を切り捨てた標準賞与額で計算します（健康保険は年度累計573万円、厚生年金は1回150万円が上限）。</li>
       <li style="margin:5px 0;font-size:14px">雇用保険料率は令和8年度（2026年4月〜2027年3月）、労災保険料率は令和6年4月改定（令和8年度も同率）の値です。</li>
@@ -291,9 +302,35 @@ var UNIONS = {
   "mazda": {name: "マツダ健康保険組合", h: [9500, 3800], c: [1740, 870], s: [230, 115], src: "https://mkenpo.mazda.co.jp/wp-content/uploads/getugakuhyou_2026.pdf"},
   "subaru": {name: "SUBARU健康保険組合", h: [9000, 3000], c: [1860, 930], s: [230, 115], src: "https://www.subarukenpo.jp/member/outline/fee.html"},
   "isuzu": {name: "いすゞ自動車健康保険組合", h: [9000, 3680], c: [1500, 750], s: [230, 115], src: "https://isuzukenpo.or.jp/shikumi/pdf/getugakuhyou.pdf"},
-  "shokki": {name: "豊田自動織機健康保険組合", h: [9500, 3277], c: [1720, 860], s: [230, 115], src: "https://www.shokki-kenpo.jp/intro"}
+  "shokki": {name: "豊田自動織機健康保険組合", h: [9500, 3277], c: [1720, 860], s: [230, 115], src: "https://www.shokki-kenpo.jp/intro"},
+  "suzuki": {name: "スズキ健康保険組合", h: [9100, 4027], c: [2050, 1025], s: [230, 115], src: "https://www.suzuki-kenpo.or.jp/member/outline/fee.html"},
+  "mhi":   {name: "三菱重工健康保険組合", h: [8600, 3460], c: [1800, 900], s: [230, 115], src: "https://www.mhi.or.jp/contents/topics/2026/resources/getugakuhyou.pdf"},
+  "mmc":   {name: "三菱自動車健康保険組合", h: [9000, 3690], c: [1800, 900], s: [230, 115], src: "http://mitsubishi-motors-kenpo.or.jp/wp-content/uploads/getsugakuhyou.pdf"},
+  "ntt":   {name: "NTT健康保険組合", h: [9270, 4560], c: [1540, 770], s: [230, 115], src: "https://www.nttkenpo.jp/member/outline/fee.html"},
+  "daiichiseimei": {name: "第一生命健康保険組合", h: [10000, 4500], c: [1800, 900], s: [230, 115], src: "http://www.daiichiseimei-kenpo.or.jp/UploadedFiles/outline/fee.pdf"}
 };
 var SHIEN_U = 230, SHIEN_EMP_U = 115; /* 子ども・子育て支援金（被用者保険一律・折半）0.001％単位 */
+/* 未収録の主要組合（案内エントリ）。料率は公式サイトで数値を確認できなかったため収録していない。
+   url は調査記録（kumiai-kenpo-research.md、確認日2026-11-19）で判明した公式URLのみ。推測でURLは作らない */
+var UNION_GUIDE = {
+  "g_jfe": {name: "JFE健康保険組合", url: "https://www.kenpo.gr.jp/jfekenpo/j_in/outline/outline.pdf"},
+  "g_toshiba": {name: "東芝健康保険組合"},
+  "g_mizuho": {name: "みずほ健康保険組合"},
+  "g_resona": {name: "りそな健康保険組合"},
+  "g_sevenandi": {name: "セブン＆アイ・ホールディングス健康保険組合"},
+  "g_murata": {name: "村田製作所健康保険組合"},
+  "g_nissay": {name: "日本生命健康保険組合"},
+  "g_tepco": {name: "東京電力健康保険組合"},
+  "g_smbc": {name: "三井住友銀行健康保険組合"},
+  "g_nomura": {name: "野村健康保険組合"},
+  "g_kepco": {name: "関西電力健康保険組合"},
+  "g_osakagas": {name: "大阪瓦斯健康保険組合"},
+  "g_toyota": {name: "トヨタ自動車健康保険組合"},
+  "g_honda": {name: "ホンダ健康保険組合"},
+  "g_aisin": {name: "アイシン健康保険組合"},
+  "g_kyocera": {name: "京セラ健康保険組合"},
+  "g_sharp": {name: "シャープ健康保険組合"}
+};
 
 function gradeOf(salary, minStd, maxStd) {
   var found = null;
@@ -350,6 +387,26 @@ function calc() {
   document.getElementById("prefWrap").classList.toggle("hidden", mode !== "kyokai");
   document.getElementById("unionWrap").classList.toggle("hidden", mode !== "union");
   document.getElementById("manualWrap").classList.toggle("hidden", mode !== "manual");
+
+  /* 未収録の組合（案内エントリ）が選ばれたら、計算ではなく案内を表示する */
+  var guide = document.getElementById("unionGuide");
+  var guideObj = (mode === "union") ? (UNION_GUIDE[document.getElementById("union").value] || null) : null;
+  if (guideObj) {
+    document.getElementById("guideName").textContent = guideObj.name + "（未収録）";
+    var gl = document.getElementById("guideLink");
+    if (guideObj.url) {
+      gl.innerHTML = "組合の公式サイト・公式資料：<a href=\"" + guideObj.url + "\" target=\"_blank\" rel=\"noopener\">" + guideObj.url + "</a>";
+      gl.classList.remove("hidden");
+    } else {
+      gl.innerHTML = "";
+      gl.classList.add("hidden");
+    }
+    result.classList.add("hidden");
+    empty.classList.add("hidden");
+    guide.classList.remove("hidden");
+    return;
+  }
+  guide.classList.add("hidden");
 
   var care = (!isNaN(age) && age >= 40 && age <= 64);
   var ready = (salary > 0) && !isNaN(age);
@@ -459,6 +516,19 @@ function calc() {
     o.value = k;
     o.textContent = u.name + "（一般" + fmtPct(u.h[0]) + "％・介護" + fmtPct(u.c[0]) + "％）";
     sel.appendChild(o);
+  });
+  var grp = document.createElement("optgroup");
+  grp.label = "未収録の組合（選ぶと案内を表示）";
+  Object.keys(UNION_GUIDE).forEach(function(k) {
+    var o = document.createElement("option");
+    o.value = k;
+    o.textContent = UNION_GUIDE[k].name + "（未収録・案内）";
+    grp.appendChild(o);
+  });
+  sel.appendChild(grp);
+  document.getElementById("guideToManual").addEventListener("click", function() {
+    document.getElementById("insurer").value = "manual";
+    calc();
   });
 })();
 
