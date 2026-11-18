@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>社会保険料計算シミュレーター</title>
-<meta name="description" content="月給と賞与から、健康保険・厚生年金・雇用保険・労災保険の本人負担と会社負担を計算する無料ツール。協会けんぽ前提、令和8年度の料率対応。">
+<meta name="description" content="月給と賞与から、健康保険・厚生年金・雇用保険・労災保険の本人負担と会社負担を計算する無料ツール。協会けんぽ・組合健保（主要26組合＋料率の手入力）対応、令和8年度の料率。">
 <style>
 :root{
   --navy:#12283f; --navy2:#0b1a2c; --amber:#f2a007; --amber-d:#c77f02;
@@ -45,6 +45,7 @@ footer .card{font-size:12.5px;color:var(--mut)}
 .credit{text-align:center;color:var(--mut);font-size:12px;margin:10px 0 30px}
 a{color:var(--navy)}
 .hidden{display:none}
+#srcInfo{overflow-wrap:anywhere}
 .sitebar{background:var(--navy2);border-bottom:2px solid var(--amber)}
 .sitebar .sb-in{max-width:980px;margin:0 auto;padding:7px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .sitebar a{color:#fff;text-decoration:none;font-size:13px}
@@ -99,7 +100,7 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
 <header>
   <div class="wrap">
     <h1>社会保険料 <span class="accent">計算シミュレーター</span></h1>
-    <p>月給と賞与を入れるだけで、健康保険・厚生年金・雇用保険・労災保険の「本人負担」と「会社負担」が分かります。協会けんぽ前提・令和8年度の料率で計算します。</p>
+    <p>月給と賞与を入れるだけで、健康保険・厚生年金・雇用保険・労災保険の「本人負担」と「会社負担」が分かります。協会けんぽ／組合健保（主要26組合＋料率の手入力）・令和8年度の料率で計算します。</p>
   </div>
 </header>
 
@@ -131,8 +132,20 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
         </select>
       </div>
       <div>
+        <label class="flabel" for="insurer">健康保険の加入先</label>
+        <select id="insurer">
+          <option value="kyokai" selected>協会けんぽ</option>
+          <option value="union">組合健保（リストから選択）</option>
+          <option value="manual">組合健保（料率を手入力）</option>
+        </select>
+      </div>
+      <div id="prefWrap">
         <label class="flabel" for="pref">都道府県（事業所の所在地・協会けんぽ）</label>
         <select id="pref"><option value="北海道">北海道（10.28％）</option><option value="青森県">青森県（9.85％）</option><option value="岩手県">岩手県（9.51％）</option><option value="宮城県">宮城県（10.10％）</option><option value="秋田県">秋田県（10.01％）</option><option value="山形県">山形県（9.75％）</option><option value="福島県">福島県（9.50％）</option><option value="茨城県">茨城県（9.52％）</option><option value="栃木県">栃木県（9.82％）</option><option value="群馬県">群馬県（9.68％）</option><option value="埼玉県">埼玉県（9.67％）</option><option value="千葉県">千葉県（9.73％）</option><option value="東京都" selected>東京都（9.85％）</option><option value="神奈川県">神奈川県（9.92％）</option><option value="新潟県">新潟県（9.21％）</option><option value="富山県">富山県（9.59％）</option><option value="石川県">石川県（9.70％）</option><option value="福井県">福井県（9.71％）</option><option value="山梨県">山梨県（9.55％）</option><option value="長野県">長野県（9.63％）</option><option value="岐阜県">岐阜県（9.80％）</option><option value="静岡県">静岡県（9.61％）</option><option value="愛知県">愛知県（9.93％）</option><option value="三重県">三重県（9.77％）</option><option value="滋賀県">滋賀県（9.88％）</option><option value="京都府">京都府（9.89％）</option><option value="大阪府">大阪府（10.13％）</option><option value="兵庫県">兵庫県（10.12％）</option><option value="奈良県">奈良県（9.91％）</option><option value="和歌山県">和歌山県（10.06％）</option><option value="鳥取県">鳥取県（9.86％）</option><option value="島根県">島根県（9.94％）</option><option value="岡山県">岡山県（10.05％）</option><option value="広島県">広島県（9.78％）</option><option value="山口県">山口県（10.15％）</option><option value="徳島県">徳島県（10.24％）</option><option value="香川県">香川県（10.02％）</option><option value="愛媛県">愛媛県（9.98％）</option><option value="高知県">高知県（10.05％）</option><option value="福岡県">福岡県（10.11％）</option><option value="佐賀県">佐賀県（10.55％）</option><option value="長崎県">長崎県（10.06％）</option><option value="熊本県">熊本県（10.08％）</option><option value="大分県">大分県（10.08％）</option><option value="宮崎県">宮崎県（9.77％）</option><option value="鹿児島県">鹿児島県（10.13％）</option><option value="沖縄県">沖縄県（9.44％）</option></select>
+      </div>
+      <div id="unionWrap" class="hidden">
+        <label class="flabel" for="union">健康保険組合（主要26組合・令和8年度の公式料率）</label>
+        <select id="union"></select>
       </div>
       <div>
         <label class="flabel" for="empCat">雇用保険の事業の種類</label>
@@ -143,9 +156,30 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
         </select>
       </div>
     </div>
+    <div id="manualWrap" class="hidden">
+      <div class="grid2">
+        <div>
+          <label class="flabel" for="manHealth">健康保険料率（総率・％）</label>
+          <input type="number" id="manHealth" inputmode="decimal" min="0" step="0.01" placeholder="例：9.27">
+        </div>
+        <div>
+          <label class="flabel" for="manHealthShare">健康保険の本人負担割合（％）</label>
+          <input type="number" id="manHealthShare" inputmode="decimal" min="0" max="100" step="0.1" value="50">
+        </div>
+        <div>
+          <label class="flabel" for="manCare">介護保険料率（総率・％）</label>
+          <input type="number" id="manCare" inputmode="decimal" min="0" step="0.01" placeholder="例：1.80">
+        </div>
+        <div>
+          <label class="flabel" for="manCareShare">介護保険の本人負担割合（％）</label>
+          <input type="number" id="manCareShare" inputmode="decimal" min="0" max="100" step="0.1" value="50">
+        </div>
+      </div>
+      <p class="note">料率は、保険証に書かれた健康保険組合の公式サイト（保険料率のページ）や給与明細で確認してください。本人負担割合が分からない場合は折半（50％）のままで目安になります。子ども・子育て支援金は被用者保険で一律0.23％・労使折半のため、自動で加算します。</p>
+    </div>
     <label class="flabel" for="rosai">業種（労災保険料率・令和6年4月改定）</label>
     <select id="rosai"><optgroup label="林業・漁業・鉱業"><option value="52">林業（52/1,000）</option><option value="18">海面漁業（定置網・魚類養殖を除く）（18/1,000）</option><option value="37">定置網漁業又は海面魚類養殖業（37/1,000）</option><option value="88">金属鉱業・非金属鉱業（石灰石等を除く）又は石炭鉱業（88/1,000）</option><option value="13">石灰石鉱業又はドロマイト鉱業（13/1,000）</option><option value="2.5">原油又は天然ガス鉱業（2.5/1,000）</option><option value="37">採石業（37/1,000）</option><option value="26">その他の鉱業（26/1,000）</option></optgroup><optgroup label="建設事業"><option value="34">水力発電施設、ずい道等新設事業（34/1,000）</option><option value="11">道路新設事業（11/1,000）</option><option value="9">舗装工事業（9/1,000）</option><option value="9">鉄道又は軌道新設事業（9/1,000）</option><option value="9.5">建築事業（既設建築物設備工事業を除く）（9.5/1,000）</option><option value="12">既設建築物設備工事業（12/1,000）</option><option value="6">機械装置の組立て又は据付けの事業（6/1,000）</option><option value="15">その他の建設事業（15/1,000）</option></optgroup><optgroup label="製造業"><option value="5.5">食料品製造業（5.5/1,000）</option><option value="4">繊維工業又は繊維製品製造業（4/1,000）</option><option value="13">木材又は木製品製造業（13/1,000）</option><option value="7">パルプ又は紙製造業（7/1,000）</option><option value="3.5">印刷又は製本業（3.5/1,000）</option><option value="4.5">化学工業（4.5/1,000）</option><option value="6">ガラス又はセメント製造業（6/1,000）</option><option value="13">コンクリート製造業（13/1,000）</option><option value="17">陶磁器製品製造業（17/1,000）</option><option value="23">その他の窯業又は土石製品製造業（23/1,000）</option><option value="6.5">金属精錬業（非鉄金属精錬業を除く）（6.5/1,000）</option><option value="7">非鉄金属精錬業（7/1,000）</option><option value="5">金属材料品製造業（鋳物業を除く）（5/1,000）</option><option value="16">鋳物業（16/1,000）</option><option value="9">金属製品製造業又は金属加工業（一部を除く）（9/1,000）</option><option value="6.5">洋食器、刃物、手工具又は一般金物製造業（めっき業を除く）（6.5/1,000）</option><option value="6.5">めっき業（6.5/1,000）</option><option value="5">機械器具製造業（一部を除く）（5/1,000）</option><option value="3">電気機械器具製造業（3/1,000）</option><option value="4">輸送用機械器具製造業（船舶を除く）（4/1,000）</option><option value="23">船舶製造又は修理業（23/1,000）</option><option value="2.5">計量器、光学機械、時計等製造業（2.5/1,000）</option><option value="3.5">貴金属製品、装身具、皮革製品等製造業（3.5/1,000）</option><option value="6">その他の製造業（6/1,000）</option></optgroup><optgroup label="運輸業・電気ガス水道"><option value="4">交通運輸事業（4/1,000）</option><option value="8.5">貨物取扱事業（港湾関係を除く）（8.5/1,000）</option><option value="9">港湾貨物取扱事業（港湾荷役業を除く）（9/1,000）</option><option value="12">港湾荷役業（12/1,000）</option><option value="3">電気、ガス、水道又は熱供給の事業（3/1,000）</option></optgroup><optgroup label="その他の事業"><option value="13">農業又は海面漁業以外の漁業（13/1,000）</option><option value="13">清掃、火葬又はと畜の事業（13/1,000）</option><option value="6">ビルメンテナンス業（6/1,000）</option><option value="6.5">倉庫業、警備業、消毒又は害虫駆除の事業又はゴルフ場の事業（6.5/1,000）</option><option value="2.5">通信業、放送業、新聞業又は出版業（2.5/1,000）</option><option value="3">卸売業・小売業、飲食店又は宿泊業（3/1,000）</option><option value="2.5">金融業、保険業又は不動産業（2.5/1,000）</option><option value="3" selected>その他の各種事業（3/1,000）</option><option value="42">船舶所有者の事業（42/1,000）</option></optgroup></select>
-    <p class="note">40歳〜64歳の方は、健康保険に介護保険分（1.62％）が自動で上乗せされます。労災保険は会社が全額負担する保険です。</p>
+    <p class="note">40歳〜64歳の方は、健康保険に介護保険分が自動で上乗せされます（協会けんぽは1.62％、組合健保は組合ごとの料率）。労災保険は会社が全額負担する保険です。</p>
   </div>
 
   <div id="emptyMsg" class="warn">月給と年齢を入れると、ここに結果が出ます。</div>
@@ -172,6 +206,7 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
     <div class="card">
       <h2>内訳</h2>
       <p class="note" id="stdInfo"></p>
+      <p class="note" id="srcInfo"></p>
       <table>
         <thead>
           <tr><th>保険</th><th>本人（月）</th><th>会社（月）</th><th>本人（年）</th><th>会社（年）</th></tr>
@@ -185,7 +220,7 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
   <div class="card">
     <h2>計算の前提</h2>
     <ul style="margin:6px 0;padding-left:20px">
-      <li style="margin:5px 0;font-size:14px">健康保険は<strong>協会けんぽ</strong>前提です。健康保険組合（組合健保）に加入している会社は、料率も介護保険料率も組合ごとに異なります。</li>
+      <li style="margin:5px 0;font-size:14px">健康保険は<strong>協会けんぽ</strong>（都道府県別）／<strong>組合健保</strong>（主要26組合の公式料率）／<strong>組合健保（料率の手入力）</strong>から選べます。組合健保は料率・介護保険料率・労使の負担割合が組合ごとに異なるため、リストにない組合は手入力モードを使ってください。</li>
       <li style="margin:5px 0;font-size:14px">月給は「その月の総支給額」として等級表に当てはめ、標準報酬月額を求めています。実際の標準報酬月額は、入社時の資格取得時決定や4〜6月の定時決定などで決まるため、この結果は目安です。</li>
       <li style="margin:5px 0;font-size:14px">賞与は1,000円未満を切り捨てた標準賞与額で計算します（健康保険は年度累計573万円、厚生年金は1回150万円が上限）。</li>
       <li style="margin:5px 0;font-size:14px">雇用保険料率は令和8年度（2026年4月〜2027年3月）、労災保険料率は令和6年4月改定（令和8年度も同率）の値です。</li>
@@ -201,8 +236,9 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
       <a href="https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/20200825.files/R08ryougaku.pdf" target="_blank" rel="noopener">日本年金機構「厚生年金保険料額表（令和8年度版）」</a>／
       <a href="https://www.nenkin.go.jp/section/faq/kounen/hokenryo/shoyokeisan.html" target="_blank" rel="noopener">日本年金機構「賞与にかかる保険料」</a>／
       <a href="https://jsite.mhlw.go.jp/ehime-roudoukyoku/content/contents/002602395.pdf" target="_blank" rel="noopener">厚生労働省「令和8年度 雇用保険料率のご案内」</a>／
-      <a href="https://jsite.mhlw.go.jp/kanagawa-roudoukyoku/hourei_seido_tetsuzuki/roudou_hoken/hourei_seido/2024_00004.html" target="_blank" rel="noopener">神奈川労働局「労災保険率（令和6年4月1日改定）」</a><br>
-      料率・ルール確認日：2026-11-17
+      <a href="https://jsite.mhlw.go.jp/kanagawa-roudoukyoku/hourei_seido_tetsuzuki/roudou_hoken/hourei_seido/2024_00004.html" target="_blank" rel="noopener">神奈川労働局「労災保険率（令和6年4月1日改定）」</a>／
+      組合健保の料率は各健康保険組合の公式サイト（保険料率ページ。利用中の組合の出典は結果画面に表示）<br>
+      料率・ルール確認日：2026-11-17（組合健保データ：2026-11-19）
     </div>
     <p class="credit">制作：andy（わんこ堂）× 熊八 🐾（Muse Spark）</p>
   </footer>
@@ -218,6 +254,37 @@ var EMP_RATES = {
   const: {emp: 6, er: 10.5}
 };
 var CARE_BP = 162, CHILD_BP = 23, PENSION_BP = 1830, CONTRIB_BP = 36;
+/* 組合健保データ（令和8年度・各組合の公式サイトで確認、確認日2026-11-19）
+   h/c/s = 一般・介護・支援金の [総率, 本人負担率]（単位は0.001％の整数） src = 出典URL */
+var UNIONS = {
+  "its":   {name: "関東ITソフトウェア健康保険組合", h: [9270, 4635], c: [1800, 900], s: [230, 115], src: "https://www.its-kenpo.or.jp/NEWS/hoken/20260209ninnkei_ryoritu_1.html"},
+  "tjk":   {name: "東京都情報サービス産業健康保険組合", h: [9400, 4700], c: [1700, 850], s: [230, 115], src: "https://dyc6ojif4u5ge.cloudfront.net/wp-content/uploads/recruit_recruit.pdf"},
+  "denshi": {name: "東京電子機械工業健康保険組合", h: [9300, 4650], c: [1500, 750], s: [230, 115], src: "https://www.tokyo-denshikempo.or.jp/member/outline/fee.html"},
+  "insatsu": {name: "全国印刷工業健康保険組合", h: [10000, 4850], c: [1650, 825], s: [230, 115], src: "https://www.insatukenpo.or.jp/member/outline/fee.html"},
+  "seibi": {name: "東京都自動車整備健康保険組合", h: [9900, 4950], c: [1700, 850], s: [230, 115], src: "http://toukyoutojidousyaseibikenkouhokenkumiai.or.jp/令和8年度保険料月額表.pdf"},
+  "denki": {name: "東京都電機健康保険組合", h: [9500, 4650], c: [1550, 775], s: [230, 115], src: "https://www.denkikenpo.or.jp/UploadedFiles/R8_ryouritu_Info.pdf"},
+  "keshouhin": {name: "東京化粧品健康保険組合", h: [10200, 5000], c: [1680, 840], s: [230, 115], src: "https://www.tkkenpo.or.jp/UploadedFiles/令和8年4月1日適用.pdf"},
+  "hitachi": {name: "日立健康保険組合", h: [8700, 3700], c: [1660, 830], s: [230, 115], src: "https://www.hitachi-kenpo.or.jp/member/info/intro.html"},
+  "panasonic": {name: "パナソニック健康保険組合", h: [9800, 3910], c: [1700, 850], s: [230, 115], src: "http://phio.panasonic.co.jp/hoken/guide/hokenryo.html"},
+  "sony":  {name: "ソニー健康保険組合", h: [8200, 3280], c: [1700, 850], s: [230, 115], src: "https://www.sonykenpo.or.jp/eng/member/outline/fee.html"},
+  "mitsubishi": {name: "三菱電機健康保険組合", h: [9300, 3760], c: [1700, 850], s: [230, 115], src: "https://www.mitsubishielectric-kenpo.or.jp/UploadedFiles/outline/fee.pdf"},
+  "fujitsu": {name: "富士通健康保険組合", h: [8800, 3916], c: [1500, 750], s: [230, 115], src: "https://kenpo.jp.fujitsu.com/content/files/download/downloads/hokenryogetsugakuhyo2026.pdf"},
+  "canon": {name: "キヤノン健康保険組合", h: [8570, 4285], c: [1900, 950], s: [230, 115], src: "https://www.cnckenpo.or.jp/system/data/etc/1/1_1.pdf"},
+  "nissan": {name: "日産自動車健康保険組合", h: [8700, 3740], c: [1800, 900], s: [230, 115], src: "https://www.nissan-kenpo.or.jp/member/outline/files/fee.pdf"},
+  "denso": {name: "デンソー健康保険組合", h: [9200, 3577], c: [1600, 800], s: [230, 115], src: "https://www.denso-kenpo.or.jp/content/wp-content/uploads/getsugaku2026.pdf"},
+  "aeon":  {name: "イオン健康保険組合", h: [10500, 5250], c: [1700, 850], s: [230, 115], src: "https://www.aeonkenpo.or.jp/such_time/pdf/burden/premium_table202603.pdf"},
+  "yamato": {name: "ヤマトグループ健康保険組合", h: [8770, 3970], c: [2000, 1000], s: [230, 100], src: "https://www.ygkenpo.jp/eng/member/outline/fee.html"},
+  "rakuten": {name: "楽天健康保険組合", h: [9400, 4700], c: [2000, 1000], s: [230, 115], src: "https://kenpo.rakuten.or.jp/member/outline/files/fee.pdf"},
+  "tmn":   {name: "東京海上日動健康保険組合", h: [8200, 3000], c: [1810, 905], s: [230, 115], src: "https://www.tmn-kenpo.or.jp/UploadedFiles/hokenryouhyou2026.pdf"},
+  "jal":   {name: "日本航空健康保険組合", h: [8400, 3200], c: [1620, 810], s: [230, 115], src: "https://jalkenpo.jp/kenkou/kikanshi/2026_spring/documents/meipuru_club.pdf"},
+  "ana":   {name: "全日本空輸健康保険組合", h: [7940, 3970], c: [1800, 900], s: [230, 115], src: "https://www.ana-kenpo.jp/shikumi/h_ryou/hyou.html"},
+  "anag":  {name: "ANAグループ健康保険組合", h: [9000, 4500], c: [1800, 900], s: [230, 115], src: "https://www.anagkenpo.com/UploadedFiles/outline/fee.pdf"},
+  "tokyogas": {name: "東京ガス健康保険組合", h: [8800, 3020], c: [1600, 800], s: [230, 115], src: "https://www.tokyogaskenpo.jp/UploadedFiles/2026通知_保険料率.pdf"},
+  "kao":   {name: "花王健康保険組合", h: [9650, 3760], c: [1850, 925], s: [230, 115], src: "https://www.kaokenpo.or.jp/eng/member/outline/fee.html"},
+  "shiseido": {name: "資生堂健康保険組合", h: [7800, 3432], c: [1570, 785], s: [230, 115], src: "https://www.shiseidokenpo.or.jp/eng/member/outline/fee.html"},
+  "mufg":  {name: "三菱UFJ銀行健康保険組合", h: [7900, 2765], c: [1600, 800], s: [230, 115], src: "https://www.mufgkenpo.or.jp/member/outline/fee.html"}
+};
+var SHIEN_U = 230, SHIEN_EMP_U = 115; /* 子ども・子育て支援金（被用者保険一律・折半）0.001％単位 */
 
 function gradeOf(salary, minStd, maxStd) {
   var found = null;
@@ -245,6 +312,14 @@ function round50(x) {
   var f = Math.floor(x), frac = x - f;
   return frac <= 0.5 ? f : f + 1;
 }
+function splitByRate(base, totalU, empU) {
+  var total = Math.round(base * totalU / 100000);
+  var emp = round50(base * empU / 100000);
+  return {emp: emp, er: total - emp, total: total};
+}
+function fmtPct(u) {
+  return (u / 1000).toFixed(3).replace(/0+$/, "").replace(/\.$/, "");
+}
 function splitPremium(base, bp) {
   var total = Math.round(base * bp / 10000);
   var emp = round50(base * bp / 20000);
@@ -262,7 +337,50 @@ function calc() {
   var rosaiPer = parseFloat(document.getElementById("rosai").value);
   var result = document.getElementById("result");
   var empty = document.getElementById("emptyMsg");
-  if (!(salary > 0) || isNaN(age) || !pref) {
+  var mode = document.getElementById("insurer").value;
+  document.getElementById("prefWrap").classList.toggle("hidden", mode !== "kyokai");
+  document.getElementById("unionWrap").classList.toggle("hidden", mode !== "union");
+  document.getElementById("manualWrap").classList.toggle("hidden", mode !== "manual");
+
+  var care = (!isNaN(age) && age >= 40 && age <= 64);
+  var ready = (salary > 0) && !isNaN(age);
+  var emptyText = "月給と年齢を入れると、ここに結果が出ます。";
+  /* 健康保険の総率・本人負担率（0.001％単位）と内訳説明 */
+  var hTotalU = 0, hEmpU = 0, rateDesc = "", unionObj = null;
+  if (mode === "kyokai") {
+    if (!pref) ready = false;
+    var prefU = Math.round(PREF[pref] * 1000);
+    hTotalU = prefU + SHIEN_U + (care ? CARE_BP * 10 : 0);
+    hEmpU = hTotalU / 2;
+    rateDesc = pref + " " + PREF[pref].toFixed(2) + "％＋支援金0.23％" + (care ? "＋介護1.62％" : "");
+  } else if (mode === "union") {
+    unionObj = UNIONS[document.getElementById("union").value] || null;
+    if (!unionObj) ready = false;
+    else {
+      hTotalU = unionObj.h[0] + unionObj.s[0] + (care ? unionObj.c[0] : 0);
+      hEmpU = unionObj.h[1] + unionObj.s[1] + (care ? unionObj.c[1] : 0);
+      rateDesc = unionObj.name + " 一般" + fmtPct(unionObj.h[0]) + "％＋支援金" + fmtPct(unionObj.s[0]) + "％" + (care ? "＋介護" + fmtPct(unionObj.c[0]) + "％" : "");
+    }
+  } else {
+    var mH = parseFloat(document.getElementById("manHealth").value);
+    var mHS = parseFloat(document.getElementById("manHealthShare").value);
+    var mC = parseFloat(document.getElementById("manCare").value);
+    var mCS = parseFloat(document.getElementById("manCareShare").value);
+    if (isNaN(mHS)) mHS = 50;
+    if (isNaN(mCS)) mCS = 50;
+    mHS = Math.min(100, Math.max(0, mHS));
+    mCS = Math.min(100, Math.max(0, mCS));
+    var mHU = Math.round((mH || 0) * 1000), mCU = Math.round((mC || 0) * 1000);
+    hTotalU = mHU + SHIEN_U + (care ? mCU : 0);
+    hEmpU = Math.round(mHU * mHS / 100) + SHIEN_EMP_U + (care ? Math.round(mCU * mCS / 100) : 0);
+    rateDesc = "手入力 一般" + fmtPct(mHU) + "％＋支援金0.23％" + (care ? "＋介護" + fmtPct(mCU) + "％" : "");
+    if (!(mH > 0) || (care && !(mC > 0))) {
+      ready = false;
+      emptyText = "組合健保（手入力）の場合は、健康保険料率" + (care ? "と介護保険料率" : "") + "も入れてください。料率は組合の公式サイトや給与明細で確認できます。";
+    }
+  }
+  if (!ready) {
+    empty.textContent = emptyText;
     result.classList.add("hidden");
     empty.classList.remove("hidden");
     return;
@@ -270,12 +388,10 @@ function calc() {
   empty.classList.add("hidden");
   result.classList.remove("hidden");
 
-  var care = (age >= 40 && age <= 64);
-  var healthBP = Math.round(PREF[pref] * 100) + CHILD_BP + (care ? CARE_BP : 0);
   var hg = gradeOf(salary, 58000, 1390000);
   var pg = gradeOf(salary, 88000, 650000);
 
-  var mh = splitPremium(hg.std, healthBP);
+  var mh = splitByRate(hg.std, hTotalU, hEmpU);
   var mp = splitPremium(pg.std, PENSION_BP);
   var er = EMP_RATES[empCat];
   var meEmp = round50(salary * er.emp / 1000);
@@ -286,8 +402,8 @@ function calc() {
   var stdBonus = Math.floor(bonus / 1000) * 1000;
   var healthBonusAnnualStd = Math.min(stdBonus * times, 5730000);
   var pensionBonusStdOnce = Math.min(stdBonus, 1500000);
-  var bhTotal = Math.round(healthBonusAnnualStd * healthBP / 10000);
-  var bhEmp = round50(healthBonusAnnualStd * healthBP / 20000);
+  var bhTotal = Math.round(healthBonusAnnualStd * hTotalU / 100000);
+  var bhEmp = round50(healthBonusAnnualStd * hEmpU / 100000);
   var bh = {emp: bhEmp, er: bhTotal - bhEmp};
   var bpTotal = Math.round(pensionBonusStdOnce * times * PENSION_BP / 10000);
   var bpEmp = round50(pensionBonusStdOnce * times * PENSION_BP / 20000);
@@ -298,7 +414,7 @@ function calc() {
   var bContrib = Math.round(pensionBonusStdOnce * times * CONTRIB_BP / 10000);
 
   var rows = [
-    ["健康保険（介護" + (care ? "あり" : "なし") + "・支援金込み）", mh.emp, mh.er, mh.emp * 12 + bh.emp, mh.er * 12 + bh.er],
+    ["健康保険（" + (mode === "kyokai" ? "" : "組合健保・") + "介護" + (care ? "あり" : "なし") + "・支援金込み）", mh.emp, mh.er, mh.emp * 12 + bh.emp, mh.er * 12 + bh.er],
     ["厚生年金", mp.emp, mp.er, mp.emp * 12 + bp.emp, mp.er * 12 + bp.er],
     ["雇用保険", meEmp, meEr, meEmp * 12 + beEmp, meEr * 12 + beEr],
     ["労災保険（会社のみ）", 0, mRosai, 0, mRosai * 12 + bRosai],
@@ -318,14 +434,26 @@ function calc() {
   document.getElementById("compYear").textContent = fmt(salary * 12 + bonus * times + tErY);
 
   var stdInfo = "標準報酬月額：健康保険 第" + hg.grade + "級 ¥" + fmt(hg.std) + "／厚生年金 第" + pg.grade + "級 ¥" + fmt(pg.std);
-  stdInfo += "（健康保険料率 " + (healthBP / 100).toFixed(2) + "％＝" + pref + " " + PREF[pref].toFixed(2) + "％＋支援金0.23％" + (care ? "＋介護1.62％" : "") + "）";
+  stdInfo += "（健康保険料率 " + fmtPct(hTotalU) + "％＝" + rateDesc + "、うち本人負担 " + fmtPct(hEmpU) + "％）";
+  document.getElementById("srcInfo").innerHTML = unionObj ? ("料率の出典：" + unionObj.name + " 公式サイト（令和8年度料率・確認日2026-11-19） <a href=\"" + unionObj.src + "\" target=\"_blank\" rel=\"noopener\">" + unionObj.src + "</a>") : "";
   if (bonus > 0 && times > 0) {
     stdInfo += "。標準賞与額：1回 ¥" + fmt(stdBonus) + "（健保の年間対象 ¥" + fmt(healthBonusAnnualStd) + "／厚年の1回対象 ¥" + fmt(pensionBonusStdOnce) + "）";
   }
   document.getElementById("stdInfo").textContent = stdInfo;
 }
 
-["salary", "age", "bonus", "bonusTimes", "pref", "empCat", "rosai"].forEach(function(id) {
+(function() {
+  var sel = document.getElementById("union");
+  Object.keys(UNIONS).forEach(function(k) {
+    var u = UNIONS[k];
+    var o = document.createElement("option");
+    o.value = k;
+    o.textContent = u.name + "（一般" + fmtPct(u.h[0]) + "％・介護" + fmtPct(u.c[0]) + "％）";
+    sel.appendChild(o);
+  });
+})();
+
+["salary", "age", "bonus", "bonusTimes", "pref", "empCat", "rosai", "insurer", "union", "manHealth", "manHealthShare", "manCare", "manCareShare"].forEach(function(id) {
   document.getElementById(id).addEventListener("input", calc);
   document.getElementById(id).addEventListener("change", calc);
 });
