@@ -113,7 +113,7 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
 <header>
   <div class="wrap">
     <h1>フリーランスの社会保険料 <span class="accent">計算シミュレーター</span></h1>
-    <p>個人事業主・フリーランスが自分で払う「国民年金」と「国民健康保険」の保険料を、あわせて計算します。国民年金は年度ごとの定額、国保はお住まいの自治体の料率（全国1,446自治体収録）で計算します。世帯の所得を入力すると、国民年金の保険料免除と国保の法定軽減の対象かどうかも、目安として診断します。</p>
+    <p>個人事業主・フリーランスが自分で払う「国民年金」と「国民健康保険」の保険料を、あわせて計算します。国民年金は年度ごとの定額、国保はお住まいの自治体の料率（全国1,446自治体収録）で計算します。世帯の所得を入力すると、国民年金の保険料免除（失業等による特例免除・納付猶予・学生納付特例を含む）と国保の法定軽減の対象かどうかも、目安として診断します。</p>
   </div>
 </header>
 
@@ -146,7 +146,7 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
 
   <div class="card">
     <h2>世帯の情報（減免の診断用・任意）</h2>
-    <p class="note">入力すると、国民年金の保険料免除と国保の法定軽減（7割・5割・2割）について、対象かどうかを目安として診断します。すべて任意入力です。未入力の項目がある場合は、その前提を診断結果に表示します。すべて未入力の場合は診断を行わず、通常の計算のみを行います。</p>
+    <p class="note">入力すると、国民年金の保険料免除（失業等による特例免除・納付猶予・学生納付特例を含む）と国保の法定軽減（7割・5割・2割）について、対象かどうかを目安として診断します。国保については、自治体の条例による減免の可能性もあわせてご案内します。すべて任意入力です。未入力の項目がある場合は、その前提を診断結果に表示します。すべて未入力の場合は診断を行わず、通常の計算のみを行います。</p>
     <div class="grid">
       <div class="field">
         <label for="spouseInc">配偶者の前年の所得（円）</label>
@@ -173,6 +173,20 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
         <input type="number" id="salCount" inputmode="numeric" placeholder="例：1">
         <div class="hint">給与収入が55万円を超える方や、一定額を超える公的年金を受けている方の人数です。2人以上いると国保の軽減の判定基準が上がります。空欄なら加算なし（判定は厳しめ）で判定します。</div>
       </div>
+    </div>
+    <div style="margin-top:10px">
+      <label class="check"><input type="checkbox" id="penUnemp"> 本人に失業等（退職・倒産・事業の廃止など）があった</label>
+      <div class="hint">「失業等による特例免除」の診断用です。チェックすると、本人の所得を審査から外し、配偶者・世帯主の所得だけで免除を判定します。申請には、雇用保険被保険者離職票の写しや雇用保険受給資格者証など、失業等の事実を確認できる書類が必要です。</div>
+      <label class="check"><input type="checkbox" id="penStudent"> 本人は学生である</label>
+      <div class="hint">「学生納付特例」の診断用です。本人の所得だけで判定し、配偶者・世帯主の所得は問いません。申請には、在学証明書（原本）または学生証の写しが必要です。</div>
+      <label class="check"><input type="checkbox" id="penUnder50"> 本人は50歳未満である</label>
+      <div class="hint">「納付猶予」の診断用です。下の国保欄で本人の年齢を入力している場合はそちらで判定するため、このチェックは不要です。</div>
+    </div>
+    <div style="margin-top:14px">
+      <p class="note" style="margin:0 0 4px"><strong>国保の条例減免の可能性チェック（任意）</strong>：次のような事情がある世帯は、自治体の条例による国保の減免を受けられる場合があります。当てはまるものにチェックすると、結果欄の案内でお伝えします。</p>
+      <label class="check"><input type="checkbox" id="kbLost"> 世帯に失業（退職）した人がいる</label>
+      <label class="check"><input type="checkbox" id="kbDrop"> 前年より所得が大きく減った</label>
+      <label class="check"><input type="checkbox" id="kbDisaster"> 災害にあった</label>
     </div>
   </div>
 
@@ -276,18 +290,24 @@ html[data-theme="andy"] .badges span.best-b{background:var(--amber);color:#03222
       <div class="note" id="calcNotes"></div>
       <div class="src" id="srcBody"></div>
     </div>
+
+    <div class="card">
+      <h2>国保の減免（自治体の条例による減免）について</h2>
+      <div id="kbGenmenBody" style="font-size:13.5px"></div>
+    </div>
   </div>
 
   <footer>
     <div class="card">
-      このツールは非公式の個人ツールです。表示される金額は公表資料にもとづく目安で、実際の保険料はお住まいの自治体の条例・年度・世帯の状況（所得の内訳、軽減の適用可否など）により異なります。正確な金額は自治体から届く納付通知書でご確認ください。国民年金の保険料免除と国保の法定軽減（7割・5割・2割）については、入力した所得をもとに目安の診断を行います（実際の審査では、他の世帯員の所得や各種控除の額なども見るため、診断と結果が異なる場合があります）。納付猶予・学生納付特例・失業等による特例免除と、国保の非自発的離職者軽減は診断の対象外です。<br>
+      このツールは非公式の個人ツールです。表示される金額は公表資料にもとづく目安で、実際の保険料はお住まいの自治体の条例・年度・世帯の状況（所得の内訳、軽減の適用可否など）により異なります。正確な金額は自治体から届く納付通知書でご確認ください。国民年金の保険料免除と国保の法定軽減（7割・5割・2割）については、入力した所得をもとに目安の診断を行います（実際の審査では、他の世帯員の所得や各種控除の額なども見るため、診断と結果が異なる場合があります）。納付猶予・学生納付特例・失業等による特例免除についても、入力内容をもとに目安の診断を行います。国保の非自発的離職者軽減は診断の対象外です。国保には自治体の条例による減免制度もありますが、基準が自治体ごとに異なるため、このツールでは判定せず、可能性の案内のみを行います。<br>
       出典：
       <a href="https://www.nenkin.go.jp/service/kokunen/hokenryo/hokenryo.html" target="_blank" rel="noopener">日本年金機構「国民年金保険料」</a>／
       <a href="https://www.nenkin.go.jp/service/kokunen/hokenryo/zenno.html" target="_blank" rel="noopener">日本年金機構「国民年金保険料の前納」</a>／
       <a href="https://www.nenkin.go.jp/service/kokunen/menjo/20150428.html" target="_blank" rel="noopener">日本年金機構「国民年金保険料の免除制度・納付猶予制度」</a>／
+      <a href="https://www.nenkin.go.jp/service/kokunen/menjo/20150514.html" target="_blank" rel="noopener">日本年金機構「国民年金保険料の学生納付特例制度」</a>／
       国保の法定軽減の判定基準は、厚生労働省の基準にもとづき自治体の公式案内（さいたま市・函館市など）で確認／
       国保の料率・出典は自治体ごとに結果欄に表示します。<br>
-      国民年金の額・前納割引の確認日：2026-11-18／免除・軽減の判定基準の確認日：2026-11-18
+      国民年金の額・前納割引の確認日：2026-11-18／免除・軽減の判定基準の確認日：2026-11-19
     </div>
     <p class="credit">制作：andy（わんこ堂）× 熊八 🐾（Muse Spark）</p>
   </footer>
@@ -462,7 +482,9 @@ function calc(){
   // household info (減免の診断用)
   var spouseInc=num("spouseInc"), headInc=num("headInc");
   var fuyou=num("fuyouCount"); if(fuyou===null||fuyou<0)fuyou=0;
-  var hhAny = spouseInc!==null||headInc!==null||num("fuyouCount")!==null||num("hhMembers")!==null||num("salCount")!==null;
+  var penUnemp=$("penUnemp").checked, penStudent=$("penStudent").checked, penUnder50=$("penUnder50").checked;
+  var kbFlags=[$("kbLost").checked,$("kbDrop").checked,$("kbDisaster").checked];
+  var hhAny = spouseInc!==null||headInc!==null||num("fuyouCount")!==null||num("hhMembers")!==null||num("salCount")!==null||penUnemp||penStudent||penUnder50||kbFlags[0]||kbFlags[1]||kbFlags[2];
   var ownInc=num("income");
 
   // pension (always computable)
@@ -490,10 +512,27 @@ function calc(){
       for(var ji=0;ji<judged.length;ji++){ if(judged[ji][1]>tiers[ti].thr){okAll=false;break} }
       if(okAll){penExempt=tiers[ti];break}
     }
+    // --- 失業等による特例免除：本人の所得を審査から外し、配偶者・世帯主の所得だけで判定 ---
+    var penViaTokurei=false, tokureiTier=null;
+    if(penUnemp){
+      var tokureiJudged=[];
+      if(spouseInc!==null)tokureiJudged.push(spouseInc);
+      if(headInc!==null)tokureiJudged.push(headInc);
+      for(var tti=0;tti<tiers.length;tti++){
+        var tokAll=true;
+        for(var tji=0;tji<tokureiJudged.length;tji++){ if(tokureiJudged[tji]>tiers[tti].thr){tokAll=false;break} }
+        if(tokAll){tokureiTier=tiers[tti];break}
+      }
+      if(tokureiTier&&(!penExempt||tokureiTier.pay<penExempt.pay)){penExempt=tokureiTier; penViaTokurei=true}
+    }
     var partialNotes=[];
     if(spouseInc===null)partialNotes.push("配偶者の所得が未入力のため、配偶者がいる場合は実際の判定と異なる場合があります");
     if(headInc===null)partialNotes.push("世帯主の所得が未入力のため、世帯主は本人として判定しています");
-    if(penExempt){
+    if(penExempt&&penViaTokurei){
+      penDiagHtml="<strong>国民年金の免除診断：失業等による特例免除で、"+penExempt.label+"の対象の目安です。</strong><br>"
+        +"本人の所得を審査から外し、配偶者・世帯主の所得だけで判定しました。本人の保険料は、免除後の納付額で計算しています。申請には、雇用保険被保険者離職票の写しや雇用保険受給資格者証など、失業等の事実を確認できる書類が必要です。"
+        +(fuka?"免除の承認を受けている間は付加保険料を納めることができないため、本人の付加分（月額400円）は計算から外しています。":"");
+    } else if(penExempt){
       penDiagHtml="<strong>国民年金の免除診断："+penExempt.label+"の対象の目安です。</strong><br>"
         +"前年の所得が日本年金機構の所得基準の範囲内でした。本人の保険料は、免除後の納付額で計算しています。"
         +(fuka?"免除の承認を受けている間は付加保険料を納めることができないため、本人の付加分（月額400円）は計算から外しています。":"");
@@ -501,8 +540,31 @@ function calc(){
       penDiagHtml="<strong>国民年金の免除診断：免除の対象外の見込みです。</strong><br>"
         +"入力された所得では、日本年金機構の所得基準（最も緩い4分の1免除の基準）を超えています。";
     }
-    penDiagHtml+="<br>※この診断は目安です。一部免除の基準に使う扶養親族等控除額は扶養1人あたり38万円で近似し、社会保険料控除額等は0として計算しているため、実際の基準はもう少し高くなる場合が多く、この診断は厳しめ（対象になりにくく）に出ます。失業等による特例免除、納付猶予（50歳未満の方）、学生納付特例はこの診断では判定していません。最終的な判定は年金事務所・市区町村の窓口でご確認ください。";
+    // --- 特例系の併記（特例免除の不成立理由・納付猶予・学生納付特例） ---
+    var specialLines=[];
+    if(penUnemp&&!penViaTokurei&&!tokureiTier){
+      specialLines.push("失業等による特例免除：本人の所得を審査から外して判定しても、配偶者・世帯主の所得が基準を超えているため、対象外の見込みです。");
+    }
+    var fullThr=tiers[0].thr;
+    var ageYuyo=num("age");
+    var under50 = ageYuyo!==null ? (ageYuyo<50) : penUnder50;
+    var yuyoOwnSpouse = ownInc<=fullThr&&(spouseInc===null||spouseInc<=fullThr);
+    var yuyoTokurei = penUnemp&&(spouseInc===null||spouseInc<=fullThr)&&(headInc===null||headInc<=fullThr);
+    if(under50&&(yuyoOwnSpouse||yuyoTokurei)&&!(penExempt&&penExempt.pay===0)){
+      specialLines.push("納付猶予（50歳未満の方）：本人と配偶者の所得が全額免除の基準の範囲内のため、納付猶予の対象の目安です。納付猶予は免除ではなく、納付が先送りになる制度です。猶予された期間は老齢基礎年金の受給資格期間には入りますが、年金額には反映されません（10年以内であれば後から納める「追納」ができます）。金額の計算には反映していません。"+((yuyoTokurei&&!yuyoOwnSpouse)?"（本人の所得は、失業等による特例として審査から外して判定しました）":""));
+    }
+    if(penStudent){
+      var gakuThr=1280000+kojoApprox;
+      if(ownInc<=gakuThr){
+        specialLines.push("学生納付特例：本人の所得が所得基準（128万円＋扶養親族等控除額等の近似で "+fmt(gakuThr)+")の範囲内のため、対象の目安です。配偶者・世帯主の所得は問いません。学生納付特例は免除ではなく、在学中の納付が猶予される制度で、猶予された期間は老齢基礎年金の受給資格期間には入りますが、年金額には反映されません（10年以内であれば追納できます）。金額の計算には反映していません。申請には、在学証明書（原本）または学生証の写しが必要です。");
+      } else {
+        specialLines.push("学生納付特例：本人の所得が所得基準（128万円＋扶養親族等控除額等の近似で "+fmt(gakuThr)+")を超えているため、対象外の見込みです。");
+      }
+    }
+    if(specialLines.length)penDiagHtml+="<br><strong>特例制度の診断：</strong><br>・"+specialLines.join("<br>・");
+    penDiagHtml+="<br>※この診断は目安です。一部免除の基準に使う扶養親族等控除額は扶養1人あたり38万円で近似し、社会保険料控除額等は0として計算しているため、実際の基準はもう少し高くなる場合が多く、この診断は厳しめ（対象になりにくく）に出ます。";
     if(partialNotes.length)penDiagHtml+="<br>※"+partialNotes.join("。")+"。";
+    penDiagHtml+="<br><strong>申請のご案内：</strong>この診断はあくまで目安です。免除・納付猶予・学生納付特例などを承認するかしないか（承認・不承認）を決めるのは、審査を行う年金事務所側です。対象の可能性がある方は、お住まいの地域の年金事務所、または市区町村の国民年金担当窓口へ行って、減免・免除の申請手続きをしてください。これらの制度は、申請しないと適用されません。今回の診断で対象外の見込みとなった場合でも、窓口で事情を伝えると別の制度が使える場合があります。";
   }
   var selfPay = penExempt ? Math.round(baseM*penExempt.pay/10)*10 : baseM;
   var fukaCount = fuka ? Math.max(persons-(penExempt?1:0),0) : 0;
@@ -513,7 +575,7 @@ function calc(){
   if(!penExempt){
     $("penNote").textContent="定額 月額"+fmt(baseM)+"（令和"+yearKey+"年度）"+(fuka?"＋付加 月額"+fmt(FUKA):"")+" × "+persons+"人分。令和9年度は月額18,290円の予定です。";
   } else {
-    $("penNote").textContent="定額 月額"+fmt(baseM)+"（令和"+yearKey+"年度）。本人分は"+penExempt.label+"の診断により月額"+fmt(selfPay)
+    $("penNote").textContent="定額 月額"+fmt(baseM)+"（令和"+yearKey+"年度）。本人分は"+penExempt.label+(penViaTokurei?"（失業等による特例免除）":"")+"の診断により月額"+fmt(selfPay)
       +(persons>1?"、他の"+(persons-1)+"人分は定額":"")
       +(fuka&&fukaCount>0?"、付加 月額"+fmt(FUKA)+"×"+fukaCount+"人分":"")
       +"で計算しています。令和9年度は月額18,290円の予定です。";
@@ -605,6 +667,19 @@ function calc(){
   if(age===null)notes.push("本人の年齢が未入力のため、介護分の所得割は40〜64歳の加入者の有無で判定しています。");
   $("calcNotes").innerHTML=notes.map(function(n){return "・"+n}).join("<br>");
 
+  // --- 国保の条例減免（基準が自治体ごとに異なるため、判定はせず可能性の案内のみ） ---
+  var kbLabels=["失業（退職）した人がいる","前年より所得が大きく減った","災害にあった"];
+  var kbHit=[];
+  for(var ki=0;ki<3;ki++){ if(kbFlags[ki])kbHit.push(kbLabels[ki]); }
+  var kbHtml="国保の保険料には、上の法定軽減とは別に、<strong>自治体の条例による減免制度</strong>があります。失業・災害・所得の急減などで納付が難しくなった世帯を対象に各自治体が条例で定めているもので、<strong>対象の条件や減免の割合は自治体ごとに異なるため、このツールでは判定できません</strong>。";
+  if(kbHit.length){
+    kbHtml+="<br><strong>世帯の情報で「"+kbHit.join("」「")+"」にチェックがありました。</strong>こうした事情がある世帯は、条例による減免の対象になる可能性があります。納付期限が来る前に、早めに窓口へ相談に行ってください。";
+  } else {
+    kbHtml+="<br>失業・災害・所得の急減などの事情がある場合は、対象になる可能性があります（上の「世帯の情報」で当てはまる事情にチェックすると、ここでもお伝えします）。";
+  }
+  kbHtml+="<br><strong>申請のご案内：</strong>このページの軽減・減免の診断はあくまで目安です。減免を承認するかしないか（承認・不承認）を決めるのは、お住まいの自治体（役所）側です。減免を受けたい場合は、お住まいの市区町村の国民健康保険課（保険年金課など、自治体によって名称が異なる担当窓口）へ行って、減免の申請手続きをしてください。すぐに納付するのが難しい事情がある場合は、分割納付などの相談も同じ窓口でできます。";
+  $("kbGenmenBody").innerHTML=kbHtml;
+
   var srcHtml="国保の料率："+cityInfo.label+"（"+cityInfo.yearLabel+"）";
   if(cityInfo.url)srcHtml+="<br>出典：<a href='"+cityInfo.url+"' target='_blank' rel='noopener'>"+cityInfo.src+"</a>";
   else if(cityInfo.src)srcHtml+="<br>出典："+cityInfo.src;
@@ -619,7 +694,7 @@ function calc(){
   prefs.forEach(function(p){ var o=document.createElement("option"); o.value=p; o.textContent=p; sel.appendChild(o); });
 })();
 
-["penYear","penPersons","penFuka","pref","city","income","age","members","careCount","preschool","under18","fixedAssetTax","spouseInc","headInc","fuyouCount","hhMembers","salCount",
+["penYear","penPersons","penFuka","pref","city","income","age","members","careCount","preschool","under18","fixedAssetTax","spouseInc","headInc","fuyouCount","hhMembers","salCount","penUnemp","penStudent","penUnder50","kbLost","kbDrop","kbDisaster",
  "manMR","manMK","manMH","manMCap","manSR","manSK","manSH","manSCap","manCR","manCK","manCH","manCCap","manKR","manKK","manKH","manKCap","manAM","manAS","manAC"
 ].forEach(function(id){
   var el=$(id); if(!el)return;
